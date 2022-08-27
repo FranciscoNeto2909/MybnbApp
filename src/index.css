@@ -1,26 +1,41 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
-}
-.button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  color: #fff;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.rede{
   cursor: pointer;
-  transition: border-color 0.25s;
+  font-size: 00.9rem;
 }
-.button:hover {
-  border-color: #646cff;
+.line{
+  border: 1px solid darkgrey;
+  display: inline-block;
+  width: 40%;
+  margin-bottom: 2.5px;
 }
-.button:focus,
-.button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.numConfirm{
+  font-size:0.82rem;
+  font-weight: 500;
+}
+
+.help{
+  font-size: 0.9rem;
+}
+.number{
+  position: relative;
+}
+.lbl{
+  position: absolute;
+  left: 5px;
+  top: 13px;
+  transition: 0.5s;
+  opacity: 0.6;
+}
+.input-group, .input-group-lg{
+  position: relative;
+}
+.inpt{
+  width: 100%;
+  height: 60px;
+  font-size:1.2rem;
+}
+.inpt:focus ~ .lbl,
+.inpt:valid ~ .lbl{
+  font-size: .9rem;
+  transform: translateY(-13px);
 }
