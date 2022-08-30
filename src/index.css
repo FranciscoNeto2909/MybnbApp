@@ -118,6 +118,10 @@
 }
 .types-carrousel{
   min-width: 100vw;
+  overflow-x: auto;
+}
+.types-carrousel::-webkit-scrollbar{
+  width: 0;
 }
 .types-item-img{
   height: 25px;
