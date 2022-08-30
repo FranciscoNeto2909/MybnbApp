@@ -1,7 +1,13 @@
+import AcomodationTypes from "../components/AcomodationsTypes";
+import SearchBar from "../components/SearchBar";
+
 export default function Home() {
-    return(
+    return (
         <div>
-            Home
+            <header className="border-bottom">
+                <SearchBar />
+                <AcomodationTypes/>
+            </header>
         </div>
     )
 }
