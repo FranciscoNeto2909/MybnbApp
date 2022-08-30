@@ -144,15 +144,50 @@
 }
 .acmd-filter-container{
   height: 100vh;
+  z-index: 2;
   background-color: rgba(0, 0, 0, 0.550);
 }
+.filter-main{
+  min-height: 100%;
+}
 .acmd-filter{
-  height: 100%;
+  overflow-y: auto;
+}
+.acmd-header{
+  z-index: 1;
 }
 .close-btn{
   font-size: 25px;
 }
-
+.filter-header{
+  width: 100%;
+}
+.price-lbl{
+  font-size: .75rem;
+  left: 10px;
+  top: 5px;
+}
+.price-input {
+  height: 50px;
+}
+.acmd-price-table{
+  border-bottom: 2px solid #a9a9a9;
+}
+.acmd-price-item{
+  height: 20px;
+  width: 10px;
+  background-color: #a9a9a9;
+  margin-left: 0.5px;
+  margin-right: 0.5px;
+  border-radius: 1.5px 1.5px 0px 0px;
+}
+.comodos-carroussel{
+  overflow-x: scroll;
+  white-space: nowrap;
+} 
+.comodos-carroussel::-webkit-scrollbar{
+  width: 0;
+}
 @media (max-width: 700px) {
   .search-desc-item{
   font-size: .7rem;

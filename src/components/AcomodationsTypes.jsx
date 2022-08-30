@@ -10,7 +10,7 @@ export default function AcomodationTypes() {
         },
         {
             name:"Ilhas",
-            img:"https://prints.ultracoloringpages.com/e103a56e1386cc746c78fd0f4291c5bd.png"
+            img:"https://www.colorironline.com/images/imgcolor/desenho-ilha-deserta-2-para-colorir.jpg"
         },
         {
             name:"Surf",
@@ -31,7 +31,7 @@ export default function AcomodationTypes() {
                 {
                     types.map((type, i) => <button key={i} className="types-item d-flex flex-column align-items-center">
                         <img src={type.img} alt="" className="types-item-img"/>
-                        <p>{type.name}</p>
+                        <p className="">{type.name}</p>
                     </button>)
                 }
             </div>
