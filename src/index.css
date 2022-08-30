@@ -132,15 +132,23 @@
 .types-item:hover{
   border-bottom: 1px solid darkgray;
 }
-<<<<<<< HEAD
-=======
 .types-item:hover{
   border-bottom: 1px solid darkgray;
 }
->>>>>>> 72478fc8a5f1e0548d4ec959aa55b671c9f4a4a2
 .types-item:focus{
   border-bottom: 1px solid blue;
 }
+.acmd-filter-container{
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.550);
+}
+.acmd-filter{
+  height: 100%;
+}
+.close-btn{
+  font-size: 25px;
+}
+
 @media (max-width: 700px) {
   .search-desc-item{
   font-size: .7rem;

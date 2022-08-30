@@ -27,15 +27,9 @@ export default function AcomodationTypes() {
     ]
     return(
         <div className="types-container position-relative overflow-hidden">
-<<<<<<< HEAD
             <div className="types-carrousel d-flex position-absolute justify-content-between px-1">
                 {
                     types.map((type, i) => <button key={i} className="types-item d-flex flex-column align-items-center">
-=======
-            <div className="types-carrousel d-flex position-absolute justify-content-evenly">
-                {
-                    types.map(type => <button className="types-item d-flex flex-column align-items-center">
->>>>>>> 72478fc8a5f1e0548d4ec959aa55b671c9f4a4a2
                         <img src={type.img} alt="" className="types-item-img"/>
                         <p>{type.name}</p>
                     </button>)
