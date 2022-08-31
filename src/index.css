@@ -188,6 +188,25 @@
 .comodos-carroussel::-webkit-scrollbar{
   width: 0;
 }
+.comodos-btn{
+  background-color: transparent;
+  padding: 5px;
+  border: 0;
+}
+.selected{
+  background-color: #000;
+  color: #fff;
+}
+.property{
+  height: 93px;
+  width:100px;
+  margin: 5px;
+}
+.property-item{
+  margin-top: 1px;
+  height: 50px;
+  width: 50px;
+}
 @media (max-width: 700px) {
   .search-desc-item{
   font-size: .7rem;

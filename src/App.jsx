@@ -6,7 +6,7 @@ import Favorites from "./pages/Favorites"
 import NotFound from "./pages/NotFound"
 import Nav from "./components/Nav"
 export default function App() {
-  const [opened, setOpened] = useState(true)
+  const [opened, setOpened] = useState(false)
   function handleOpenFilter() {
       setOpened(!opened)
   }

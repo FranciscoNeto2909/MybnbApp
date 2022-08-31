@@ -2,11 +2,30 @@ import { useState } from "react"
 
 export default function AcomodationsFilter({ handleOpenFilter }) {
     const sizes = [5, 5, 10, 20, 25, 40, 45, 50, 60, 65, 70, 60, 75, 70, 65, 80, 70, 75, 65, 60, 55, 65, 60, 50, 55, 40, 25, 20, 25, 15, 10, 5, 3, 1]
-    const quantity = ["Qualquer um", 1, 2, 3, 4, 5, 6, 7, "8+"]
-    const [bRoom, setBRoom] = useState("")
-    const [room, setRoom] = useState("")
-    const [bthRoom, setBthRoom] = useState("")
+    const quantity = [1, 2, 3, 4, 5, 6, 7, "8+"]
+    const [bRoom, setBRoom] = useState(0)
+    const [room, setRoom] = useState(0)
+    const [bthRoom, setBthRoom] = useState(0)
+    const [property, setProperty] = useState("")
+    function handleSelectBdRooms(e) {
+        setBRoom(e.target.innerText)
+        const bdRooms = document.querySelectorAll(".bdRooms")
+        bdRooms.forEach(btn => btn.classList.remove("selected"))
+        e.target.classList.toggle("selected")
+    }
+    function handleSelectBeeds(e) {
+        setRoom(e.target.innerText)
+        const beeds = document.querySelectorAll(".beeds")
+        beeds.forEach(btn => btn.classList.remove("selected"))
+        e.target.classList.toggle("selected")
 
+    }
+    function handleSelectBthRooms(e) {
+        setBthRoom(e.target.innerText)
+        const bthRooms = document.querySelectorAll(".bthRooms")
+        bthRooms.forEach(btn => btn.classList.remove("selected"))
+        e.target.classList.add("selected")
+    }
     return (
         <div className="acmd-filter-container container-fluid d-flex position-absolute top-0 pt-3">
             <div className="acmd-filter container rounded-4 bg-light position-relative">
@@ -63,9 +82,10 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6 ">Quartos</h5>
                             <div className="comodos-carroussel d-flex">
+                                <button className="bdRooms comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBdRooms}>qualquer um</button>
                                 {
-                                    quantity.map(option => (
-                                        <button className="btn rounded-5 mx-2 px-4">{option}</button>
+                                    quantity.map((option, i) => (
+                                        <button key={i} className="bdRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBdRooms}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -73,18 +93,21 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Camas</h5>
                             <div className="comodos-carroussel d-flex">
+                                <button className="beeds comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBeeds}>qualquer um</button>
                                 {
-                                    quantity.map(option => (
-                                        <button className="btn rounded-5 mx-2 px-4">{option}</button>
+                                    quantity.map((option, i) => (
+                                        <button key={i} className="beeds comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBeeds}>{option}</button>
                                     ))
                                 }
                             </div>
-                        </div><div className="comodos-container  mb-3">
+                        </div>
+                        <div className="comodos-container mb-3">
                             <h5 className="fs-6">Banheiros</h5>
                             <div className="comodos-carroussel d-flex">
+                                <button className="bthRooms comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>qualquer um</button>
                                 {
-                                    quantity.map(option => (
-                                        <button className="btn rounded-5 mx-2 px-4"> {option}</button>
+                                    quantity.map((option, i) => (
+                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -92,22 +115,39 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                     </section>
                     <section>
                         <h2 className="fs-5">Tipo de propriedade</h2>
-                        <div className="property-container">
-                            <div className="property">
-                                <img src="" alt="" />
-                                <p>Casa</p>
-                            </div>
-                            <div className="property">
-                                <img src="" alt="" />
-                                <p>Apartamento</p>
-                            </div>
-                            <div className="property">
-                                <img src="" alt="" />
-                                <p>Casa de hóspedes</p>
-                            </div>
-                            <div className="property">
-                                <img src="" alt="" />
-                                <p>hotel</p>
+                        <div class="container">
+                            <div class="row row-cols-2">
+                                <div class="col">
+                                    <button className="property border border-secondary
+                                px-3 rounded d-flex flex-column
+                                align-items-center" onClick={()=>setProperty("casa")}>
+                                        <img src="https://img2.gratispng.com/20180515/syw/kisspng-house-drawing-coloring-book-casa-de-juego-5afaadd17a9696.8114916915263779375021.jpg" alt="casa" className="property-item" />
+                                        <p>Casa</p>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button className="property border border-secondary
+                                px-3 rounded d-flex flex-column 
+                                align-items-center" onClick={()=>setProperty("apartamento")}>
+                                        <img src="https://static.vecteezy.com/system/resources/previews/004/589/681/original/hotel-building-line-icon-vector.jpg" alt="apartamento" className="property-item" />
+                                        <p>Apartamento</p>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button className="property border border-secondary
+                                px-3 rounded d-flex flex-column
+                                align-items-center" onClick={()=>setProperty("casa de hospedes")} >
+                                        <img src="https://cdn5.colorir.com/desenhos/pintar/casa-con-dois-pavimenti_2.png" alt="" className="property-item" />
+                                        <p>Casa de hóspedes</p>
+                                    </button>
+                                </div>
+                                <div class="col">
+                                    <button className="property border border-secondary
+                                px-3 rounded d-flex flex-column align-items-center" onClick={()=>setProperty("hotel")}>
+                                        <img src="https://www.colorironline.com/images/imgcolor/desenho-mansao-3-para-colorir.jpg" alt="" className="property-item" />
+                                        <p>hotel</p>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </section>
