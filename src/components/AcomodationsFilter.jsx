@@ -107,7 +107,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                                 <button className="bthRooms comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>{option}</button>
+                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBthRooms} value>{option}</button>
                                     ))
                                 }
                             </div>
@@ -118,7 +118,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <div class="container">
                             <div class="row row-cols-2">
                                 <div class="col">
-                                    <button className="property border border-secondary
+                                    <button className="property bg-transparent border border-secondary
                                 px-3 rounded d-flex flex-column
                                 align-items-center" onClick={()=>setProperty("casa")}>
                                         <img src="https://img2.gratispng.com/20180515/syw/kisspng-house-drawing-coloring-book-casa-de-juego-5afaadd17a9696.8114916915263779375021.jpg" alt="casa" className="property-item" />
@@ -126,7 +126,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button className="property border border-secondary
+                                    <button className="property bg-transparent border border-secondary
                                 px-3 rounded d-flex flex-column 
                                 align-items-center" onClick={()=>setProperty("apartamento")}>
                                         <img src="https://static.vecteezy.com/system/resources/previews/004/589/681/original/hotel-building-line-icon-vector.jpg" alt="apartamento" className="property-item" />
@@ -134,7 +134,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button className="property border border-secondary
+                                    <button className="property bg-transparent border border-secondary
                                 px-3 rounded d-flex flex-column
                                 align-items-center" onClick={()=>setProperty("casa de hospedes")} >
                                         <img src="https://cdn5.colorir.com/desenhos/pintar/casa-con-dois-pavimenti_2.png" alt="" className="property-item" />
@@ -142,7 +142,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button className="property border border-secondary
+                                    <button className="property bg-transparent border border-secondary
                                 px-3 rounded d-flex flex-column align-items-center" onClick={()=>setProperty("hotel")}>
                                         <img src="https://www.colorironline.com/images/imgcolor/desenho-mansao-3-para-colorir.jpg" alt="" className="property-item" />
                                         <p>hotel</p>
