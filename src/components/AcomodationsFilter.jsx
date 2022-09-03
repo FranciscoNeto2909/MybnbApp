@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export default function AcomodationsFilter({ handleOpenFilter }) {
-    const sizes = [5, 5, 10, 20, 25, 40, 45, 50, 60, 65, 70, 60, 75, 70, 65, 80, 70, 75, 65, 60, 55, 65, 60, 50, 55, 40, 25, 20, 25, 15, 10, 5, 3, 1]
+    const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75,80,80,75,70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]
     const quantity = [1, 2, 3, 4, 5, 6, 7, "8+"]
     const [bRoom, setBRoom] = useState(0)
     const [room, setRoom] = useState(0)
@@ -34,8 +34,8 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                     <h1 className="text-center fs-4">Filtros</h1>
                 </header>
                 <main className="filter-main">
-                    <section className="acmd-price mt-4">
-                        <h2 className="fs-5 mt-5">Faixa de preço</h2>
+                    <section className="acmd-price mt-5">
+                        <h2 className="fs-5">Faixa de preço</h2>
                         <p className="acmd-price-desc text-secondary">O preço médio por noite é R$988</p>
                         <div className="acmd-price-table container-fluid d-flex mb-4 align-items-baseline mt-5 justify-content-center">
                             {
@@ -56,8 +56,8 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                             </div>
                         </div>
                     </section>
-                    <section className="place-type">
-                        <h2 className="mt-4 fs-5">Tipo de lugar</h2>
+                    <section className="place-type mt-5">
+                        <h2 className="fs-5 mb-4">Tipo de lugar</h2>
                         <div className="form-check container d-flex justify-content-between">
                             <label className="form-check-label" htmlFor="espaco">
                                 Espaço inteiro <br /> <span className="text-secondary">Um lugar só para você</span>
@@ -78,7 +78,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         </div>
                     </section>
                     <section className="mt-5">
-                        <h2 className="fs-5">Quartos e camas</h2>
+                        <h2 className="fs-5 mb-4">Quartos e camas</h2>
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6 ">Quartos</h5>
                             <div className="comodos-carroussel d-flex">
@@ -107,48 +107,102 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                                 <button className="bthRooms comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBthRooms} value>{option}</button>
+                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>{option}</button>
                                     ))
                                 }
                             </div>
                         </div>
                     </section>
-                    <section>
-                        <h2 className="fs-5">Tipo de propriedade</h2>
+                    <section className="mt-5">
+                        <h2 className="fs-5 mb-4">Tipo de propriedade</h2>
                         <div class="container">
                             <div class="row row-cols-2">
                                 <div class="col">
-                                    <button className="property bg-light border border-secondary
+                                    <button className="property border border-secondary
                                 px-3 rounded d-flex flex-column
-                                align-items-center" onClick={()=>setProperty("casa")}>
+                                align-items-center" onClick={() => setProperty("casa")}>
                                         <img src="https://comofazeremcasa.net/wp-content/uploads/2020/05/desenho-de-casa-para-colorir-10.jpg" alt="casa" className="property-item" />
                                         <p>Casa</p>
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button className="property bg-light border border-secondary
+                                    <button className="property border border-secondary
                                 px-3 rounded d-flex flex-column 
-                                align-items-center" onClick={()=>setProperty("apartamento")}>
+                                align-items-center" onClick={() => setProperty("apartamento")}>
                                         <img src="https://static.vecteezy.com/system/resources/previews/004/589/681/original/hotel-building-line-icon-vector.jpg" alt="apartamento" className="property-item" />
                                         <p>Apartamento</p>
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button className="property bg-light border border-secondary
+                                    <button className="property border border-secondary
                                 px-3 rounded d-flex flex-column
-                                align-items-center" onClick={()=>setProperty("casa de hospedes")} >
+                                align-items-center" onClick={() => setProperty("casa de hospedes")} >
                                         <img src="https://cdn5.colorir.com/desenhos/pintar/casa-con-dois-pavimenti_2.png" alt="" className="property-item" />
                                         <p>Casa de hóspedes</p>
                                     </button>
                                 </div>
                                 <div class="col">
-                                    <button className="property bg-light border border-secondary
-                                px-3 rounded d-flex flex-column align-items-center" onClick={()=>setProperty("hotel")}>
+                                    <button className="property border border-secondary
+                                px-3 rounded d-flex flex-column align-items-center" onClick={() => setProperty("hotel")}>
                                         <img src="https://www.colorironline.com/images/imgcolor/desenho-mansao-3-para-colorir.jpg" alt="" className="property-item" />
                                         <p>hotel</p>
                                     </button>
                                 </div>
                             </div>
+                        </div>
+                    </section>
+                    <section className="mt-5">
+                        <h2 className="fs-5 mb-4">Comodidades</h2>
+                        <h5 className="fs-6 mb-4">Itens básicos</h5>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="espaco">Wi-Fi</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="espaco" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="quarto">Cozinha</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="quarto" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="compartilhado">Televisor</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="compartilhado">Maquina de lavar</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
+                        </div>
+                    </section>
+                    <section className="mt-5">
+                        <h2 className="fs-5 mb-4">Opções de reserva</h2>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Reserva instantanea <br /> <span className="text-secondary">Acomodações que você pode reservar sem ter que esperar pela aprovação do anfitrião</span></label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Self check-in <br /> <span className="text-secondary">Acesso fácil a propriedade assim que chegar</span></label>
+                        </div>
+                    </section>
+                    <section className="mt-5 mb-4">
+                        <h2 className="fs-5 mb-4">Idiomas do anfitrião</h2>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="espaco">Wi-Fi</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="espaco" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="quarto">Português</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="quarto" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="compartilhado">Inglês</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="compartilhado">Francês</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
+                        </div>
+                        <div className="form-check container d-flex justify-content-between">
+                            <label className="form-check-label" htmlFor="compartilhado">Alemão</label>
+                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
                         </div>
                     </section>
                 </main>
