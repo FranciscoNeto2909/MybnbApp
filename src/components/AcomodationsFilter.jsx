@@ -1,12 +1,17 @@
 import { useState } from "react"
+import CompostCheckButton from "./CompostCheckButton"
+import PropertyTypeButton from "./PropTypeButton"
+import SimpleCheckButton from "./SimpleCheckButton"
 
 export default function AcomodationsFilter({ handleOpenFilter }) {
-    const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75,80,80,75,70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]
+    const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75, 80, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]
     const quantity = [1, 2, 3, 4, 5, 6, 7, "8+"]
     const [bRoom, setBRoom] = useState(0)
     const [room, setRoom] = useState(0)
     const [bthRoom, setBthRoom] = useState(0)
     const [property, setProperty] = useState("")
+    const [convenience, setConvenience] = useState("")
+    const [lang, setLang] = useState("")
     function handleSelectBdRooms(e) {
         setBRoom(e.target.innerText)
         const bdRooms = document.querySelectorAll(".bdRooms")
@@ -58,24 +63,11 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                     </section>
                     <section className="place-type mt-5">
                         <h2 className="fs-5 mb-4">Tipo de lugar</h2>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="espaco">
-                                Espaço inteiro <br /> <span className="text-secondary">Um lugar só para você</span>
-                            </label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="espaco" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="quarto">
-                                Quarto inteiro <br /> <span className="text-secondary">Seu próprio quarto em uma cas ou hotel, além de alguns espaços comuns compartilhados</span>
-                            </label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="quarto" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="compartilhado">
-                                Quarto compartilhado <br /> <span className="text-secondary">Um espaço para dormir e áreas comuns que podem ser compartilhadas com outras pessoas</span>
-                            </label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
-                        </div>
+                        <CompostCheckButton text1="espaço inteiro" text2="Um lugar só para você" value="espacoInteiro" />
+
+                        <CompostCheckButton text1="Quarto inteiro" text2="Seu próprio quarto em uma cas ou hotel, além de alguns espaços comuns compartilhados" value="quartoInteiro" />
+
+                        <CompostCheckButton text1="Quarto compartilhado" text2="Um espaço para dormir e áreas comuns que podem ser compartilhadas com outras pessoas" value="quartoCompartilhado" />
                     </section>
                     <section className="mt-5">
                         <h2 className="fs-5 mb-4">Quartos e camas</h2>
@@ -115,38 +107,27 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                     </section>
                     <section className="mt-5">
                         <h2 className="fs-5 mb-4">Tipo de propriedade</h2>
-                        <div class="container">
-                            <div class="row row-cols-2">
-                                <div class="col">
-                                    <button className="property border border-secondary
-                                px-3 rounded d-flex flex-column
-                                align-items-center" onClick={() => setProperty("casa")}>
-                                        <img src="https://comofazeremcasa.net/wp-content/uploads/2020/05/desenho-de-casa-para-colorir-10.jpg" alt="casa" className="property-item" />
-                                        <p>Casa</p>
-                                    </button>
+                        <div className="container">
+                            <div className="row row-cols-2">
+                                <div className="col">
+                                    <PropertyTypeButton text="Casa"
+                                        img="https://comofazeremcasa.net/wp-content/uploads/2020/05/desenho-de-casa-para-colorir-10.jpg"
+                                        setProperty={setProperty} />
                                 </div>
-                                <div class="col">
-                                    <button className="property border border-secondary
-                                px-3 rounded d-flex flex-column 
-                                align-items-center" onClick={() => setProperty("apartamento")}>
-                                        <img src="https://static.vecteezy.com/system/resources/previews/004/589/681/original/hotel-building-line-icon-vector.jpg" alt="apartamento" className="property-item" />
-                                        <p>Apartamento</p>
-                                    </button>
+                                <div className="col">
+                                    <PropertyTypeButton text="Apartamento"
+                                        img="https://static.vecteezy.com/system/resources/previews/004/589/681/original/hotel-building-line-icon-vector.jpg"
+                                        setProperty={setProperty} />
                                 </div>
-                                <div class="col">
-                                    <button className="property border border-secondary
-                                px-3 rounded d-flex flex-column
-                                align-items-center" onClick={() => setProperty("casa de hospedes")} >
-                                        <img src="https://cdn5.colorir.com/desenhos/pintar/casa-con-dois-pavimenti_2.png" alt="" className="property-item" />
-                                        <p>Casa de hóspedes</p>
-                                    </button>
+                                <div className="col">
+                                    <PropertyTypeButton text="Casa de hóspedes"
+                                        img="https://cdn5.colorir.com/desenhos/pintar/casa-con-dois-pavimenti_2.png"
+                                        setProperty={setProperty} />
                                 </div>
-                                <div class="col">
-                                    <button className="property border border-secondary
-                                px-3 rounded d-flex flex-column align-items-center" onClick={() => setProperty("hotel")}>
-                                        <img src="https://www.colorironline.com/images/imgcolor/desenho-mansao-3-para-colorir.jpg" alt="" className="property-item" />
-                                        <p>hotel</p>
-                                    </button>
+                                <div className="col">
+                                    <PropertyTypeButton text="Hotel"
+                                        img="https://www.colorironline.com/images/imgcolor/desenho-mansao-3-para-colorir.jpg"
+                                        setProperty={setProperty} />
                                 </div>
                             </div>
                         </div>
@@ -154,56 +135,28 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                     <section className="mt-5">
                         <h2 className="fs-5 mb-4">Comodidades</h2>
                         <h5 className="fs-6 mb-4">Itens básicos</h5>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="espaco">Wi-Fi</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="espaco" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="quarto">Cozinha</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="quarto" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="compartilhado">Televisor</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="compartilhado">Maquina de lavar</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
-                        </div>
+                        <SimpleCheckButton text="Wi-Fi" value="wifi" func={setConvenience} />
+                        <SimpleCheckButton text="Cozinha" value="cozinha" setConvenience={setConvenience} />
+                        <SimpleCheckButton text="Televisor" value="televisor" func={setConvenience} />
+                        <SimpleCheckButton text="Máquina de lavar" value="maquinaDeLavar" func={setConvenience} />
                     </section>
                     <section className="mt-5">
                         <h2 className="fs-5 mb-4">Opções de reserva</h2>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Reserva instantanea <br /> <span className="text-secondary">Acomodações que você pode reservar sem ter que esperar pela aprovação do anfitrião</span></label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">instant reserv<br /> <span className="text-secondary">Acomodações que você pode reservar sem ter que esperar pela aprovação do anfitrião</span></label>
                         </div>
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Self check-in <br /> <span className="text-secondary">Acesso fácil a propriedade assim que chegar</span></label>
+                        <div className="form-check form-switch">
+                            <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Self check-in <br /> <span className="text-secondary">Acesso fácil a propriedade assim que chegar</span></label>
                         </div>
                     </section>
                     <section className="mt-5 mb-4">
-                        <h2 className="fs-5 mb-4">Idiomas do anfitrião</h2>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="espaco">Wi-Fi</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="espaco" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="quarto">Português</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="quarto" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="compartilhado">Inglês</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="compartilhado">Francês</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
-                        </div>
-                        <div className="form-check container d-flex justify-content-between">
-                            <label className="form-check-label" htmlFor="compartilhado">Alemão</label>
-                            <input className="form-check-input border-secondary p-2" type="checkbox" value="" id="compartilhado" />
-                        </div>
+                        <h2 className="fs-5 mb-4">Idioma do anfitrião</h2>
+                        <SimpleCheckButton text="Português" value="portugues" func={setLang} />
+                        <SimpleCheckButton text="Inglês" value="ingles" func={setLang} />
+                        <SimpleCheckButton text="Françes" value="frances" func={setLang} />
+                        <SimpleCheckButton text="Alemão" value="alemao" func={setLang} />
                     </section>
                 </main>
             </div>
