@@ -32,8 +32,8 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
         e.target.classList.add("selected")
     }
     return (
-        <div className="acmd-filter-container container-fluid d-flex position-absolute top-0 pt-3">
-            <div className="acmd-filter container rounded-4 bg-light position-relative">
+        <div className="acmd-filter-container container-fluid d-flex position-absolute top-0 pt-3 justify-content-center">
+            <div className="acmd-filter px-2 rounded-4 bg-light position-relative">
                 <header className="acmd-header pt-3 position-sticky top-0 container-fluid bg-light">
                     <button className="close-btn position-absolute border-0 fw-bold m-0 p-0 top-0 bg-transparent" onClick={handleOpenFilter}>x</button>
                     <h1 className="text-center fs-4">Filtros</h1>
@@ -107,8 +107,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                     </section>
                     <section className="mt-5">
                         <h2 className="fs-5 mb-4">Tipo de propriedade</h2>
-                        <div className="container">
-                            <div className="row row-cols-2">
+                        <div className="container row row-cols-2 mx-auto">
                                 <div className="col">
                                     <PropertyTypeButton text="Casa"
                                         img="https://comofazeremcasa.net/wp-content/uploads/2020/05/desenho-de-casa-para-colorir-10.jpg"
@@ -129,7 +128,6 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                                         img="https://www.colorironline.com/images/imgcolor/desenho-mansao-3-para-colorir.jpg"
                                         setProperty={setProperty} />
                                 </div>
-                            </div>
                         </div>
                     </section>
                     <section className="mt-5">
@@ -144,11 +142,13 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <h2 className="fs-5 mb-4">Opções de reserva</h2>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">instant reserv<br /> <span className="text-secondary">Acomodações que você pode reservar sem ter que esperar pela aprovação do anfitrião</span></label>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">instant reserv</label>
+                            <p className="text-secondary">Acomodações que você pode reservar sem ter que esperar pela aprovação do anfitrião</p>
                         </div>
                         <div className="form-check form-switch">
                             <input className="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
-                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Self check-in <br /> <span className="text-secondary">Acesso fácil a propriedade assim que chegar</span></label>
+                            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Self check-in</label>
+                            <p className="text-secondary">Acesso fácil a propriedade assim que chegar</p>
                         </div>
                     </section>
                     <section className="mt-5 mb-4">

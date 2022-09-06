@@ -53,6 +53,7 @@
 }
 
 .navbar {
+  box-shadow: 0 -1px 12px rgba(0, 0, 0, 0.644);
   height: 60px;
   z-index: 1;
 }
@@ -151,7 +152,7 @@
   min-height: 100%;
 }
 .acmd-filter{
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 .acmd-header{
   z-index: 1;
