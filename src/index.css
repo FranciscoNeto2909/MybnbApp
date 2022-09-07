@@ -149,6 +149,12 @@
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.550);
 }
+.destiny-container{
+  background-color: #ddd;
+}
+.find-destiny, .data-guest-btn{
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.200);
+}
 .filter-main{
   min-height: 100%;
 }
@@ -220,11 +226,24 @@
 .lupa{
   height: 16px;
 }
+.destiny-text{
+  white-space: nowrap;
+}
+.destiny-maps{
+  overflow-x: scroll;
+}
+
+.destiny-map-img{
+  height: 5.5rem;
+}
 @media (max-width: 700px) {
   .search-desc-item{
   font-size: .7rem;
   }
   .search-lbl{
     display: block;
+  }
+  .destiny-maps::-webkit-scrollbar{
+    height: 0;
   }
 }

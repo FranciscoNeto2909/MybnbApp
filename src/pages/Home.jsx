@@ -4,7 +4,7 @@ import AcomodationsFilter from "../components/AcomodationsFilter";
 import Destiny from "../components/Destiny"
 import { useState } from "react";
 export default function Home({showFilter, handleOpenFilter}) {
-    const [showDestiny, setShowDestiny] = useState(true)
+    const [showDestiny, setShowDestiny] = useState(false)
     function handleOpenDestiny() {
         setShowDestiny(!showDestiny)
     }
