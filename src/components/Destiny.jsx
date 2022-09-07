@@ -65,8 +65,6 @@ export default function Destiny({ handleOpenDestiny }) {
                             </label>
                             <input type="text" className="form-control border-secondary py-3 ps-5" placeholder="Buscar destinos" />
                         </div>
-
-
                         <div className="destiny-maps d-flex justify-content-between m-2">
                             {
                                 destinations.map((dest, i) => (

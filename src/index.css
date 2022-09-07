@@ -74,13 +74,15 @@
   width: 20px;
 }
 
-.search-filter-button {
-  right: 17px;
-  top: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.349);
+.search-filter-container {
+  right: 10px;
+  top: 8px;
   background-color: transparent;
+  z-index: 1;
 }
-
+.search-filter-btn{
+  border: 1px solid rgba(0, 0, 0, 0.349);
+}
 .search-button-mgnf-glass {
   top: 18px;
   left: 23px;
