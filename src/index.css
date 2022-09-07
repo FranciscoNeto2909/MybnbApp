@@ -1,5 +1,6 @@
 * {
   list-style: none;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
 .rede {
@@ -143,7 +144,7 @@
 .types-item:focus{
   border-bottom: 1px solid blue;
 }
-.acmd-filter-container{
+.acmd-filter-container,.destiny-container{
   height: 100vh;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.550);
@@ -154,7 +155,7 @@
 .acmd-filter{
   overflow-y: scroll;
 }
-.acmd-header{
+.acmd-header, .destiny-header{
   z-index: 1;
 }
 .close-btn{
@@ -208,6 +209,16 @@
   margin-top: 1px;
   height: 50px;
   width: 50px;
+}
+.destiny-btn{
+  border: 0;
+  border-bottom: 2px solid transparent;
+}
+.bottom-border{
+  border-bottom: 2px solid black;
+}
+.lupa{
+  height: 16px;
 }
 @media (max-width: 700px) {
   .search-desc-item{

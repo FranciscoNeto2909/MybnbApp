@@ -6,15 +6,15 @@ import Favorites from "./pages/Favorites"
 import NotFound from "./pages/NotFound"
 import Nav from "./components/Nav"
 export default function App() {
-  const [opened, setOpened] = useState(false)
+  const [showFilter, setShowFilter] = useState(false)
   function handleOpenFilter() {
-      setOpened(!opened)
+      setShowFilter(!showFilter)
   }
   return (
     <div className="App">
-      {!opened && <Nav/>}
+      {!showFilter && <Nav/>}
       <Routes>
-        <Route path="/" element={<Home opened={opened} handleOpenFilter={handleOpenFilter} />} />
+        <Route path="/" element={<Home showFilter={showFilter} handleOpenFilter={handleOpenFilter} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/favorites" element={<Favorites/>}/>
         <Route path="*" element={<NotFound />} />

@@ -1,7 +1,7 @@
-export default function SearchBar({handleOpenFilter}) {
+export default function SearchBar({handleOpenFilter,handleOpenDestiny}) {
     return (
         <div className="search-container position-relative p-2 mt-2 mx-3">
-            <button type="text" id="search-input" className="search-input form-control rounded-5 ps-5 py-4" onClick={handleOpenFilter} > 
+            <button type="text" id="search-input" className="search-input form-control rounded-5 ps-5 py-4" onClick={handleOpenDestiny} > 
             <div className="search-filter-button position-absolute rounded-4 p-1" onClick={handleOpenFilter}>
                 <img src="https://icons-for-free.com/iconfiles/png/512/filter-131979013401653166.png" className="search-button-img" /> 
             </div>
