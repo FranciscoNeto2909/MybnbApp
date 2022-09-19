@@ -68,7 +68,6 @@
 .social-logo {
   left: 5px;
 }
-
 .search-button-img {
   height: 20px;
   width: 20px;
@@ -234,9 +233,36 @@
 .destiny-maps{
   overflow-x: scroll;
 }
-
 .destiny-map-img{
   height: 5.5rem;
+}
+.phone-input::placeholder{
+  font-size: 1.2rem;
+}
+.code-input{
+  letter-spacing: 5px;
+}
+.name-desc,.email-desc,.info-desc,.terms-desc,.notifi-desc{
+  font-size: .9rem;
+}
+summary::-webkit-details-marker{
+  display: none;
+}
+summary::after{
+  background-color: #000;
+  content: "?";
+  color: #fff;
+  font-weight: bold;
+  padding: 0 5px;
+  margin-left: 5px;
+  border-radius: 50%;
+  text-align: center;
+  width: 20px;
+  left: 20px;
+  margin-right: 10px;
+}
+details[open] summary::after{
+  content: "-";
 }
 @media (max-width: 700px) {
   .search-desc-item{

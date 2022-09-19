@@ -74,10 +74,10 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6 ">Quartos</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="bdRooms comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBdRooms}>qualquer um</button>
+                                <button className="bdRooms comodos-btn selected rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="bdRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBdRooms}>{option}</button>
+                                        <button key={i} className="bdRooms comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -85,10 +85,10 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Camas</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="beeds comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBeeds}>qualquer um</button>
+                                <button className="beeds comodos-btn selected rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="beeds comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBeeds}>{option}</button>
+                                        <button key={i} className="beeds comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -96,10 +96,10 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Banheiros</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="bthRooms comodos-btn selected rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>qualquer um</button>
+                                <button className="bthRooms comodos-btn selected rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4" onClick={handleSelectBthRooms}>{option}</button>
+                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>{option}</button>
                                     ))
                                 }
                             </div>
