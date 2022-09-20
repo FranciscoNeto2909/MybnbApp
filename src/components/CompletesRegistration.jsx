@@ -1,4 +1,10 @@
+import { userLogin } from "../assets/userSlice"
+import { useDispatch } from "react-redux"
 export default function CompleteRegistration() {
+    const dispatch = useDispatch()
+    function handleLogin(){
+        dispatch(userLogin())
+    }
     return (
         <>
             <header className="border border-bottom mb-3 py-3">
@@ -33,7 +39,7 @@ export default function CompleteRegistration() {
                 <section className="service-terms">
                     <p className="terms-desc mb-4">Ao selecionar <strong>Concordar e continuar</strong>, u concordo com os <a href="">termos de serviços</a>, <a href="">Politica de Não Discriminalização</a> e <a href="">Politica de Privacidade</a></p>
                 </section>
-                <button className="btn btn-primary">Concordar e continuar</button>
+                <button className="btn btn-primary" onClick={() => handleLogin()}>Concordar e continuar</button>
                 <p className="notifi-desc mt-5">O mybnb enviará notificações de push, ideias inspiradoras, emails promocionais e ofertas exclusivas para membros. Você pode cancelar o recebimento dessas mensagens quando quiser ao acessas as cofigurações da sua conta ou diretamente nas notificações</p>
                 <div className="form-check container d-flex justify-content-between">
                     <input className="form-check-input border-secondary p-2 me-2" type="checkbox" id="espaco" />

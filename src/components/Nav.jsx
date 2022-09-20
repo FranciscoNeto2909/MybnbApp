@@ -13,15 +13,10 @@ export default function Nav() {
                 <img className="icon" src="https://freepngimg.com/thumb/instagram/1-2-instagram-heart-transparent.png" alt="coração" />
                 Favorites
             </Link>
-            {!user.logged ? <Link to="/profile" className="d-flex flex-column align-items-center text-decoration-none">
+            <Link to="/user" className="d-flex flex-column align-items-center text-decoration-none">
                 <img className="icon" src="https://distrimar.s3.amazonaws.com/static/apm/img/misc/default_user.png" alt="user" />
-                Perfil
-            </Link> :
-                <Link to="/login" className="d-flex flex-column align-items-center text-decoration-none">
-                    <img className="icon" src="https://distrimar.s3.amazonaws.com/static/apm/img/misc/default_user.png" alt="user" />
-                    Entrar
-                </Link>
-            }
+                {user.isLogged ? "Perfil" : "Entrar"}
+            </Link> 
         </nav>
     )
 } 

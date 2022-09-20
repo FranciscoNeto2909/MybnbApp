@@ -1,7 +1,16 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import {logout} from "../assets/userSlice"
 
 export default function Profile() {
     const user = useSelector(data => data.user)
+    
+    const dispatch = useDispatch()
+
+    function handleLogout(){
+        dispatch(logout())
+        console.log("clicou")
+    }
+
     return (
         <div className="user container container-fluid p-2 my-5">
             <section className="container d-flex flex-column my-2">
@@ -57,8 +66,11 @@ export default function Profile() {
                     <button className="btn position-relative  p-2 my-2 fw-bolder">Português (BR)</button>
                     <button className="btn position-relative  p-2 my-2 fw-bolder">R$ BRL</button>
                 </div>
-                <button className="btn p-2 border border-dark fw-bold">Sair</button>
+                <button className="btn p-2 border border-dark fw-bold" onClick={() => handleLogout()}>Sair</button>
             </section>
+            <footer>
+                <p className="profile-footer">Esta aplicação foi desenvolvida no intuito de praticar programação e não tem nenhum fim comercial.</p>
+            </footer>
         </div>
     )
 }

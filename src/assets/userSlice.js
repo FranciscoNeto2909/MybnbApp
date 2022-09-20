@@ -24,8 +24,15 @@ const userSlice = createSlice({
         email: "",
         isLogged: false
     },
-    reducers: {},
+    reducers: {
+      logout(state) {
+        return{...state, isLogged:false }
+      },
+      userLogin(state) {
+        return{...state, isLogged:true }
+      }
+    },
     extraReducers: {}
 })
-
+export const {logout, userLogin } = userSlice.actions
 export default userSlice.reducer

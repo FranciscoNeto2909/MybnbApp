@@ -264,6 +264,9 @@ summary::after{
 details[open] summary::after{
   content: "-";
 }
+.profile-footer{
+  font-size: .85rem;
+}
 @media (max-width: 700px) {
   .search-desc-item{
   font-size: .7rem;
