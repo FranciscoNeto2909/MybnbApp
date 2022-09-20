@@ -5,6 +5,7 @@ import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
 import NotFound from "./pages/NotFound"
 import Nav from "./components/Nav"
+import Profile from "./pages/Profile"
 export default function App() {
   const [showFilter, setShowFilter] = useState(false)
   function handleOpenFilter() {
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/" element={<Home showFilter={showFilter} handleOpenFilter={handleOpenFilter} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/favorites" element={<Favorites/>}/>
+        <Route path="/profile" element={<Profile/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
