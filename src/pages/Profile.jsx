@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import {logout} from "../assets/userSlice"
+import { logout } from "../assets/userSlice"
+import { UserCircle, Gear, FadersHorizontal, AlignLeft, Gift, SquaresFour } from "phosphor-react"
 
 export default function Profile() {
     const user = useSelector(data => data.user)
-    
+
     const dispatch = useDispatch()
 
-    function handleLogout(){
+    function handleLogout() {
         dispatch(logout())
         console.log("clicou")
     }
@@ -14,16 +15,16 @@ export default function Profile() {
     return (
         <div className="user container container-fluid p-2 my-5">
             <section className="container d-flex flex-column my-2">
-                <img src="" alt="" className="user-img" />
+                <UserCircle size={80} />
                 <h1 className="user-name">{user.name}</h1>
                 <a href="" className="text-dark mb-5">Mostrar perfil</a>
-                <button className="btn position-relative  p-2 my-2">
-                    <img src="" alt="" />
+                <button className="btn position-relative  p-2 my-2 text-start">
+                    <UserCircle size={30} className="me-4" />
                     Informações pessoais
                     <span className="position-absolute end-0 top-0 fw-bold fs-3">&gt;</span>
                 </button>
-                <button className="btn position-relative  p-2 my-2">
-                    <img src="" alt="" />
+                <button className="btn position-relative  p-2 my-2 text-start">
+                    <Gear size={30} className="me-4" />
                     Conta
                     <span className="position-absolute end-0 top-0 fw-bold fs-3">&gt;</span>
                 </button>
@@ -31,13 +32,13 @@ export default function Profile() {
             </section>
             <section className="container d-flex flex-column my-2">
                 <h2>Hospedagem</h2>
-                <button className="btn position-relative  p-2 my-2">
-                    <img src="" alt="" />
+                <button className="btn position-relative  p-2 my-2 text-start">
+                    <FadersHorizontal size={30} className="me-4" />
                     Hospede uma acomodação
                     <span className="position-absolute end-0 top-0 fw-bold fs-3">&gt;</span>
                 </button>
-                <button className="btn position-relative  p-2 my-2">
-                    <img src="" alt="" />
+                <button className="btn position-relative  p-2 my-2 text-start">
+                    <AlignLeft size={32} className="me-4" />
                     Hospede uma experiência
                     <span className="position-absolute end-0 top-0 fw-bold fs-3">&gt;</span>
                 </button>
@@ -45,8 +46,8 @@ export default function Profile() {
             </section>
             <section className="container d-flex flex-column my-2">
                 <h2>Indicações e créditos</h2>
-                <button className="btn position-relative  p-2 my-2">
-                    <img src="" alt="" />
+                <button className="btn position-relative  p-2 my-2 text-start">
+                    <Gift size={32} className="me-4"/>
                     Indicar um anfitrião
                     <span className="position-absolute end-0 top-0 fw-bold fs-3">&gt;</span>
                 </button>
@@ -54,8 +55,8 @@ export default function Profile() {
             </section>
             <section className="container d-flex flex-column my-2">
                 <h2>Atendimento</h2>
-                <button className="btn position-relative  p-2 my-2">
-                    <img src="" alt="" />
+                <button className="btn position-relative  p-2 my-2 text-start">
+                <SquaresFour size={32} className="me-4" />
                     Como funciona o mybnb
                     <span className="position-absolute end-0 top-0 fw-bold fs-3">&gt;</span>
                 </button>

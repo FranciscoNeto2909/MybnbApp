@@ -264,6 +264,11 @@ summary::after{
 details[open] summary::after{
   content: "-";
 }
+.profile-img{
+  height: 60px;
+  width: 60px;
+  background-color: rgb(50, 50, 50);
+}
 .profile-footer{
   font-size: .85rem;
 }

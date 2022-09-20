@@ -1,22 +1,23 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import { UserCircle, Heart, MagnifyingGlass } from "phosphor-react"
 export default function Nav() {
     const user = useSelector(data => data.user)
     return (
         <nav className="navbar container-fluid justify-content-center position-fixed bottom-0 border-secondary bg-light">
             <Link to="/" className="d-flex flex-column align-items-center text-decoration-none">
-                <img className="icon" src="https://icones.pro/wp-content/uploads/2021/06/icone-loupe-gris.png" alt="lupa" />
+                <MagnifyingGlass size={30} />
                 Explorar
             </Link>
             <Link to="/favorites" className="d-flex flex-column align-items-center text-decoration-none mx-5">
-                <img className="icon" src="https://freepngimg.com/thumb/instagram/1-2-instagram-heart-transparent.png" alt="coração" />
+                <Heart size={30} />
                 Favorites
             </Link>
             <Link to="/user" className="d-flex flex-column align-items-center text-decoration-none">
-                <img className="icon" src="https://distrimar.s3.amazonaws.com/static/apm/img/misc/default_user.png" alt="user" />
+                <UserCircle size={30} />
                 {user.isLogged ? "Perfil" : "Entrar"}
-            </Link> 
+            </Link>
         </nav>
     )
 } 
