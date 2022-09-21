@@ -1,9 +1,12 @@
-import { userLogin } from "../assets/userSlice"
+import { userLogin } from "../../assets/userSlice"
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 export default function CompleteRegistration() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     function handleLogin(){
         dispatch(userLogin())
+        navigate("/")
     }
     return (
         <>
