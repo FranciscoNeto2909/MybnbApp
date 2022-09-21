@@ -7,16 +7,18 @@ import Nav from "./components/Nav"
 import Profile from "./pages/Profile"
 import Login from "./pages/Login"
 import PersonalInfos from "./components/user/PersonalInfos"
+import { useSelector } from "react-redux"
 export default function App() {
   const [showFilter, setShowFilter] = useState(false)
+  const isNavVisible = useSelector(data => data.app.navVisibility)
   function handleOpenFilter() {
     setShowFilter(!showFilter)
   }
   return (
     <div className="App">
-      {!showFilter && <Nav />}
+      {isNavVisible && <Nav />}
       <Routes>
-        <Route path="/" element={<Home showFilter={showFilter} handleOpenFilter={handleOpenFilter} />} />
+        <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />

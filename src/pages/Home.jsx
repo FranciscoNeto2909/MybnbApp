@@ -3,19 +3,21 @@ import SearchBar from "../components/SearchBar";
 import AcomodationsFilter from "../components/AcomodationsFilter";
 import Destiny from "../components/Destiny"
 import { useState } from "react";
-export default function Home({showFilter, handleOpenFilter}) {
+import { useSelector } from "react-redux";
+export default function Home() {
     const [showDestiny, setShowDestiny] = useState(false)
+    const isNavVisible = useSelector(data => data.app.navVisibility)
     function handleOpenDestiny() {
         setShowDestiny(!showDestiny)
     }
     return (
         <div>
             <header className="border-bottom">
-                <SearchBar handleOpenFilter={handleOpenFilter} handleOpenDestiny={handleOpenDestiny}/>
+                <SearchBar handleOpenDestiny={handleOpenDestiny}/>
                 <AcomodationTypes/>
             </header>
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny}/>}
-            {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter}/>}
+            {!isNavVisible && <AcomodationsFilter/>}
         </div>
     )
 }

@@ -68,7 +68,7 @@ export default function Destiny({ handleOpenDestiny }) {
                         <div className="destiny-maps d-flex justify-content-between m-2">
                             {
                                 destinations.map((dest, i) => (
-                                    <div className="destiny-map mx-2 border border-2 rounded-3 d-flex flex-column align-items-center p-1">
+                                    <div key={i} className="destiny-map mx-2 border border-2 rounded-3 d-flex flex-column align-items-center p-1">
                                         <img className="destiny-map-img p-2" src={dest.img} alt="" />
                                         <p className="destiny-text p-0 m-0">{dest.text}</p>
                                     </div>

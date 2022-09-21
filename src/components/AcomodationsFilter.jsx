@@ -1,9 +1,11 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { hideNav, showNav } from "../assets/appSlice"
 import CompostCheckButton from "./CompostCheckButton"
 import PropertyTypeButton from "./PropTypeButton"
 import SimpleCheckButton from "./SimpleCheckButton"
 
-export default function AcomodationsFilter({ handleOpenFilter }) {
+export default function AcomodationsFilter() {
     const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75, 80, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]
     const quantity = [1, 2, 3, 4, 5, 6, 7, "8+"]
     const [bRoom, setBRoom] = useState(0)
@@ -12,6 +14,7 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
     const [property, setProperty] = useState("")
     const [convenience, setConvenience] = useState("")
     const [lang, setLang] = useState("")
+    const dispatch = useDispatch()
     function handleSelectBdRooms(e) {
         setBRoom(e.target.innerText)
         const bdRooms = document.querySelectorAll(".bdRooms")
@@ -30,6 +33,9 @@ export default function AcomodationsFilter({ handleOpenFilter }) {
         const bthRooms = document.querySelectorAll(".bthRooms")
         bthRooms.forEach(btn => btn.classList.remove("selected"))
         e.target.classList.add("selected")
+    }
+    function handleOpenFilter() {
+        dispatch(showNav())
     }
     return (
         <div className="acmd-filter-container container-fluid d-flex position-absolute top-0 pt-3 justify-content-center">
