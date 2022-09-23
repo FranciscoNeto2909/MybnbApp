@@ -17,7 +17,10 @@ export default function Profile() {
         dispatch(hideNav())
         navigate("/profile/personal-infos")
     }
-
+    function handleOpenAccount() {
+        dispatch(hideNav())
+        navigate("/profile/account")
+    }
     return (
         <div className="user container container-fluid p-2 my-5">
             <section className="container d-flex flex-column my-2">
@@ -29,7 +32,7 @@ export default function Profile() {
                     Informações pessoais
                     <CaretRight size={30} className="position-absolute end-0"/>
                 </button>
-                <button className="btn position-relative  p-2 my-2 text-start">
+                <button className="btn position-relative  p-2 my-2 text-start" onClick={handleOpenAccount}>
                     <Gear size={30} className="me-4" />
                     Conta
                     <CaretRight size={30} className="position-absolute end-0"/>
@@ -76,7 +79,7 @@ export default function Profile() {
                 <button className="btn p-2 border border-dark fw-bold" onClick={handleLogout}>Sair</button>
             </section>
             <footer>
-                <p className="profile-footer">Esta aplicação foi desenvolvida no intuito de praticar programação e não tem nenhum fim comercial.</p>
+                <p className="profile-footer">Esta aplicação foi desenvolvida no intuito de praticar programação. Não tem nenhum fim comercial ou financeiro.</p>
             </footer>
         </div>
     )

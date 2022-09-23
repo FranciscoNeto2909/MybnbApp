@@ -11,7 +11,7 @@ export default function name() {
     const [birthVisib, setBirthVisb] = useState(false)
     const [EmailVisib, setEmailVisb] = useState(false)
     const [phoneVisib, setPhoneVisb] = useState(false)
-    const [AddrVisib, setAddrVisb] = useState(false)
+    const [addrVisib, setAddrVisb] = useState(false)
 
 
     function handleBackButton() {
@@ -20,13 +20,13 @@ export default function name() {
     }
     return (
         <div>
-            <header className="personalinfo-header py-3 position-sticky top-0 bg-light border-bottom border-secondary">
+            <header className="personalinfo-header py-3 position-sticky top-0 bg-light">
                 <CaretLeft size={25} onClick={handleBackButton} />
             </header>
             <main className="p-3">
-                <h1 className="fs-4 fw-bold">Informações pessoais</h1>
+                <h1 className="fs-3 fw-bold mb-4">Informações pessoais</h1>
                 <div className="personalInfo-name-container border-bottom border-secondary position-relative py-2 my-2">
-                    <label>Nome</label>
+                    <h2 className="fs-4 fw-bold">Nome</h2>
                     {nameVisib ?
                         <p className="text-secondary">Este é o nome que aparecerá em seus documentos de viagem.</p> :
                         <p className="text-secondary">Francisco</p>
@@ -44,7 +44,7 @@ export default function name() {
                             <button className="btn btn-dark my-3 py-2">Salvar</button>
                         </div>
                     }
-                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setNameVisb(!nameVisib)}>Editar</button>
+                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setNameVisb(!nameVisib)}>{nameVisib ? "Cancelar" : "Editar"}</button>
                 </div>
                 <div className="personalInfo-sexo-container border-bottom border-secondary position-relative py-2 my-2">
                     <h2 className="fs-4 fw-bold">Sexo</h2>
@@ -62,11 +62,11 @@ export default function name() {
                             <button className="btn btn-dark my-3 py-2">Salvar</button>
                         </div>
                     }
-                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setSexoVisb(!sexoVisib)}>Editar</button>
+                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setSexoVisb(!sexoVisib)}>{sexoVisib ? "Cancelar" : "Editar"}</button>
                 </div>
                 <div className="personalInfo-nascimento-container border-bottom border-secondary position-relative py-2 my-2">
-                    <h2>Data de nascimento</h2>
-                    {!birthVisib && <p>**/**/****</p>}
+                    <h2 className="fs-4 fw-bold">Data de nascimento</h2>
+                    {!birthVisib && <p className="text-secondary">**/**/****</p>}
                     {birthVisib &&
                         <div className="personalInfo-nascimento">
                             <div className="personalInfo-changeSexo">
@@ -75,11 +75,11 @@ export default function name() {
                             <button className="btn btn-dark my-3 py-2">Salvar</button>
                         </div>
                     }
-                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setBirthVisb(!birthVisib)}>Editar</button>
+                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setBirthVisb(!birthVisib)}>{birthVisib ? "Cancelar" : "Editar"}</button>
                 </div>
                 <div className="personalInfo-email-container border-bottom border-secondary position-relative py-2 my-2">
-                    <h2>Endereço de email</h2>
-                    {!EmailVisib && <p>Use um endereço de email a qual tenha acesso</p>}
+                    <h2 className="fs-4 fw-bold">Endereço de email</h2>
+                    {!EmailVisib && <p className="text-secondary">Use um endereço de email a qual tenha acesso</p>}
                     {EmailVisib && <div className="personalInfo-nascimento">
                         <div className="phone input-group-lg col-11 my-2">
                                 <input id="name" type="email" className="inpt border border-secondary rounded ps-3" autoComplete="none" required />
@@ -87,11 +87,11 @@ export default function name() {
                             </div>
                         <button className="btn btn-dark my-3 py-2">Salvar</button>
                     </div>}
-                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setEmailVisb(!EmailVisib)}>Editar</button>
+                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setEmailVisb(!EmailVisib)}>{EmailVisib ? "Cancelar" : "Editar"}</button>
                 </div>
                 <div className="personalInfo-telefone-container border-bottom border-secondary position-relative py-2 my-2">
-                    <h2>Telefone</h2>
-                    {!phoneVisib && <p>Adicione um numero de telefone para que os hospedes e o mybnb possa entrar em contato.</p>}
+                    <h2 className="fs-4 fw-bold">Telefone</h2>
+                    {!phoneVisib && <p className="text-secondary">Adicione um numero de telefone para que os hospedes e o mybnb possa entrar em contato.</p>}
                     {phoneVisib && <div className="personalInfo-telefone">
                         <p>Insira um novo numero de telefone</p>
                         <div className="personalInfo-changeTelefone">
@@ -116,20 +116,20 @@ export default function name() {
                         </div>
                         <button className="btn btn-dark my-3 py-2">Verificar</button>
                     </div>}
-                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setPhoneVisb(!phoneVisib)}>Editar</button>
+                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setPhoneVisb(!phoneVisib)}>{phoneVisib ? "Cancelar" : "Editar"}</button>
                 </div>
                 <div className="personalInfo-endereco-container
                 position-relative py-2 my-2">
-                    <h2>Endereço</h2>
-                    {!AddrVisib && <p>Não fornecido</p>}
-                   {AddrVisib && <div className="personalInfo-endereco">
+                    <h2 className="fs-4 fw-bold">Endereço</h2>
+                    {!addrVisib && <p className="text-secondary">Não fornecido</p>}
+                   {addrVisib && <div className="personalInfo-endereco">
                     <div className="phone input-group-lg col-11 position-relative">
                                 <input id="address" type="text" className="inpt border border-secondary rounded ps-3" autoComplete="none" required onChange={e => setPNum(e.target.value)} />
                                 <label className="lbl" htmlFor="address">Endereço</label>
                             </div>
                         <button className="btn btn-dark my-3 py-2">Salvar</button>
                     </div>}
-                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setAddrVisb(!AddrVisib)}>Editar</button>
+                    <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setAddrVisb(!addrVisib)}>{addrVisib ? "Cancelar" : "Editar"}</button>
                 </div>
             </main >
         </div >

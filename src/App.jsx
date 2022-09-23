@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { Routes, Route } from "react-router-dom"
+import { useSelector } from "react-redux"
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
 import NotFound from "./pages/NotFound"
@@ -7,7 +8,8 @@ import Nav from "./components/Nav"
 import Profile from "./pages/Profile"
 import Login from "./pages/Login"
 import PersonalInfos from "./components/user/PersonalInfos"
-import { useSelector } from "react-redux"
+import Account from "./components/account/Account"
+import LoginAndSecurity from "./components/account/LoginAndSecurity"
 export default function App() {
   const [showFilter, setShowFilter] = useState(false)
   const isNavVisible = useSelector(data => data.app.navVisibility)
@@ -23,6 +25,8 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/personal-infos" element={<PersonalInfos />} />
+        <Route path="/profile/account" element={<Account />} />
+        <Route path="/profile/account/login-and-security" element={<LoginAndSecurity />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
