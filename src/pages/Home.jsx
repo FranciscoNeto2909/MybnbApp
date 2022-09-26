@@ -1,7 +1,7 @@
-import AcomodationTypes from "../components/AcomodationsTypes";
-import SearchBar from "../components/SearchBar";
-import AcomodationsFilter from "../components/AcomodationsFilter";
-import Destiny from "../components/Destiny"
+import AcomodationTypes from "../components/aplication/AcomodationsTypes";
+import SearchBar from "../components/aplication/SearchBar";
+import AcomodationsFilter from "../components/aplication/AcomodationsFilter";
+import Destiny from "../components/aplication/Destiny"
 import { useState } from "react";
 import { useSelector } from "react-redux";
 export default function Home() {

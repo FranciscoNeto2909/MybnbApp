@@ -25,7 +25,7 @@ export default function name() {
             </header>
             <main className="p-3">
                 <h1 className="fs-3 fw-bold mb-4">Informações pessoais</h1>
-                <div className="personalInfo-name-container border-bottom border-secondary position-relative py-2 my-2">
+                <div className="personalInfo-name-container bottom-border position-relative py-2 my-2">
                     <h2 className="fs-4 fw-bold">Nome</h2>
                     {nameVisib ?
                         <p className="text-secondary">Este é o nome que aparecerá em seus documentos de viagem.</p> :
@@ -46,7 +46,7 @@ export default function name() {
                     }
                     <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setNameVisb(!nameVisib)}>{nameVisib ? "Cancelar" : "Editar"}</button>
                 </div>
-                <div className="personalInfo-sexo-container border-bottom border-secondary position-relative py-2 my-2">
+                <div className="personalInfo-sexo-container bottom-border position-relative py-2 my-2">
                     <h2 className="fs-4 fw-bold">Sexo</h2>
                     <p className="text-secondary">Não especificado</p>
                     {sexoVisib &&
@@ -64,7 +64,7 @@ export default function name() {
                     }
                     <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setSexoVisb(!sexoVisib)}>{sexoVisib ? "Cancelar" : "Editar"}</button>
                 </div>
-                <div className="personalInfo-nascimento-container border-bottom border-secondary position-relative py-2 my-2">
+                <div className="personalInfo-nascimento-container bottom-border position-relative py-2 my-2">
                     <h2 className="fs-4 fw-bold">Data de nascimento</h2>
                     {!birthVisib && <p className="text-secondary">**/**/****</p>}
                     {birthVisib &&
@@ -77,7 +77,7 @@ export default function name() {
                     }
                     <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setBirthVisb(!birthVisib)}>{birthVisib ? "Cancelar" : "Editar"}</button>
                 </div>
-                <div className="personalInfo-email-container border-bottom border-secondary position-relative py-2 my-2">
+                <div className="personalInfo-email-container bottom-border position-relative py-2 my-2">
                     <h2 className="fs-4 fw-bold">Endereço de email</h2>
                     {!EmailVisib && <p className="text-secondary">Use um endereço de email a qual tenha acesso</p>}
                     {EmailVisib && <div className="personalInfo-nascimento">
@@ -89,7 +89,7 @@ export default function name() {
                     </div>}
                     <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={() => setEmailVisb(!EmailVisib)}>{EmailVisib ? "Cancelar" : "Editar"}</button>
                 </div>
-                <div className="personalInfo-telefone-container border-bottom border-secondary position-relative py-2 my-2">
+                <div className="personalInfo-telefone-container bottom-border position-relative py-2 my-2">
                     <h2 className="fs-4 fw-bold">Telefone</h2>
                     {!phoneVisib && <p className="text-secondary">Adicione um numero de telefone para que os hospedes e o mybnb possa entrar em contato.</p>}
                     {phoneVisib && <div className="personalInfo-telefone">

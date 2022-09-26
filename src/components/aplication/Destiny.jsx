@@ -1,5 +1,7 @@
-export default function Destiny({ handleOpenDestiny }) {
+import { useState } from "react"
 
+export default function Destiny({ handleOpenDestiny }) {
+    const [toggleClass, setToggleClass] = useState(true)
     const destinations = [
         {
             text: "Busca flexível",
@@ -26,16 +28,8 @@ export default function Destiny({ handleOpenDestiny }) {
             img: "https://media.istockphoto.com/vectors/portugal-map-vector-illustration-country-isolated-background-vector-id1082851132?k=20&m=1082851132&s=612x612&w=0&h=wLILjsjT7iC-CSSCRkLHOS4v8QhBZN_-OebNAEeV1E8="
         }
     ]
-
-
-    function handleSelectAcomodation(e) {
-        const btns = document.querySelectorAll(".destiny-btn")
-        btns.forEach(btn => {
-            btn.classList.remove("bottom-border")
-            btn.classList.add("text-secondary")
-        })
-        e.target.classList.toggle("bottom-border")
-        e.target.classList.toggle("text-secondary")
+    function handleToggleClass() {
+        setToggleClass(!toggleClass)
     }
     return (
         <div className="destiny-container container-fluid d-flex position-absolute top-0 pt-3 justify-content-center bg-light">
@@ -48,11 +42,10 @@ export default function Destiny({ handleOpenDestiny }) {
                         x
                     </button>
                     <div className="btns-container mx-auto d-flex justify-content-center">
-                        <button type="button" className="destiny-btn        
-                            bg-transparent fw-bold bottom-border" onClick={handleSelectAcomodation}>Acomodações
+                        <button type="button" className={toggleClass ? "destiny-btn bg-transparent fw-bold border-bt" : "destiny-btn bg-transparent fw-bold text-secondary"}
+                        onClick={handleToggleClass} >Acomodações
                         </button>
-                        <button type="button" className="destiny-btn 
-                            bg-transparent fw-bold text-secondary" onClick={handleSelectAcomodation}>Experiêcias
+                        <button type="button" className={toggleClass ?"destiny-btn bg-transparent fw-bold text-secondary" : "destiny-btn bg-transparent fw-bold border-bt"} onClick={handleToggleClass}>Experiêcias
                         </button>
                     </div>
                 </header>

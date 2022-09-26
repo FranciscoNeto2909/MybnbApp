@@ -217,11 +217,11 @@
   height: 50px;
   width: 50px;
 }
-.destiny-btn{
+.destiny-btn, .offers-btn, .account-btn{
   border: 0;
   border-bottom: 2px solid transparent;
 }
-.bottom-border{
+.border-bt{
   border-bottom: 2px solid black;
 }
 .lupa{
@@ -278,8 +278,12 @@ details[open] summary::after{
 }
 .login-btn{
   background: linear-gradient(to left,#008080, #00c0c0);
-
 }
+ .bottom-border{
+  border: 0;
+ border-bottom: 1px solid darkgray;
+  }
+
 @media (max-width: 700px) {
   .search-desc-item{
   font-size: .7rem;

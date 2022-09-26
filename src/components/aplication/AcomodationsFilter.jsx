@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { hideNav, showNav } from "../assets/appSlice"
+import { hideNav, showNav } from "../../assets/appSlice"
 import CompostCheckButton from "./CompostCheckButton"
 import PropertyTypeButton from "./PropTypeButton"
 import SimpleCheckButton from "./SimpleCheckButton"

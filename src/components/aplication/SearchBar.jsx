@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { hideNav } from "../assets/appSlice"
+import { hideNav } from "../../assets/appSlice"
 
 export default function SearchBar({handleOpenDestiny}) {
     const dispatch = useDispatch()
