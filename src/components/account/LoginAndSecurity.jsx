@@ -8,12 +8,12 @@ export default function LoginAndSecurity() {
     return (
         <>
             <header className="account-header py-3 position-sticky top-0 bg-light mb-5">
-                <CaretLeft size={30} onClick={() => navigate(-1)} />
+                <CaretLeft size={25} onClick={() => navigate(-1)} />
             </header>
             <main className="p-3">
                 <h1 className="fs-3 fw-bold mb-5">Login e segurança</h1>
                 <section className="py-2 mb-5">
-                    <h2 className="fs-3 fw-bold">Login</h2>
+                    <h2 className="fs-3 fw-bold mb-5">Login</h2>
                     <div className="personalInfo-name-container border-bottom border-secondary position-relative">
                         <h3 className="fs-5 fw-bold">Senha</h3>
                         {loginVisib ?

@@ -13,13 +13,13 @@ export default function OfersAndNews() {
         <>
             <section className="offersAndNews mb-5 bottom-border">
                 <h2 className="fw-bold fs-4">Dicas e ofertas de viagem</h2>
-                <p className="text-secondary">Inspire-se para sua proxima viagem com recomendações personalizadas e ofertas especiais.</p>
+                <p className="font-smaller text-secondary">Inspire-se para sua proxima viagem com recomendações personalizadas e ofertas especiais.</p>
                 <div className="offersAndNews-buttons mt-4">
                     <div className="personalInfo-name-container  position-relative py-2 my-2">
-                        <h3 className="fs-5 fw-bold">Inspiração e ofertas</h3>
+                        <h3 className="fs-6 fw-bold">Inspiração e ofertas</h3>
                         {offersVisib ?
-                            <p className="text-secondary">Acomodações, experiencias e ofertas inspiradoras.</p> :
-                            <p className="text-secondary">Desativado</p>
+                            <p className="font-smaller text-secondary">Acomodações, experiencias e ofertas inspiradoras.</p> :
+                            <p className="font-smaller text-secondary">Desativado</p>
                         }
                         {offersVisib &&
                             <>
@@ -32,10 +32,10 @@ export default function OfersAndNews() {
                         <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setOffersVisib(!offersVisib)}>{offersVisib ? "Cancelar" : "Editar"}</button>
                     </div>
                     <div className="personalInfo-name-container  position-relative py-2 my-2">
-                        <h3 className="fs-5 fw-bold">Planejamento de viagens</h3>
+                        <h3 className="fs-6 fw-bold">Planejamento de viagens</h3>
                         {planningVisib ?
-                            <p className="text-secondary">Recomendações personalizadas para sua viagem.</p> :
-                            <p className="text-secondary">Desativado</p>
+                            <p className="font-smaller text-secondary">Recomendações personalizadas para sua viagem.</p> :
+                            <p className="font-smaller text-secondary">Desativado</p>
                         }
                         {planningVisib &&
                             <>
@@ -51,13 +51,13 @@ export default function OfersAndNews() {
             </section>
             <section className="mybnbNews bottom-border">
                 <h3 className="fs-3 fw-bold">Novidades do Mybnb</h3>
-                <p className="text-secondary">Fique por dentro de todas as nossas novidades.</p>
+                <p className="font-smaller text-secondary">Fique por dentro de todas as nossas novidades.</p>
                 <div className="mybnbNews-buttons mt-4">
                     <div className="personalInfo-name-container  position-relative py-2 my-2">
-                        <h3 className="fs-5 fw-bold">Notícias e programas</h3>
+                        <h3 className="fs-6 fw-bold">Notícias e programas</h3>
                         {noticesVisib ?
-                            <p className="text-secondary">Fique por dentro dos novos programas e comunicados.</p> :
-                            <p className="text-secondary">Desativado</p>
+                            <p className="font-smaller text-secondary">Fique por dentro dos novos programas e comunicados.</p> :
+                            <p className="font-smaller text-secondary">Desativado</p>
                         }
                         {noticesVisib &&
                             <>
@@ -70,10 +70,10 @@ export default function OfersAndNews() {
                         <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setNoticesVisib(!noticesVisib)}>{noticesVisib ? "Cancelar" : "Editar"}</button>
                     </div>
                     <div className="personalInfo-name-container  position-relative py-2 my-2">
-                        <h3 className="fs-5 fw-bold">Feedback</h3>
+                        <h3 className="fs-6 fw-bold">Feedback</h3>
                         {feedbackVisib ?
-                            <p className="text-secondary">Queremos saber o que você está achando e como podemos melhorar.</p> :
-                            <p className="text-secondary">Desativado</p>
+                            <p className="font-smaller text-secondary">Queremos saber o que você está achando e como podemos melhorar.</p> :
+                            <p className="font-smaller text-secondary">Desativado</p>
                         }
                         {feedbackVisib &&
                             <>
@@ -86,10 +86,10 @@ export default function OfersAndNews() {
                         <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setFeedbackVisib(!feedbackVisib)}>{feedbackVisib ? "Cancelar" : "Editar"}</button>
                     </div>
                     <div className="personalInfo-name-container  position-relative py-2 my-2">
-                        <h3 className="fs-5 fw-bold">Regulamento de viagens</h3>
+                        <h3 className="fs-6 fw-bold">Regulamento de viagens</h3>
                         {travelRegulVisib ?
-                            <p className="text-secondary">Viaje de forma inteligente ao conhecer as novidades dos regulamentos.</p> :
-                            <p className="text-secondary">Desativado</p>
+                            <p className="font-smaller text-secondary">Viaje de forma inteligente ao conhecer as novidades dos regulamentos.</p> :
+                            <p className="font-smaller text-secondary">Desativado</p>
                         }
                         {travelRegulVisib &&
                             <>
@@ -102,7 +102,7 @@ export default function OfersAndNews() {
                         <button className="position-absolute top-0 end-0 border-0 bg-transparent text-decoration-underline" onClick={e => setTravelRegulVisib(!travelRegulVisib)}>{travelRegulVisib ? "Cancelar" : "Editar"}</button>
                     </div>
                 </div>
-                <div className="checkbtn-container my-4">
+                <div className="container checkbtn-container my-4">
                     <SimpleCheckButton text={"Cancelar inscrição de todos os emails de marketing"} func="" />
                 </div>
             </section>

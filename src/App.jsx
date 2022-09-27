@@ -12,6 +12,7 @@ import Account from "./components/account/Account"
 import LoginAndSecurity from "./components/account/LoginAndSecurity"
 import Payment from "./components/account/Payment"
 import Notification from "./components/account/Notification"
+import GlobalPrefer from "./components/account/GlobalPrefer"
 export default function App() {
   const [showFilter, setShowFilter] = useState(false)
   const isNavVisible = useSelector(data => data.app.navVisibility)
@@ -31,7 +32,7 @@ export default function App() {
         <Route path="/profile/account/payment" element={<Payment />} />
         <Route path="/profile/account/notification" element={<Notification />} />
         <Route path="/profile/account/login-and-security" element={<LoginAndSecurity />} />
-
+        <Route path="/profile/account/global-prefer" element={<GlobalPrefer />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

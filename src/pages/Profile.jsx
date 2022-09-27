@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { logout } from "../assets/userSlice"
-import { UserCircle, Gear, FadersHorizontal, AlignLeft, Gift, SquaresFour, CaretRight } from "phosphor-react"
+import { UserCircle, Gear, FadersHorizontal, AlignLeft, Gift, SquaresFour, CaretRight, ToggleRight, ToggleLeft } from "phosphor-react"
 import { useNavigate } from "react-router-dom"
 import { hideNav } from "../assets/appSlice"
 
@@ -23,9 +23,9 @@ export default function Profile() {
     }
     return (
         <div className="user container container-fluid p-2 my-5">
-            <section className="container d-flex flex-column my-2">
-                <UserCircle size={80} />
-                <h1 className="user-name">{user.name}</h1>
+            <section className="container d-flex flex-column my-3">
+                <UserCircle size={65} />
+                <h1 className="user-name fw-bold mt-2">{user.name}</h1>
                 <a href="" className="text-dark mb-5">Mostrar perfil</a>
                 <button className="btn position-relative  p-2 my-2 text-start" onClick={handleOpenPersonalInfos}>
                     <UserCircle size={30} className="me-4" />
@@ -41,8 +41,11 @@ export default function Profile() {
             </section>
             <section className="container d-flex flex-column my-2">
                 <h2>Hospedagem</h2>
-                <button className="btn position-relative  p-2 my-2 text-start">
-                    <FadersHorizontal size={30} className="me-4" />
+                <button className="btn position-relative d-flex p-2 my-2 text-start align-items-baseline">
+                    <div className="toggles-container d-flex flex-column position-relative me-4">
+                        <ToggleLeft size={25} className="m-0 position-absolute top-50"/>
+                        <ToggleRight size={25} className="m-0 position" />
+                    </div>
                     Hospede uma acomodação
                     <CaretRight size={30} className="position-absolute end-0"/>
                 </button>
