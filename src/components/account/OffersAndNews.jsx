@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SimpleCheckButton from "../aplication/SimpleCheckButton"
-import SwitchButton from "../aplication/SwitchButton";
+import SimpleCheckButton from "../buttons/SimpleCheckButton"
+import SwitchButton from "../buttons/SwitchButton";
 
 export default function OfersAndNews() {
     const [offersVisib, setOffersVisib] = useState(false)

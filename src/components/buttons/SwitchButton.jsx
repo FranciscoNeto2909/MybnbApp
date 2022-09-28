@@ -1,7 +1,7 @@
 export default function SwitchButton({ text, text2, func }) {
     return (
         <div className="d-flex flex-column justify-content-between form-switch p-3 ps-0 position-relative">
-            <label className="form-check-label fs-5" htmlFor="switch-btn">{text}</label>
+            <label className="form-check-label fs-5 me-3" htmlFor="switch-btn">{text}</label>
             {text2 !== undefined &&
                 <p className="font-smaller text-secondary">{text2}</p>
             }

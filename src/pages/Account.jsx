@@ -1,7 +1,7 @@
 import { CaretLeft, CaretRight } from "phosphor-react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { showNav } from "../../assets/appSlice"
+import { showNav } from "../assets/appSlice"
 export default function Account() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -36,7 +36,7 @@ export default function Account() {
                     <span className="font-smaller text-secondary">Idioma, moeda e fuso horário padrao</span>
                     <CaretRight size={25} className="position-absolute end-0 top-50 translate-middle"/>
                 </button>
-                <button className="bottom-border py-4 text-start position-relative bg-transparent">
+                <button className="bottom-border py-4 text-start position-relative bg-transparent" onClick={() => navigate("/profile/account/privacity-and-share")}>
                     <span className="d-block fs-5 mb-2">Privacidade e compartilhamento</span>
                     <span className="font-smaller text-secondary">Aplicativos conectados e configurações de compartilhamento</span>
                     <CaretRight size={25} className="position-absolute end-0 top-50 translate-middle"/>

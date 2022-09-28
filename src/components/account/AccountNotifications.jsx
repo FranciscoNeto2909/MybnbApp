@@ -1,5 +1,5 @@
 import { useState } from "react";
-import SwitchButton from "../aplication/SwitchButton";
+import SwitchButton from "../buttons/SwitchButton";
 
 export default function AccountNotifications() {
     const [activitiVisib, setActivitiVisib] = useState(false)

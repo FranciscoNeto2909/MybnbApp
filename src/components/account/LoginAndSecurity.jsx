@@ -59,11 +59,11 @@ export default function LoginAndSecurity() {
                     <p>Não temos acesso aos dispositivos acessados pelo usuario</p>
                 </section>
                 <section className="border-secondary border-bottom">
-                        <h1 className="fs-3 fw-bold">Conta</h1>
-                        <div className="del-account position-relative">
-                            <p>Desativar sua conta</p>
-                            <button className="border-0 bg-transparent text-danger position-absolute top-0 end-0">Desativar</button>
-                        </div>
+                    <h1 className="fs-3 fw-bold">Conta</h1>
+                    <div className="del-account position-relative">
+                        <p>Desativar sua conta</p>
+                        <button className="border-0 bg-transparent text-danger position-absolute top-0 end-0">Desativar</button>
+                    </div>
                 </section>
             </main>
         </>

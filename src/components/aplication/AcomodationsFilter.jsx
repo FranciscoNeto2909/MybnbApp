@@ -1,9 +1,9 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { hideNav, showNav } from "../../assets/appSlice"
-import CompostCheckButton from "./CompostCheckButton"
+import CompostCheckButton from "../buttons/CompostCheckButton"
 import PropertyTypeButton from "./PropTypeButton"
-import SimpleCheckButton from "./SimpleCheckButton"
+import SimpleCheckButton from "../buttons/SimpleCheckButton"
 
 export default function AcomodationsFilter() {
     const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75, 80, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]

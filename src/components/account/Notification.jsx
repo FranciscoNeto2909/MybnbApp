@@ -35,7 +35,7 @@ export default function Notification() {
                     </button>
                 </div>
                 <section>
-                    {elemVisib ? <AccountNotifications/> : <OffersAndNews/>}
+                    {elemVisib ? <AccountNotifications /> : <OffersAndNews />}
                 </section>
             </main>
         </>
