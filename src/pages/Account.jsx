@@ -41,16 +41,6 @@ export default function Account() {
                     <span className="font-smaller text-secondary">Aplicativos conectados e configurações de compartilhamento</span>
                     <CaretRight size={25} className="position-absolute end-0 top-50 translate-middle"/>
                 </button>
-                <button className="bottom-border py-4 text-start position-relative bg-transparent">
-                    <span className="d-block fs-5 mb-2">Viagem a trabalho</span>
-                    <span className="font-smaller text-secondary">Adicione um email profissional para ter os benefícios da viagem a trabalho</span>
-                    <CaretRight size={25} className="position-absolute end-0 top-50 translate-middle"/>
-                </button>
-                <button className="tools-contayner border-0 py-4 text-start position-relative bg-transparent">
-                    <span className="d-block fs-5 mb-2">Ferramentas de hospedagem profissional</span>
-                    <span className="font-smaller text-secondary">Tenha acesso as feramentas profissionais caso gerencie várias propriedades</span>
-                    <CaretRight size={25} className="position-absolute end-0 top-50 translate-middle"/>
-                </button>
             </main>
         </>
     )

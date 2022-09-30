@@ -21,6 +21,10 @@ export default function Profile() {
         dispatch(hideNav())
         navigate("/profile/account")
     }
+    function handleOpenAcomodationHost() {
+        dispatch(hideNav())
+        navigate("/profile/acomodation-host")
+    }
     return (
         <div className="user container container-fluid p-2 my-5">
             <section className="container d-flex flex-column my-3">
@@ -41,7 +45,7 @@ export default function Profile() {
             </section>
             <section className="container d-flex flex-column my-2">
                 <h2>Hospedagem</h2>
-                <button className="btn position-relative d-flex p-2 my-2 text-start align-items-baseline">
+                <button className="btn position-relative d-flex p-2 my-2 text-start align-items-baseline" onClick={handleOpenAcomodationHost}>
                     <div className="toggles-container d-flex flex-column position-relative me-4">
                         <ToggleLeft size={25} className="m-0 position-absolute top-50"/>
                         <ToggleRight size={25} className="m-0 position" />

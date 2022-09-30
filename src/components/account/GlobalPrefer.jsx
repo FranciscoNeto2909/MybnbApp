@@ -1,6 +1,6 @@
 import { CaretLeft } from "phosphor-react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import SwitchButton from "../buttons/SwitchButton"
 export default function GlobalPrefer() {
     const navigate = useNavigate()
