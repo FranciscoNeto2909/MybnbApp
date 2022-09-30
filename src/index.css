@@ -362,6 +362,20 @@ details[open] summary::after {
   padding: 0;
   margin: 0;
 }
+.anfitriao-resume-container{
+  overflow-x: scroll;
+}
+.spaceDesc-container{
+  background-color: rgba(0, 0, 0, 0.500);
+  z-index: 1;
+}
+.scroll-lock{
+  position: fixed;
+}
+.space-type-button-container{
+  background-color: rgba(0, 0, 0, 0.150);
+
+}
 @media (max-width: 700px) {
   .search-desc-item {
     font-size: .7rem;
