@@ -1,10 +1,22 @@
 import React from "react";
-import { X } from "phosphor-react";
+import { X, MinusCircle, PlusCircle } from "phosphor-react";
 import { useState } from "react";
+import { GoogleMap, Marker  } from "@react-google-maps/api";
+import AutocompleteElem from "./AutocompleteElem";
+
 
 export default function AddAcomodation({ handleToggleAcmdVisib }) {
-    
+    const [hostsQuant, setHostsQuant] = useState(4)
+    const [bedsQuant, setBedsQuant] = useState(1)
+    const [bedroomsQuant, setBedroomsQuant] = useState(1)
+    const [bethroomsQuant, setBethroomsQuant] = useState(1)
     const [step, setStep] = useState(1)
+
+    const [cordenates, setCordenates] = useState({
+        lat: -4.179914,
+        lng: -38.129617
+    })
+
     const spaceType = ["Apartamento", "Casa", "Unidade-secundária", "Acomodação única", "Pousada", "Hotel botique"]
     const spaceTypesDesc = [
         {
@@ -41,8 +53,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         }
     ]
     const placeType = ["Lugar inteiro", "Um quarto inteiro", "Um quarto compartilhado"]
+
     function handleNextStep() {
-        if (step < 4) {
+        if (step < 6) {
             setStep(step + 1)
         }
     }
@@ -61,7 +74,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                     <button className="btn btn-dark" onClick={handleNextStep}>Avançar</button>
                 </nav>
             </header>
-            <main className="addAcomodation-main rounded-top pt-3">
+            <main className="addAcomodation-main container rounded-top pt-3">
                 {step === 1 &&
                     <div className="space-types-container d-flex flex-column">
                         {spaceType.map((type, i) => <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent">{type}</button>)}
@@ -83,8 +96,48 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                     </div>
                 }
                 {step === 4 &&
-                    <div className="map">
-                        <p>Mapa</p>
+                    <div className="map-container" style={{ minHeight: '300px' }}>
+                        <AutocompleteElem setCordenates={setCordenates} />
+                        <GoogleMap
+                            mapContainerClassName="map"
+                            center={{
+                                lat: cordenates.lat,
+                                lng: cordenates.lng
+                            }}
+                            zoom={15}>
+                            <Marker position={{
+                                lat: cordenates.lat,
+                                lng: cordenates.lng
+                            }} />
+                        </GoogleMap>
+                    </div>
+                }
+                {step === 5 &&
+                    <div className="hosts">
+                        <div>
+                            Hóspedes
+                            <MinusCircle />
+                            {hostsQuant}
+                            <PlusCircle />
+                        </div>
+                        <div>
+                            Camas
+                            <MinusCircle />
+                            {bedsQuant}
+                            <PlusCircle />
+                        </div>
+                        <div>
+                            Quartos
+                            <MinusCircle />
+                            {bedroomsQuant}
+                            <PlusCircle />
+                        </div>
+                        <div>
+                            Banheiros
+                            <MinusCircle />
+                            {bethroomsQuant}
+                            <PlusCircle />
+                        </div>
                     </div>
                 }
             </main>

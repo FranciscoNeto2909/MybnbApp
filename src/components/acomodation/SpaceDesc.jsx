@@ -1,12 +1,13 @@
 import { MinusCircle, PlusCircle, X } from "phosphor-react";
 import { useState } from "react";
+import AutocompleteElem from "./AutocompleteElem";
 
-export default function SpaceDesc({ setSpaceDescVisib }) {
+export default function SpaceDesc({ setSpaceDescVisib, setCordenates }) {
     const [guests, setGuests] = useState(4)
     const [toggleSpaceType, setToggleSpaceType] = useState(false)
     const [wholeSpace, setWholeSpace] = useState(false)
     const [wholeBedroom, setWholeBedroom] = useState(false)
-
+    
     function handleSelectWholeSpace() {
         setWholeSpace(!wholeSpace)
         setGuests(4)
@@ -37,7 +38,7 @@ export default function SpaceDesc({ setSpaceDescVisib }) {
                 <main>
                     <div className="addressAndRegion bottom-border py-5">
                         <label className="form-label" htmlFor="address">Endereço ou região</label>
-                        <input id="address" type="text" className="form-control" />
+                        <AutocompleteElem setCordenates={setCordenates} />
                     </div>
                     <div className="space-type bottom-border py-5">
                         <label htmlFor="space-inpt">Tipo de espaço</label>
@@ -57,7 +58,7 @@ export default function SpaceDesc({ setSpaceDescVisib }) {
                         </div>
                     </div>
                     <div className="container d-flex justify-content-center mt-5">
-                        <button className="btn btn-dark text-light px-4 py-2">Atualize sua estimativa</button>
+                        <button className="btn btn-dark text-light px-4 py-2" onClick={() => setSpaceDescVisib(false)}>Atualize sua estimativa</button>
                     </div>
                 </main>
             </div>

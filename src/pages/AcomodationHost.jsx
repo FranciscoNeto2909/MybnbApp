@@ -5,11 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { showNav } from "../assets/appSlice";
 import AddAcomodation from "../components/acomodation/AddAcomodation";
 import SpaceDesc from "../components/acomodation/SpaceDesc"
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import AutocompleteElem from "../components/acomodation/AutocompleteElem"
+
 export default function AcomodationHost() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [AddAcmdVisib, setAddAcmdVisib] = useState(false)
     const [spaceDescVisib, setSpaceDescVisib] = useState(false)
+    const [cordenates, setCordenates] = useState({
+        lat: -4.179914,
+        lng: -38.129617
+    })
     function handleBackButton() {
         navigate(-1)
         dispatch(showNav())
@@ -25,7 +32,7 @@ export default function AcomodationHost() {
                         <CaretLeft size={20} className="position-absolute mt-2 ms-2 text-dark" onClick={handleBackButton} />
                         <img src="https://www.meusonhar.com.br/wp-content/uploads/2016/11/casa-nova-sonhar-com.jpg" alt="" style={{ width: "100%" }} />
                     </header>
-                    <main className={!spaceDescVisib ? "mt-5" : "mt-5 scroll-lock"}>
+                    <main className={!spaceDescVisib ? "my-5" : "mt-5 scroll-lock"}>
                         <h1 className="ms-4 me-5 mb-5 fw-bolder">Abra suas portas para receber hóspedes</h1>
                         <h2 className="ms-4 me-5 mb-4 fw-bolder fs-3">Descubra quanto você pode ganhar como anfitrião</h2>
                         <section className="region-receipt p-4">
@@ -46,13 +53,26 @@ export default function AcomodationHost() {
                         </section>
                         <section className="space-desc container-fluid position-relative p-2">
                             <p className="ms-3 fw-bold">Descreva o seu espaço</p>
-                            <button className=" border-0 rounded-5 px-5 position-absolute ms-4 mt-2 bg-light" style={{ width: "80%" }} onClick={() => setSpaceDescVisib(!spaceDescVisib)}>
+                            <button className=" border-0 rounded-5 px-5 position-absolute ms-4 bg-light" style={{ width: "80%" }} onClick={() => setSpaceDescVisib(!spaceDescVisib)}>
                                 <span>
                                     <MagnifyingGlass size={20} className="text-danger position-absolute start-0 ms-2" />
-                                    Beberibe</span>
+                                    Digite sua localização</span>
                             </button>
-                            {spaceDescVisib && <SpaceDesc setSpaceDescVisib={setSpaceDescVisib} />}
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31834.12237109596!2d-38.14479012723916!3d-4.168168852770807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7b88e0b58561925%3A0xd03dac14ccee1cc4!2sBeberibe%2C%20CE%2C%2062840-000!5e0!3m2!1spt-BR!2sbr!4v1664545325168!5m2!1spt-BR!2sbr" width="100%" height="300" style={{ border: 0 }} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                            {spaceDescVisib && <SpaceDesc setCordenates={setCordenates} setSpaceDescVisib={setSpaceDescVisib} />}
+                            <div className="map-container" style={{ minHeight: '300px', marginTop:"65px" }}>
+                                <GoogleMap
+                                    mapContainerClassName="map"
+                                    center={{
+                                        lat: cordenates.lat,
+                                        lng: cordenates.lng
+                                    }}
+                                    zoom={15}>
+                                    <Marker position={{
+                                        lat: cordenates.lat,
+                                        lng: cordenates.lng
+                                    }} />
+                                </GoogleMap>
+                            </div>
                         </section>
                         <section className="my-5">
                             <h2 className="mb-4 ms-3 fw-bold fs-3">Você pode hospedar onde quiser, quando quiser</h2>
