@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 export default function NumberAuth({handleBackStep,handleNextStep, phone, code}) {
+    const pattern = "[a-zA-Z0-9{8}]"
     const [writedCode, setWritedCode] = useState("")
     function handleConfirmCode() {
         if (writedCode.toString() !== code) {

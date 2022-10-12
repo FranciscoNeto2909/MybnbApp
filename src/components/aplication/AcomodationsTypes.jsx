@@ -21,7 +21,7 @@ export default function AcomodationTypes() {
             img:"https://storyateverycorner.com/wp-content/uploads/2021/01/national-park-icon.png"
         },
         {
-            name:"tropical",
+            name:"Tropical",
             img:"https://prints.ultracoloringpages.com/d61819753059d96901b3e4ea7a2c00ca.png"
         }
     ]

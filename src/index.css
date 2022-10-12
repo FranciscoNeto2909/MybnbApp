@@ -383,12 +383,21 @@ details[open] summary::after {
   background-color: rgba(255, 255, 255, 0.336);
 }
 .addAcomodation-main{
-  min-height: 300px;
+  min-height: 100%;
   background-color: #fff;
 }
 .space-types{
   border: 1px solid darkgray;
   text-align: start;
+}
+.emphasis{
+  border: 1px solid darkgray;
+  padding: 10px;
+  background-color: transparent;
+  border-radius: 20px;
+}
+.emphasis:focus{
+  border: 1px solid #000;
 }
 .space-types:focus{
   border: 1px solid #000;
@@ -409,6 +418,20 @@ details[open] summary::after {
 .selected{
   border: 1px solid #000;
   color: #000;
+}
+.img-container{
+  border: 1px dotted #008080;
+  width: 70%;
+  margin: 0 auto;
+}
+.anuncio-title{
+  margin: 0 auto;
+}
+a.comodation-desc{
+  resize: none;
+}
+.form-check-input{
+  padding: 10px;
 }
 @media (max-width: 700px) {
   .search-desc-item {

@@ -1,9 +1,9 @@
 import React from "react";
-import { X, MinusCircle, PlusCircle } from "phosphor-react";
+import { X, MinusCircle, PlusCircle, Image } from "phosphor-react";
 import { useState } from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
-
+import SimpleCheckButon from "../buttons/SimpleCheckButton"
 
 export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [hostsQuant, setHostsQuant] = useState(4)
@@ -11,7 +11,10 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [bedroomsQuant, setBedroomsQuant] = useState(1)
     const [bethroomsQuant, setBethroomsQuant] = useState(1)
     const [step, setStep] = useState(1)
-
+    const [desc, setDesc] = useState("")
+    const [emphasis, setEmphasis] = useState("")
+    const [price, setPrice] = useState(53)
+    const [char, setChar] = useState(0)
     const [cordenates, setCordenates] = useState({
         lat: -4.179914,
         lng: -38.129617
@@ -57,7 +60,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const placeType = ["Lugar inteiro", "Um quarto inteiro", "Um quarto compartilhado"]
 
     function handleNextStep() {
-        if (step < 7) {
+        if (step < 12) {
             setStep(step + 1)
         }
     }
@@ -88,6 +91,33 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             func(elem - 1)
         }
     }
+
+    function handleSelectEmphasis(value) {
+        console.log(value)
+        setEmphasis(value)
+    }
+    function handleChangeAcomodationDesc(e) {
+        setDesc(e.target.value)
+        if (e.keyCode !== 8 && char < 270) {
+            setChar(char + 1)
+        }
+        else if (e.keyCode === 8 && char > 0) {
+            setChar(char - 1)
+        }
+    }
+    function handleChangePriceValue(operation) {
+        if (operation === "addition" && price  < 5003) {
+            setPrice(price +  13)
+        } else if (operation === "subtration" && price  > 53 ) {
+            setPrice(price - 13)
+        }
+    }
+    // function handleShowImage(e) {
+    //     const inputImg = document.querySelector("#img").files[0]
+    //     const img = document.createElement('img')
+    //     img.src = URL.createObjectURL(inputImg)
+    //     document.querySelector(".thumbnail").appendChild(img)
+    // }
     return (
         <div className="addAcomodation">
             <header className="addAcomodation-header py-5" style={{ height: "160px" }}>
@@ -95,7 +125,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 <h1 className="AddAcomodation-tittle text-light fs-2 me-4 ms-4 mt-4">Em que tipo de espaço você vai hospedar?</h1>
                 <nav className="position-fixed bottom-0 container d-flex justify-content-between p-2">
                     <button className="bg-transparent border-0 text-decoration-underline fw-bold" onClick={handleBackStep}>Voltar</button>
-                    <button className="btn btn-dark" onClick={handleNextStep}>Avançar</button>
+                    <button className="btn btn-dark" onClick={handleNextStep}>{step === 12 ? "Revise seu anúncio" : "Avançar"}</button>
                 </nav>
             </header>
             <main className="addAcomodation-main container rounded-top pt-3">
@@ -192,9 +222,79 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                     </div>
                 }
                 {step === 7 &&
-                    <div className="images">
+                    <div className="images-container">
                         <img src="" alt="" />
                         <h2 className="fs-4">Agora vamos adicionar algumas fotos</h2>
+                        <label htmlFor="img" className="font-smaller img-container py-5 rounded-2 text-center mt-5 d-flex flex-column align-items-center">
+                            <Image size={40} />
+                            Escolha pelo menos 5 imagens
+                            <input type="file" accept="image/*" className="imgs-input d-none" id="img" multiple />
+                        </label>
+                    </div>
+                }
+                {step === 8 &&
+                    <div className="anucio-title-container container-fluid d-flex flex-column">
+                        <p>O titulo do seu anúncio deve destacar o que há de especial na acomodação.</p>
+                        <input type="text" id="" placeholder="Casa do lago" className="anuncio-title p-3" />
+                    </div>
+                }
+                {step === 9 &&
+                    <div className="destaques-container container">
+                        <h2 className="fs-4 fw-bold mt-4 mb-3">Escolha o destaque de sua acomodação</h2>
+                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => handleSelectEmphasis("Praia")}>
+                            <img src="https://prints.ultracoloringpages.com/841d46dcc996365d7654b4e4fa5a1350.png" alt="" className="types-item-img" />
+                            <span className="ms-2 fw-bold">Praia</span>
+                        </button>
+                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => handleSelectEmphasis("Piscinas incriveis")}>
+                            <img src="https://prints.ultracoloringpages.com/733be6c3fa243f757ec78ac738437c6b.png" alt="" className="types-item-img" />
+                            <span className="ms-2 fw-bold">Piscinas incriveis</span>
+                        </button>
+                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => handleSelectEmphasis("Ilhas")}>
+                            <img src="https://www.colorironline.com/images/imgcolor/desenho-ilha-deserta-2-para-colorir.jpg" alt="" className="types-item-img" />
+                            <span className="ms-2 fw-bold">Ilhas</span>
+                        </button>
+                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={e => handleSelectEmphasis(e)}>
+                            <img src="https://cdn-icons-png.flaticon.com/512/250/250330.png" alt="" className="types-item-img" />
+                            <span className="ms-2 fw-bold">Surf</span>
+                        </button>
+                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => handleSelectEmphasis("Parques nacionais")}>
+                            <img src="https://storyateverycorner.com/wp-content/uploads/2021/01/national-park-icon.png" alt="" className="types-item-img" />
+                            <span className="ms-2 fw-bold">Parques nacionais</span>
+                        </button>
+                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => handleSelectEmphasis("Tropical")}>
+                            <img src="https://prints.ultracoloringpages.com/d61819753059d96901b3e4ea7a2c00ca.png" alt="" className="types-item-img" />
+                            <span className="ms-2 fw-bold">Tropical</span>
+                        </button>
+                    </div>
+                }
+                {step === 10 &&
+                    <div className="description-container d-flex flex-column">
+                        <h2 className="fs-4 fw-bold">Nos fale um pouco sobre sua comodação</h2>
+                        <textarea id="" cols="30" rows="10" placeholder="Você vai se divertir muito neste local" className="acomodation-desc p-2 mx-auto" maxLength="270" onKeyDown={e => handleChangeAcomodationDesc(e)}></textarea>
+                        <span className="ms-5 mt-2 text-secondary">{char}/270</span>
+                    </div>
+                }
+                {step === 11 &&
+                    <div>
+                        <h2>vamos definir seu preço</h2>
+                        <div className="price-container mt-5 d-flex align-items-center justify-content-center">
+                            <MinusCircle size={40} className={price === 0 && "text-secondary"} onClick={() => handleChangePriceValue("subtration")} />
+                            <span className="fs-3 mx-3 border py-3 rounded px-5">R${price}</span>
+                            <PlusCircle size={40} className="" onClick={() => handleChangePriceValue("addition")} />
+                        </div>
+                        <p className="text-center my-2">Por noite</p>
+                        <p className="m-5">Lembre-se que os preços de lugares como o seu geralmente variam de R$100 a R$300.</p>
+                        <SimpleCheckButon text={"Ofereça um desconto de 20% aos três primeiros hóspedes para conseguir reservas o quanto antes."}/>
+                    </div>
+                }
+                {step === 12 && 
+                    <div className="security-items container-fluid d-flex flex-column">
+                        <h2 className="mt-5 mb-3">Sua acomodação tem algumas dessa opções?</h2>
+                        <SimpleCheckButon text={"Câmera(s) de segurança"} />
+                        <SimpleCheckButon text={"Armas"} />
+                        <SimpleCheckButon text={"Animais perigosos"} />
+                        <h2 className="mt-5">O que é importante saber</h2>
+                        <p>Ressalto que essa aplicação é apenas para peaticar programação web e não tem nenhum intuito comercial ou finançeiro.</p>
                     </div>
                 }
             </main>

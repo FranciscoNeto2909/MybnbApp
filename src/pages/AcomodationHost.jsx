@@ -75,7 +75,7 @@ export default function AcomodationHost() {
                             </div>
                         </section>
                         <section className="my-5">
-                            <h2 className="mb-4 ms-3 fw-bold fs-3">Você pode hospedar onde quiser, quando quiser</h2>
+                            <h2 className="mb-4 ms-3 fw-bold fs-3 px-2">Você pode hospedar onde quiser, quando quiser</h2>
                             <div className="anfitriao-resume-container d-flex">
                                 <div className="anfitriao-resume d-flex flex-column align-items-center p-2">
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScuOKcRCySbtTZHLPP2FT8nvNHG25StGcdhw&usqp=CAU" alt="" className="rounded-3" style={{ height: "250px" }} />
