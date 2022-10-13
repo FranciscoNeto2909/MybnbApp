@@ -18,21 +18,21 @@ export default function AcomodationsFilter() {
     function handleSelectBdRooms(e) {
         setBRoom(e.target.innerText)
         const bdRooms = document.querySelectorAll(".bdRooms")
-        bdRooms.forEach(btn => btn.classList.remove("selected"))
-        e.target.classList.toggle("selected")
+        bdRooms.forEach(btn => btn.classList.remove("conv_selected"))
+        e.target.classList.toggle("conv_selected")
     }
     function handleSelectBeeds(e) {
         setRoom(e.target.innerText)
         const beeds = document.querySelectorAll(".beeds")
-        beeds.forEach(btn => btn.classList.remove("selected"))
-        e.target.classList.toggle("selected")
+        beeds.forEach(btn => btn.classList.remove("conv_selected"))
+        e.target.classList.toggle("conv_selected")
 
     }
     function handleSelectBthRooms(e) {
         setBthRoom(e.target.innerText)
         const bthRooms = document.querySelectorAll(".bthRooms")
-        bthRooms.forEach(btn => btn.classList.remove("selected"))
-        e.target.classList.add("selected")
+        bthRooms.forEach(btn => btn.classList.remove("conv_selected"))
+        e.target.classList.toggle("conv_selected")
     }
     function handleOpenFilter() {
         dispatch(showNav())
@@ -80,7 +80,7 @@ export default function AcomodationsFilter() {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6 ">Quartos</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="bdRooms comodos-btn selected rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>qualquer um</button>
+                                <button className="bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
                                         <button key={i} className="bdRooms comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>{option}</button>
@@ -91,7 +91,7 @@ export default function AcomodationsFilter() {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Camas</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="beeds comodos-btn selected rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>qualquer um</button>
+                                <button className="beeds comodos-btn conv_selected rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
                                         <button key={i} className="beeds comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>{option}</button>
@@ -102,7 +102,7 @@ export default function AcomodationsFilter() {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Banheiros</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="bthRooms comodos-btn selected rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>qualquer um</button>
+                                <button className="bthRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
                                         <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>{option}</button>

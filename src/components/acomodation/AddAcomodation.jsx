@@ -15,6 +15,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [emphasis, setEmphasis] = useState("")
     const [price, setPrice] = useState(53)
     const [char, setChar] = useState(0)
+    const [progress, setProgress] = useState(7.5)
     const [cordenates, setCordenates] = useState({
         lat: -4.179914,
         lng: -38.129617
@@ -62,11 +63,13 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     function handleNextStep() {
         if (step < 12) {
             setStep(step + 1)
+            setProgress(progress + 7.5)
         }
     }
     function handleBackStep() {
         if (step > 1) {
             setStep(step - 1)
+            setProgress(progress - 7.5)
         }
     }
     function handleIncrease(func, elem) {
@@ -107,9 +110,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     }
     function handleChangePriceValue(operation) {
         if (operation === "addition" && price  < 5003) {
-            setPrice(price +  13)
+            setPrice(price +  10)
         } else if (operation === "subtration" && price  > 53 ) {
-            setPrice(price - 13)
+            setPrice(price - 10)
         }
     }
     // function handleShowImage(e) {
@@ -124,6 +127,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 <X size={25} className="close-addAcmd-btn position-absolute top-0 ms-3 mt-3 rounded-5 p-1 text-light" onClick={handleToggleAcmdVisib} />
                 <h1 className="AddAcomodation-tittle text-light fs-2 me-4 ms-4 mt-4">Em que tipo de espaço você vai hospedar?</h1>
                 <nav className="position-fixed bottom-0 container d-flex justify-content-between p-2">
+                    <progress className="position-absolute top-0" value={progress} max={100} style={{width:"100%", height:"6px"}}></progress>
                     <button className="bg-transparent border-0 text-decoration-underline fw-bold" onClick={handleBackStep}>Voltar</button>
                     <button className="btn btn-dark" onClick={handleNextStep}>{step === 12 ? "Revise seu anúncio" : "Avançar"}</button>
                 </nav>

@@ -235,7 +235,7 @@
   border: 0;
 }
 
-.selected {
+.conv_selected {
   background-color: #000;
   color: #fff;
 }
