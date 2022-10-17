@@ -433,6 +433,9 @@ a.comodation-desc{
 .form-check-input{
   padding: 10px;
 }
+.desc-option-radio{
+  padding: 20px;
+}
 @media (max-width: 700px) {
   .search-desc-item {
     font-size: .7rem;
