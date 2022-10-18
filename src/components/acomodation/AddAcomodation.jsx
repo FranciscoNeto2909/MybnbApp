@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { X, MinusCircle, PlusCircle, Image } from "phosphor-react";
+import { X, MinusCircle, PlusCircle, Image, Bed } from "phosphor-react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
 import SimpleCheckButon from "../buttons/SimpleCheckButton"
@@ -7,6 +7,12 @@ import SimpleCheckButon from "../buttons/SimpleCheckButton"
 export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [step, setStep] = useState(1)
     const [char, setChar] = useState(0)
+    const [filed, setFiled] = useState(false)
+    const [progress, setProgress] = useState(7.5)
+    const [cordenates, setCordenates] = useState({
+        lat: -4.179914,
+        lng: -38.129617
+    })
     const [acomodation, setAcomodation] = useState({
         hostSpace: "",
         hostSpaceDesc: "",
@@ -21,15 +27,10 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         securityItems: [],
         images: [],
         title: "",
-        hostEmphasis:"",
+        hostEmphasis: "",
         hostDesc: "",
         price: 53,
         hostOptions: []
-    })
-    const [progress, setProgress] = useState(7.5)
-    const [cordenates, setCordenates] = useState({
-        lat: -4.179914,
-        lng: -38.129617
     })
     const confort = ["piscina", "Churrasqueira", "jacuzzi", "patio", "fogueira", "Área de lazer"]
     const preferences = ["Wi-Fi", "Tv", "Cozinha", "maquina de lavar", "chuveiro eletrico", "Ar-condicionado"]
@@ -69,15 +70,117 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             desc: "Uma casa de madeira com um telado inclinado popular para viagens de esqui ou estadias de verão."
         }
     ]
+    const hostEmphasis = [
+        {
+            name: "Praia",
+            image: "https://prints.ultracoloringpages.com/841d46dcc996365d7654b4e4fa5a1350.png"
+        },
+        {
+            name: "Piscinas incriveis",
+            image: "https://prints.ultracoloringpages.com/733be6c3fa243f757ec78ac738437c6b.png"
+        },
+        {
+            name: "Ilhas",
+            image: "https://www.colorironline.com/images/imgcolor/desenho-ilha-deserta-2-para-colorir.jpg"
+        },
+        {
+            name: "Surf",
+            image: "https://cdn-icons-png.flaticon.com/512/250/250330.png"
+        },
+        {
+            name: "Parques nacionais",
+            image: "https://storyateverycorner.com/wp-content/uploads/2021/01/national-park-icon.png"
+        },
+        {
+            name: "Tropical",
+            image: "https://prints.ultracoloringpages.com/d61819753059d96901b3e4ea7a2c00ca.png"
+        }
+    ]
     const placeType = ["Lugar inteiro", "Um quarto inteiro", "Um quarto compartilhado"]
 
     function handleNextStep() {
-        if (step < 13) {
+        if (step === 1 && acomodation.hostSpace === "") {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 1 && acomodation.hostSpace !== "") {
+            setStep(step + 1)
+            setFiled(false)
+            setProgress(progress + 7.5)
+        }
+        if (step === 2 && acomodation.hostSpaceDesc === "") {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 2 && acomodation.hostSpaceDesc !== "") {
+            setStep(step + 1)
+            setFiled(false)
+            setProgress(progress + 7.5)
+        }
+        if (step === 3 && acomodation.hostPlace === "") {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 3 && acomodation.hostPlace !== "") {
+            setStep(step + 1)
+            setFiled(false)
+
+            setProgress(progress + 7.5)
+        }
+        if (step === 4 && acomodation.hostLocalization === "") {
+            setFiled(false)
+        } else if (step === 4 && acomodation.hostLocalization !== "") {
+            setStep(step + 1)
+            setFiled(true)
+            setProgress(progress + 7.5)
+        }
+        if (step === 5) {
             setStep(step + 1)
             setProgress(progress + 7.5)
-            if (step === 12) {
-                console.log(acomodation)
-            }
+        }
+        if (step === 6) {
+            setStep(step + 1)
+            setFiled(false)
+            setProgress(progress + 7.5)
+        }
+        if (step === 7 && acomodation.images == []) {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 7 && acomodation.images.length > 4) {
+            setStep(step + 1)
+            setFiled(false)
+            setProgress(progress + 7.5)
+        }
+        if (step === 8 && acomodation.title === "") {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 8 && acomodation.title !== "") {
+            setStep(step + 1)
+            setFiled(false)
+            setProgress(progress + 7.5)
+        }
+        if (step === 9 && acomodation.hostEmphasis == []) {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 9 && acomodation.hostEmphasis != []) {
+            setStep(step + 1)
+            setFiled(false)
+            setProgress(progress + 7.5)
+        }
+        if (step === 10 && acomodation.hostDesc === "") {
+            alert("Selecione um campo antes de ir para o proximo passo!")
+            setFiled(false)
+        } else if (step === 10 && acomodation.hostDesc !== "") {
+            setStep(step + 1)
+            setFiled(true)
+            setProgress(progress + 7.5)
+        }
+        if (step === 11) {
+            setStep(step + 1)
+            setFiled(true)
+            setProgress(progress + 7.5)
+        }
+        if (step === 12) {
+            setStep(step + 1)
+            setFiled(true)
+            setProgress(progress + 7.5)
         }
     }
     function handleBackStep() {
@@ -141,7 +244,8 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         }
     }
     function handleChangeAcomodationDesc(e) {
-        setAcomodation({...acomodation, hostDesc:e.target.value})
+        setAcomodation({ ...acomodation, hostDesc: e.target.value })
+        setFiled(true)
         if (e.keyCode !== 8 && char < 270) {
             setChar(char + 1)
         }
@@ -151,13 +255,14 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     }
     function handleChangePriceValue(operation) {
         if (operation === "addition" && acomodation.price < 5003) {
-            setAcomodation({...acomodation, price: acomodation.price + 10})
+            setAcomodation({ ...acomodation, price: acomodation.price + 10 })
         } else if (operation === "subtration" && acomodation.price > 53) {
-            setAcomodation({...acomodation, price: acomodation.price - 10})
+            setAcomodation({ ...acomodation, price: acomodation.price - 10 })
         }
     }
     async function handleUploadImages(e) {
         const files = await e.target.files
+        setFiled(true)
         setAcomodation({ ...acomodation, images: files })
     }
     function handleShowPreviewImage(elem) {
@@ -180,19 +285,37 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 <nav className="position-fixed bottom-0 container d-flex justify-content-between bg-white p-2">
                     <progress className="position-absolute top-0" value={progress} max={100} style={{ width: "100%", height: "6px" }}></progress>
                     <button className="bg-transparent border-0 text-decoration-underline fw-bold" onClick={handleBackStep}>Voltar</button>
-                    <button className="btn btn-dark" onClick={handleNextStep}>{step === 12 ? "Revise seu anúncio" : "Avançar"}</button>
+                    {step === 13 ?
+                        <button className="btn btn-danger">Salve seu anucio
+                        </button> :
+                        <button className={filed ? "btn btn-dark" : "btn btn-secondary"} onClick={handleNextStep}>{step === 12 ? "Revise seu anúncio" : "Avançar"}
+                        </button>}
+
                 </nav>
             </header>
             <main className="addAcomodation-main container rounded-top pt-3">
                 {step === 1 &&
                     <div className="space-types-container d-flex flex-column">
-                        {spaceType.map((type, i) => <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent" onClick={e => setAcomodation({ ...acomodation, hostSpace: e.target.value })} value={type}>{type}</button>)}
+                        {spaceType.map((type, i) =>
+                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent"
+                                onClick={e => {
+                                    setAcomodation({ ...acomodation, hostSpace: e.target.value })
+                                    setFiled(true)
+                                }}
+                                value={type}>
+                                {type}
+                            </button>)}
                     </div>
                 }
                 {step == 2 &&
                     <div className="space-types-desc-container mb-5">
                         {spaceTypesDesc.map((space, i) =>
-                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent" onClick={e => setAcomodation({ ...acomodation, hostSpaceDesc: space.desc})} value={space.desc}>
+                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent"
+                                onClick={e => {
+                                    setAcomodation({ ...acomodation, hostSpaceDesc: space.desc })
+                                    setFiled(true)
+                                }}
+                                value={space.desc}>
                                 <h2 className="fs-4">{space.space}</h2>
                                 <p>{space.desc}</p>
                             </button>)
@@ -201,12 +324,20 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 }
                 {step === 3 &&
                     <div className="space-types-container d-flex flex-column">
-                        {placeType.map((place, i) => <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent" onClick={e => setAcomodation({ ...acomodation, hostPlace: e.target.value })} value={place}>{place}</button>)}
+                        {placeType.map((place, i) =>
+                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent" onClick={e => {
+                                setAcomodation({ ...acomodation, hostPlace: e.target.value })
+                                setFiled(true)
+                            }}
+                                value={place}>
+                                {place}
+                            </button>)}
                     </div>
                 }
                 {step === 4 &&
                     <div className="map-container" style={{ minHeight: '300px' }}>
-                        <AutocompleteElem setCordenates={setCordenates} getAddress={(e) => setAcomodation({ ...acomodation, hostLocalization: e })} />
+                        <AutocompleteElem setCordenates={setCordenates}
+                            setAcomodation={setAcomodation} acomodation={acomodation} setFiled={setFiled} />
                         <GoogleMap
                             mapContainerClassName="map"
                             center={{
@@ -307,36 +438,26 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 8 &&
                     <div className="anucio-title-container container-fluid d-flex flex-column">
                         <p>O titulo do seu anúncio deve destacar o que há de especial na acomodação.</p>
-                        <input type="text" id="" placeholder="Casa do lago" className="anuncio-title p-3" onChange={e => setAcomodation({...acomodation, title: e.target.value})} />
+                        <input type="text" id="" placeholder="Casa do lago" className="anuncio-title p-3" onChange={e => {
+                            setAcomodation({ ...acomodation, title: e.target.value })
+                            setFiled(true)
+                        }} />
                     </div>
                 }
                 {step === 9 &&
                     <div className="destaques-container container">
                         <h2 className="fs-4 fw-bold mt-4 mb-3">Escolha o destaque de sua acomodação</h2>
-                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => setAcomodation({...acomodation, hostEmphasis: "praia"})}>
-                            <img src="https://prints.ultracoloringpages.com/841d46dcc996365d7654b4e4fa5a1350.png" alt="" className="types-item-img" />
-                            <span className="ms-2 fw-bold">Praia</span>
-                        </button>
-                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => setAcomodation({...acomodation, hostEmphasis: "Piscinas incriveis"})}>
-                            <img src="https://prints.ultracoloringpages.com/733be6c3fa243f757ec78ac738437c6b.png" alt="" className="types-item-img" />
-                            <span className="ms-2 fw-bold">Piscinas incriveis</span>
-                        </button>
-                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => setAcomodation({...acomodation, hostEmphasis: "Ilhas"})}>
-                            <img src="https://www.colorironline.com/images/imgcolor/desenho-ilha-deserta-2-para-colorir.jpg" alt="" className="types-item-img" />
-                            <span className="ms-2 fw-bold">Ilhas</span>
-                        </button>
-                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={e =>setAcomodation({...acomodation, hostEmphasis: "Surf"})}>
-                            <img src="https://cdn-icons-png.flaticon.com/512/250/250330.png" alt="" className="types-item-img" />
-                            <span className="ms-2 fw-bold">Surf</span>
-                        </button>
-                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => setAcomodation({...acomodation, hostEmphasis: "Parques nacionais"})}>
-                            <img src="https://storyateverycorner.com/wp-content/uploads/2021/01/national-park-icon.png" alt="" className="types-item-img" />
-                            <span className="ms-2 fw-bold">Parques nacionais</span>
-                        </button>
-                        <button className="emphasis bg-transparent rounded-5 p-2 m-2" onClick={() => setAcomodation({...acomodation, hostEmphasis: "Tropical"})}>
-                            <img src="https://prints.ultracoloringpages.com/d61819753059d96901b3e4ea7a2c00ca.png" alt="" className="types-item-img" />
-                            <span className="ms-2 fw-bold">Tropical</span>
-                        </button>
+                        {
+                            hostEmphasis.map((host, i) => (
+                                <button className="emphasis bg-transparent rounded-5 p-2 m-2" key={i} onClick={() => {
+                                    setAcomodation({ ...acomodation, hostEmphasis: host.name })
+                                    setFiled(true)
+                                }}>
+                                    <img src={host.image} alt="emphasis" className="types-item-img" />
+                                    <span className="ms-2 fw-bold">{host.name}</span>
+                                </button>
+                            ))
+                        }
                     </div>
                 }
                 {step === 10 &&
@@ -362,17 +483,34 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 12 &&
                     <div className="security-items container-fluid d-flex flex-column">
                         <h2 className="mt-5 mb-3">Sua acomodação tem algumas dessa opções?</h2>
-                        <SimpleCheckButon text={"Câmera(s) de segurança"} value="Câmera(s) de segurança" func={setAcomodationOption}/>
-                        <SimpleCheckButon text={"Armas"} value="Armas" func={setAcomodationOption}/>
+                        <SimpleCheckButon text={"Câmera(s) de segurança"} value="Câmera(s) de segurança" func={setAcomodationOption} />
+                        <SimpleCheckButon text={"Armas"} value="Armas" func={setAcomodationOption} />
                         <SimpleCheckButon text={"Animais perigosos"} value="Animais perigosos" func={setAcomodationOption} />
                         <h2 className="mt-5">O que é importante saber</h2>
                         <p>Ressalto que essa aplicação é apenas para peaticar programação web e não tem nenhum intuito comercial ou finançeiro.</p>
                     </div>
                 }
-                {step === 13 && 
-                    <div>
-                        resume
-                    </div>                    
+                {step === 13 &&
+                    <div className="host-resume-container">
+                        <div className="host-resume-header d-flex flex-column">
+                            <img src={handleShowPreviewImage(acomodation.images[0])} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
+                            <h1 className="fw-bold mb-4">{acomodation.title}</h1>
+                        </div>
+                        <div className="mb-4 pb-3 border-bottom">
+                            <h3>{acomodation.hostPlace}:{acomodation.hostSpace}</h3>
+                        </div>
+                        <div className="mb-4 pb-3 border-bottom">
+                            <p className="font-smaller">{acomodation.hostsQuant} hóspedes - {acomodation.bedroomsQuant} quarto(os) - {acomodation.bedsQuant} cama(as) - {acomodation.bethroomsQuant} banheiro(os)</p>
+                        </div>
+                        <div className="mb-4 pb-3 border-bottom">
+                            <p>{acomodation.hostDesc}</p>
+                        </div>
+                        <div className="mb-5 pb-3 border-bottom">
+                            <h3>Localização</h3>
+                            <p className="my-3">{acomodation.hostLocalization}</p>
+                            <p className="mt-5">Seus dados não serão vendidos nem compartilhados com outras empresas, uma vez que essa aplicação é apenas para praticar.</p>
+                        </div>
+                    </div>
                 }
             </main>
         </div>

@@ -5,7 +5,7 @@ import PlacesAutocomplete, {
     getLatLng,
   }  from "react-places-autocomplete";
 
-export default function AutocompleteElem({setCordenates, getAddress}) {
+export default function AutocompleteElem({setFiled, setCordenates, acomodation, setAcomodation}) {
     const [address, setAddress] = useState("")
 
     async function handleSelect(value) {
@@ -13,7 +13,8 @@ export default function AutocompleteElem({setCordenates, getAddress}) {
         const latLang = await getLatLng(results[0])
         setAddress(value)
         setCordenates(latLang)
-        getAddress(address)
+        setAcomodation({...acomodation, hostLocalization: results[0].formatted_address})
+        setFiled(true) 
     }
     return(
         <PlacesAutocomplete
@@ -23,7 +24,7 @@ export default function AutocompleteElem({setCordenates, getAddress}) {
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <input
+            <input 
               {...getInputProps({
                 placeholder: 'Search Places ...',
                 className: 'location-search-input mb-4',
