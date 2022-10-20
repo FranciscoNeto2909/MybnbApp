@@ -436,6 +436,13 @@ a.comodation-desc{
 .desc-option-radio{
   padding: 20px;
 }
+.input-img-container{
+  margin-bottom: 60px;
+}
+.preview-container{
+  background-color: rgba(0, 0, 0, 0.192);
+  border-radius: 10px;
+}
 @media (max-width: 700px) {
   .search-desc-item {
     font-size: .7rem;

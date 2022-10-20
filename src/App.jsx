@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Routes, Route } from "react-router-dom"
+import React, { useState, useEffect } from "react"
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
@@ -15,12 +15,14 @@ import Notification from "./components/account/Notification"
 import GlobalPrefer from "./components/account/GlobalPrefer"
 import PrivAndShare from "./components/account/PrivAndShare"
 import AcomodationHost from "./pages/AcomodationHost"
+
 export default function App() {
-  const [showFilter, setShowFilter] = useState(false)
   const isNavVisible = useSelector(data => data.app.navVisibility)
-  function handleOpenFilter() {
-    setShowFilter(!showFilter)
-  }
+ const navigate = useNavigate()
+  
+  useEffect(() => {
+    navigate("/")
+  }, [])
   return (
     <div className="App">
       {isNavVisible && <Nav />}

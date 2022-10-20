@@ -261,11 +261,17 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         }
     }
     async function handleUploadImages(e) {
-        const files = await e.target.files
+        const file = await e.target.files[0]
+        const isSameName = acomodation.images.every((elem) => file.name !== elem.name)
+        const isSameSize = acomodation.images.every((elem) => file.size !== elem.size)
         setFiled(true)
-        setAcomodation({ ...acomodation, images: files })
+        if (file !== undefined && isSameName && isSameSize) {
+            setAcomodation({ ...acomodation, images: [...acomodation.images, file] })
+        }else{
+            alert("a imagem ja foi adicionada")
+        }
     }
-    function handleShowPreviewImage(elem) {
+    function handlePreviewImage(elem) {
         const previewImg = URL.createObjectURL(elem)
         return previewImg
     }
@@ -409,30 +415,25 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 }
                 {step === 7 &&
                     <div className="images-container d-flex flex-column align-items-center">
-                        {acomodation.images.length > 0 &&
-                            <>
-                                <div className="capa position-relative">
-                                    <span className="position-absolute font-smaller ms-1 mt-1 bg-light rounded p-1 fw-bold">Foto de capa</span>
-                                    <img src={handleShowPreviewImage(acomodation.images[0])} alt="" style={{ height: "200px", width: "200px" }} className="rouded-4" />
-                                </div>
-                                {acomodation.images.length > 1 &&
-                                    <img src={handleShowPreviewImage(acomodation.images[1])} alt="hospedagem" style={{ height: "200px", width: "200px" }} className="rouded-4 m-3" />
-                                }
-                                {acomodation.images.length > 2 &&
-                                    <img src={handleShowPreviewImage(acomodation.images[2])} alt="hospedagem" style={{ height: "200px", width: "200px" }} className="rouded-4 m-3" />
-                                }{acomodation.images.length > 3 &&
-                                    <img src={handleShowPreviewImage(acomodation.images[3])} alt="hospedagem" style={{ height: "200px", width: "200px" }} className="rouded-4 m-3" />
-                                }{acomodation.images.length > 4 &&
-                                    <img src={handleShowPreviewImage(acomodation.images[4])} alt="hospedagem" style={{ height: "200px", width: "200px" }} className="rouded-4 m-3" />
-                                }
-                            </>
-                        }
                         <h2 className="fs-4">Agora vamos adicionar algumas fotos</h2>
-                        <label htmlFor="img" className="font-smaller img-container py-5 rounded-2 text-center mt-5 d-flex flex-column align-items-center">
-                            <Image size={40} />
-                            Escolha pelo menos 5 imagens
-                            <input type="file" accept="image/*" className="imgs-input d-none" id="img" multiple onChange={handleUploadImages} />
-                        </label>
+                        {acomodation.images.map((img, i) => (
+                            acomodation.images[0] == img ?
+                                <div key={i} className="preview-container container d-flex justify-content-center position-relative">
+                                    <span className="position-absolute font-smaller ms-1 mt-1 bg-light rounded p-1 fw-bold">Foto de capa</span>
+                                    <img src={handlePreviewImage(img)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
+                                </div> :
+                                <div key={i} className="preview-container container d-flex justify-content-center my-2">
+                                    <img src={handlePreviewImage(img)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
+                                </div>
+                        ))
+                        }
+                        <div className="input-img-container container">
+                            <label htmlFor="img" className="font-smaller img-container py-5 rounded-2 text-center mt-5 d-flex flex-column align-items-center">
+                                <Image size={40} />
+                                {acomodation.images.length < 5 ? `Escolha pelo menos ${5 - acomodation.images.length} imagens` : "Escolha no maximo 8 imagens"}
+                                <input type="file" accept="image/*" className="imgs-input d-none" id="img" onChange={handleUploadImages} />
+                            </label>
+                        </div>
                     </div>
                 }
                 {step === 8 &&
@@ -493,7 +494,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 13 &&
                     <div className="host-resume-container">
                         <div className="host-resume-header d-flex flex-column">
-                            <img src={handleShowPreviewImage(acomodation.images[0])} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
+                            <img src={handlePreviewImage(acomodation.images[0])} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
                             <h1 className="fw-bold mb-4">{acomodation.title}</h1>
                         </div>
                         <div className="mb-4 pb-3 border-bottom">

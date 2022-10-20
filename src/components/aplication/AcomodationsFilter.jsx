@@ -1,11 +1,11 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { hideNav, showNav } from "../../assets/appSlice"
+import { showNav } from "../../assets/appSlice"
 import CompostCheckButton from "../buttons/CompostCheckButton"
 import PropertyTypeButton from "./PropTypeButton"
 import SimpleCheckButton from "../buttons/SimpleCheckButton"
 
-export default function AcomodationsFilter() {
+export default function AcomodationsFilter({handleOpenFilter}) {
     const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75, 80, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]
     const quantity = [1, 2, 3, 4, 5, 6, 7, "8+"]
     const [bRoom, setBRoom] = useState(0)
@@ -34,14 +34,15 @@ export default function AcomodationsFilter() {
         bthRooms.forEach(btn => btn.classList.remove("conv_selected"))
         e.target.classList.toggle("conv_selected")
     }
-    function handleOpenFilter() {
+    function handleCloseFilter() {
+        handleOpenFilter()
         dispatch(showNav())
     }
     return (
         <div className="acmd-filter-container container-fluid d-flex position-absolute top-0 pt-3 justify-content-center">
             <div className="acmd-filter px-2 rounded-4 bg-light position-relative">
                 <header className="acmd-header pt-3 position-sticky top-0 container-fluid bg-light">
-                    <button className="close-btn position-absolute border-0 fw-bold m-0 p-0 top-0 bg-transparent" onClick={handleOpenFilter}>x</button>
+                    <button className="close-btn position-absolute border-0 fw-bold m-0 p-0 top-0 bg-transparent" onClick={handleCloseFilter}>x</button>
                     <h1 className="text-center fs-4">Filtros</h1>
                 </header>
                 <main className="filter-main">
