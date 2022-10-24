@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function NumberAuth({handleBackStep,handleNextStep, phone, code}) {
+export default function NumberAuth({email, handleBackStep,handleNextStep, code}) {
     const pattern = "[a-zA-Z0-9{8}]"
     const [writedCode, setWritedCode] = useState("")
     function handleConfirmCode() {
@@ -19,7 +19,7 @@ export default function NumberAuth({handleBackStep,handleNextStep, phone, code})
                 <h1 className="text-center fs-5">Confirme seu número</h1>
             </header>
             <main className="mt-5 px-2 container d-flex flex-column">
-                <p>Caro usuario do numero {phone}. Os metodos de envio de SMS são pagos, portanto inviaveis para uma aplicação de testes, então digite abaixo o codigo de acesso {code}:</p>
+                <p>{code}:</p>
                 <input type="text" aria-label="Código inserido: " className="code-input col-6 py-2 border-2 border-dark rounded-3 mx-auto text-center fs-2" maxLength={6} placeholder="- - - - - -" value={writedCode} onChange={e => setWritedCode(e.target.value)}/>
                 <p className="mt-4 mx-auto">Não recebeu o código? <span><a href="" className="text-dark">Mais opções</a></span></p>
                 <button className="btn btn-dark my-4 col-10 mx-auto" onClick={handleConfirmCode}>Continuar</button>

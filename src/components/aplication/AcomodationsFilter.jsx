@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React,{ useState } from "react"
 import { useDispatch } from "react-redux"
 import { showNav } from "../../assets/appSlice"
 import CompostCheckButton from "../buttons/CompostCheckButton"
@@ -7,32 +7,30 @@ import SimpleCheckButton from "../buttons/SimpleCheckButton"
 
 export default function AcomodationsFilter({handleOpenFilter}) {
     const sizes = [5, 5, 10, 20, 25, 40, 45, 55, 60, 70, 75, 80, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 15, 10, 5, 3, 1]
-    const quantity = [1, 2, 3, 4, 5, 6, 7, "8+"]
-    const [bRoom, setBRoom] = useState(0)
-    const [room, setRoom] = useState(0)
+    const quantity = ["Qualquer um", 1, 2, 3, 4, 5, 6, 7, "8+"]
+    const [bdRoom, setBdRoom] = useState(0)
+    const [beds, setBeds] = useState(0)
     const [bthRoom, setBthRoom] = useState(0)
     const [property, setProperty] = useState("")
     const [convenience, setConvenience] = useState("")
     const [lang, setLang] = useState("")
+    const [bdRoomsId, setBdRoomsId] = useState(0)
+    const [bedsId, setBedsId] = useState(0)
+    const [bthRoomsId, setBthRoomsId] = useState(0)
+
     const dispatch = useDispatch()
     function handleSelectBdRooms(e) {
-        setBRoom(e.target.innerText)
-        const bdRooms = document.querySelectorAll(".bdRooms")
-        bdRooms.forEach(btn => btn.classList.remove("conv_selected"))
-        e.target.classList.toggle("conv_selected")
+        setBdRoom(e.target.innerText)  
+        setBdRoomsId(e.target.id)
     }
-    function handleSelectBeeds(e) {
-        setRoom(e.target.innerText)
-        const beeds = document.querySelectorAll(".beeds")
-        beeds.forEach(btn => btn.classList.remove("conv_selected"))
-        e.target.classList.toggle("conv_selected")
-
+    function handleSelectBeds(e) {
+        setBeds(e.target.innerText)
+        setBedsId(e.target.id)
+        
     }
     function handleSelectBthRooms(e) {
         setBthRoom(e.target.innerText)
-        const bthRooms = document.querySelectorAll(".bthRooms")
-        bthRooms.forEach(btn => btn.classList.remove("conv_selected"))
-        e.target.classList.toggle("conv_selected")
+        setBthRoomsId(e.target.id)
     }
     function handleCloseFilter() {
         handleOpenFilter()
@@ -81,10 +79,9 @@ export default function AcomodationsFilter({handleOpenFilter}) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6 ">Quartos</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="bdRooms comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBdRooms}>{option}</button>
+                                        <button key={i} id={i} className= {bdRoomsId == i ?"bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBdRooms}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -92,10 +89,9 @@ export default function AcomodationsFilter({handleOpenFilter}) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Camas</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="beeds comodos-btn conv_selected rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="beeds comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBeeds}>{option}</button>
+                                        <button key={i} id={i} className={bedsId == i ? "bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBeds}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -103,10 +99,9 @@ export default function AcomodationsFilter({handleOpenFilter}) {
                         <div className="comodos-container mb-3">
                             <h5 className="fs-6">Banheiros</h5>
                             <div className="comodos-carroussel d-flex">
-                                <button className="bthRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>qualquer um</button>
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} className="bthRooms comodos-btn rounded-5 mx-2 px-4 border" onClick={handleSelectBthRooms}>{option}</button>
+                                        <button key={i} id={i} className={bthRoomsId == i ? "bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBthRooms}>{option}</button>
                                     ))
                                 }
                             </div>

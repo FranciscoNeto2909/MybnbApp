@@ -3,10 +3,9 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showNav } from "../assets/appSlice";
-import AddAcomodation from "../components/acomodation/AddAcomodation";
+import HostAcomodation from "../components/acomodation/HostAcomodation";
 import SpaceDesc from "../components/acomodation/SpaceDesc"
 import { GoogleMap, Marker } from "@react-google-maps/api";
-import AutocompleteElem from "../components/acomodation/AutocompleteElem"
 
 export default function AcomodationHost() {
     const navigate = useNavigate()
@@ -29,7 +28,7 @@ export default function AcomodationHost() {
             {!AddAcmdVisib ?
                 <>
                     <header className="posiiton-relative">
-                        <CaretLeft size={20} className="position-absolute mt-2 ms-2 text-dark" onClick={handleBackButton} />
+                        <CaretLeft size={20} className="caret position-absolute mt-2 ms-2 text-dark" onClick={handleBackButton} />
                         <img src="https://www.meusonhar.com.br/wp-content/uploads/2016/11/casa-nova-sonhar-com.jpg" alt="" style={{ width: "100%" }} />
                     </header>
                     <main className={!spaceDescVisib ? "my-5" : "mt-5 scroll-lock"}>
@@ -94,7 +93,7 @@ export default function AcomodationHost() {
                         <div className="acomodation-experience container-fluid p-2 position-fixed bottom-0 bg-light d-flex justify-content-center border-top border-secondary">
                             <button className="btn btn-danger me-2" onClick={handleToggleAcmdVisib}>Experimente Hospedar</button>
                         </div>
-                    </main> </> : <AddAcomodation handleToggleAcmdVisib={handleToggleAcmdVisib} setAddAcmdVisib={setAddAcmdVisib} />}
+                    </main> </> : <HostAcomodation handleToggleAcmdVisib={handleToggleAcmdVisib} setAddAcmdVisib={setAddAcmdVisib} />}
         </>
     )
 }

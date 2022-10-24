@@ -1,10 +1,10 @@
 import Registration from "../components/login/Registration"
-import NumberAuth from "../components/login/NumberAuth"
+import NumberAuth from "../components/login/EmailAuth"
 import { useState } from "react"
 import CompleteRegistration from "../components/login/CompletesRegistration"
 export default function Login() {
     const [step, setStep] = useState(1)
-    const [phone, setPhone] = useState("")
+    const [email, setEmail] = useState("")
     const [code, setCode] = useState("")
     function handleNextStep() {
         if (step < 3) {
@@ -23,8 +23,8 @@ export default function Login() {
     return (
         <>
             {step === 1 &&
-                <Registration code={code} setCode={setCode} setPhone={setPhone} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
-            {step === 2 && <NumberAuth phone={phone} code={code} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
+                <Registration code={code} email={email} setCode={setCode} setEmail={setEmail} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
+            {step === 2 && <NumberAuth email={email} code={code} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
             {step === 3 && <CompleteRegistration handleNextStep={handleNextStep} />}
 
         </>

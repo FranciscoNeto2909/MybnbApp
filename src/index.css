@@ -75,7 +75,7 @@
 }
 
 .search-filter-container {
-  right: 10px;
+  right: 8px;
   top: 8px;
   background-color: transparent;
   z-index: 1;
@@ -120,7 +120,7 @@
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 1.2rem;
-  transform: translateY(-11px);
+  transform: translateY(-7px);
 }
 
 .types-container {
@@ -228,11 +228,9 @@
 .comodos-carroussel::-webkit-scrollbar {
   width: 0;
 }
-
 .comodos-btn {
   background-color: transparent;
   padding: 5px;
-  border: 0;
 }
 
 .conv_selected {
@@ -315,7 +313,7 @@ summary::after {
 }
 
 details[open] summary::after {
-  content: "-";
+  content: "x";
 }
 
 .profile-img {
@@ -443,11 +441,20 @@ a.comodation-desc{
   background-color: rgba(0, 0, 0, 0.192);
   border-radius: 10px;
 }
+.caret{
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.350);
+}
 @media (max-width: 700px) {
+  .search-desc-container {
+    width: 70%;
+  }
   .search-desc-item {
     font-size: .7rem;
   }
-
+  .desc-item-divisor {
+    transform: translateY(-11px);
+  }
   .search-lbl {
     display: block;
   }
@@ -455,4 +462,5 @@ a.comodation-desc{
   .destiny-maps::-webkit-scrollbar {
     height: 0;
   }
+  
 }

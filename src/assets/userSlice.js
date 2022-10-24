@@ -22,7 +22,7 @@ const userSlice = createSlice({
     initialState: {
         name: "Francisco",
         email: "",
-        isLogged: true
+        isLogged: false
     },
     reducers: {
       logout(state) {
