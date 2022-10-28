@@ -2,14 +2,18 @@ import React from "react"
 import { userLogin } from "../../assets/userSlice"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import InputMask from "react-input-mask"
-
+import { mask } from "remask" 
+import { useState } from "react"
 export default function CompleteRegistration() {
+    const [phone, setPhone] = useState("")
     const dispatch = useDispatch()
     const navigate = useNavigate()
     function handleLogin() {
         dispatch(userLogin())
         navigate("/")
+    }
+    function handleMaskPhone(e) {
+        setPhone(mask(`${e.target.value}`,['(99)99999-9999']))
     }
     return (
         <>
@@ -30,12 +34,12 @@ export default function CompleteRegistration() {
                 </section>
                 <section className="password-container container mb-4">
                     <div className="password input-group-lg">
-                        <input type="password" id="pass" className="inpt border border-secondary rounded ps-3 border" required />
+                        <input type="password" id="pass" className="inpt border border-secondary rounded ps-3 border" required/>
                         <label htmlFor="pass" className="lbl">Senha</label>
                     </div>
                     <span className="d-inline-block my-1">Confirme sua senha</span>
                     <div className="password input-group">
-                        <input type="password" id="pass" className="inpt border border-secondary rounded ps-3 border" required />
+                        <input type="password" id="pass-confirm" className="inpt border border-secondary rounded ps-3 border" required />
                         <label htmlFor="pass" className="lbl">Confirmação</label>
                     </div>
                 </section>
@@ -47,7 +51,7 @@ export default function CompleteRegistration() {
                 </section>
                 <section className="phone-container container my-4">
                     <div className="phone input-group-lg position-relative">
-                        <InputMask mask="(99) 99999-9999" className="inpt border border-secondary rounded ps-3 pt-2" type={'tel'} id="tel" autoComplete="none" required />
+                        <input className="inpt border border-secondary rounded ps-3 pt-2" type={'tel'} id="tel" autoComplete="none" required onChange={e => handleMaskPhone(e)} value={phone} />
                         <label className="lbl" htmlFor="tel">Telefone</label>
                     </div>
                 </section>
