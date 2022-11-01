@@ -1,4 +1,5 @@
 import React from "react"
+import { useState } from "react"
 export default function Registration({ email, setEmail, setCode, handleNextStep }) {
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
     const social = [
@@ -15,6 +16,7 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
             logo: "https://th.bing.com/th/id/OIP.9RcUGPQjcZjbS4102B7LkwHaHa?pid=ImgDet&rs=1"
         }
     ]
+    const [wrong, setWrong] = useState(false)
     async function handleGenerateAuthCode() {
         let arr = ""
         for (let index = 0; index < 6; index++) {
@@ -24,15 +26,15 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
         await setCode(arr)
         return arr
     }
-    async function handleValidatePhone(e) {
+    async function handleValidateEmail(e) {
         e.preventDefault()
-        if (email === undefined) {
-            alert("preencha os campos")
-        }
-        else if (!emailRegex.test(email)) {
-            alert("digite um endereço de email válido!")
+         if (email === undefined || !emailRegex.test(email)) {
             setEmail("")
-        } else {
+            setWrong(true)
+            setTimeout(() => {
+                setWrong(false)
+            }, 2000);
+        } else {    
             handleGenerateAuthCode()
             handleNextStep()
         }
@@ -45,13 +47,14 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
             <h3 className="mt-5">Bem-vindo ao Mybnb</h3>
             <form className="d-flex flex-column justify-content-center align-items-center mt-4">
                 <div className="phone input-group-lg col-11 position-relative">
-                    <input id="phone" type="Email" className="inpt border border-secondary rounded ps-3 border" autoComplete="none" required onChange={e => setEmail(e.target.value)} value={email}/>
-                    <label className="lbl" htmlFor="phone">Email</label>
+                    <input id="phone" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error" : "inpt border border-secondary rounded ps-3"} autoComplete="none" required onChange={e => setEmail(e.target.value)} value={email}/>
+                    <label className={wrong ? "lbl lbl-error" : "lbl"} htmlFor="phone">Email</label>
+                    {wrong && <p className="font-smaller mt-1 mb-0 text-danger">Digite um email válido!</p>}
                 </div>
                 <div className="numConfirm mt-2">
                     <p className="text-center">Enviaremos um codigo de confirmação para seu endereço de email.</p>
                 </div>
-                <button className="btn btn-primary p-2 col-11 my-1 mx-auto" onClick={e => handleValidatePhone(e)}>Continue</button>
+                <button className="btn btn-primary p-2 col-11 my-1 mx-auto" onClick={e => handleValidateEmail(e)}>Continue</button>
             </form>
             <p className="text-center my-4"> <span className="line"></span> ou <span className="line"></span></p>
             <div className="social container-fluid">

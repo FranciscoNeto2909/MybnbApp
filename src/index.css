@@ -3,6 +3,9 @@
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
+.navbar-navigator-selected{
+  color: #f00;
+}
 .rede {
   cursor: pointer;
   font-size: 00.9rem;
@@ -35,12 +38,19 @@
   transition: 0.5s;
   opacity: 0.6;
 }
-
+.lbl-error{
+  color: #f00;
+  transition: none;
+  opacity: 1;
+}
 .input-group,
 .input-group-lg {
   position: relative;
 }
 
+.inpt-error{
+  border: 2px solid #f00;
+}
 .inpt {
   width: 100%;
   height: 60px;
@@ -112,7 +122,6 @@
 
 .search-desc-item {
   height: 2rem;
-  height: 20px;
   overflow: hidden;
 }
 
@@ -447,7 +456,8 @@ a.comodation-desc{
 }
 @media (max-width: 700px) {
   .search-desc-container {
-    width: 70%;
+    white-space: nowrap;
+    width: 60%;
   }
   .search-desc-item {
     font-size: .7rem;

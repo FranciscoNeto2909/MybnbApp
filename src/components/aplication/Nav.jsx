@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { UserCircle, Heart, MagnifyingGlass } from "phosphor-react"
 export default function Nav() {
     const isUserLogged = useSelector(data => data.user.isLogged)
+    
     return (
         <nav className="navbar container-fluid justify-content-center position-fixed bottom-0 border-secondary bg-light">
             <Link to="/" className="font-smaller d-flex flex-column align-items-center text-decoration-none">
