@@ -1,6 +1,11 @@
 import React from "react"
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 export default function Registration({ email, setEmail, setCode, handleNextStep }) {
+
+    const navigate = useNavigate()
+
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
     const social = [
         {
@@ -17,6 +22,7 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
         }
     ]
     const [wrong, setWrong] = useState(false)
+
     async function handleGenerateAuthCode() {
         let arr = ""
         for (let index = 0; index < 6; index++) {
@@ -26,19 +32,20 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
         await setCode(arr)
         return arr
     }
+
     async function handleValidateEmail(e) {
         e.preventDefault()
-         if (email === undefined || !emailRegex.test(email)) {
-            setEmail("")
+        if (email === undefined || !emailRegex.test(email)) {
             setWrong(true)
             setTimeout(() => {
                 setWrong(false)
             }, 2000);
-        } else {    
+        } else {
             handleGenerateAuthCode()
             handleNextStep()
         }
     }
+
     return (
         <div className="p-4 mb-5">
             <header>
@@ -46,8 +53,8 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
             </header>
             <h3 className="mt-5">Bem-vindo ao Mybnb</h3>
             <form className="d-flex flex-column justify-content-center align-items-center mt-4">
-                <div className="phone input-group-lg col-11 position-relative">
-                    <input id="phone" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error" : "inpt border border-secondary rounded ps-3"} autoComplete="none" required onChange={e => setEmail(e.target.value)} value={email}/>
+                <div className="email input-group-lg col-11 position-relative">
+                    <input id="email" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error" : "inpt border border-secondary rounded ps-3"} placeholder=" " autoComplete="none" required onChange={e => setEmail(e.target.value)} value={email} />
                     <label className={wrong ? "lbl lbl-error" : "lbl"} htmlFor="phone">Email</label>
                     {wrong && <p className="font-smaller mt-1 mb-0 text-danger">Digite um email válido!</p>}
                 </div>
@@ -58,7 +65,7 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
             </form>
             <p className="text-center my-4"> <span className="line"></span> ou <span className="line"></span></p>
             <div className="social container-fluid">
-                {social.map((social, i) => <div key={i} className="rede my-3 py-3 text-center border border-dark rounded fw-bold d-flex justify-content-center position-relative mx-2">
+                {social.map((social, i) => <div key={i} className="rede my-3 py-3 text-center border border-dark rounded fw-bold d-flex justify-content-center position-relative mx-2" onClick={() => navigate("/login")}>
                     <img src={social.logo} alt="" className="social-logo position-absolute" />
                     Continuar com {social.name}</div>)}
             </div>

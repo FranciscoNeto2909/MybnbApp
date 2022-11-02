@@ -6,8 +6,9 @@ import Favorites from "./pages/Favorites"
 import NotFound from "./pages/NotFound"
 import Nav from "./components/aplication/Nav"
 import Profile from "./pages/Profile"
-import Login from "./pages/Login"
+import LoginPage from "./pages/Login"
 import PersonalInfos from "./components/user/PersonalInfos"
+import Login from "./components/login/Login"
 import Account from "./pages/Account"
 import LoginAndSecurity from "./components/account/LoginAndSecurity"
 import Payment from "./components/account/Payment"
@@ -29,6 +30,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/loginPage" element={<LoginPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/profile/personal-infos" element={<PersonalInfos />} />

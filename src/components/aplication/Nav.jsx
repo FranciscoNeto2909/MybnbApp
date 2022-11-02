@@ -15,7 +15,7 @@ export default function Nav() {
                 <Heart size={25} />
                 Favorites
             </Link>
-            <Link to={isUserLogged ? "/profile" : "/login"} className="font-smaller d-flex flex-column align-items-center text-decoration-none">
+            <Link to={isUserLogged ? "/profile" : "/loginPage"} className="font-smaller d-flex flex-column align-items-center text-decoration-none">
                 <UserCircle size={25} />
                 {isUserLogged ? "Perfil" : "Entrar"}
             </Link>

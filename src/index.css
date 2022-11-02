@@ -57,8 +57,9 @@
   font-size: 1.2rem;
 }
 
-.inpt:focus~.lbl,
-.inpt:valid~.lbl {
+.inpt:focus ~ .lbl,
+.inpt:valid ~ .lbl,
+.inpt:not(:placeholder-shown).inpt:not(:focus) ~ .lbl {
   font-size: .9rem;
   transform: translateY(-13px);
 }
