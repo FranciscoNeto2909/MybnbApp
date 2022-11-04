@@ -1,11 +1,21 @@
-import Registration from "../components/login/Registration"
+import CodeSender from "../components/login/CodeSender"
 import NumberAuth from "../components/login/EmailAuth"
 import { useState } from "react"
-import CompleteRegistration from "../components/login/CompletesRegistration"
+import Register from "../components/login/Register"
 export default function Login() {
     const [step, setStep] = useState(1)
-    const [email, setEmail] = useState("")
     const [code, setCode] = useState("")
+
+    const [userData, setUserData] = useState({
+        name: "",
+        email:"",
+        lastName: "",
+        phone: "",
+        password: "",
+        confirmPass: "",
+        birthDate: "",
+    })
+
     function handleNextStep() {
         if (step < 3) {
             setStep(step + 1)
@@ -23,9 +33,9 @@ export default function Login() {
     return (
         <>
             {step === 1 &&
-                <Registration code={code} email={email} setCode={setCode} setEmail={setEmail} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
-            {step === 2 && <NumberAuth email={email} code={code} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
-            {step === 3 && <CompleteRegistration handleNextStep={handleNextStep} />}
+                <CodeSender code={code} setCode={setCode} userData={userData} setUserData={setUserData} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
+            {step === 2 && <NumberAuth userData={userData} code={code} handleNextStep={handleNextStep} handleBackStep={handleBackStep}/>}
+            {step === 3 && <Register userData={userData} setUserData={setUserData} handleNextStep={handleNextStep} />}
 
         </>
     )

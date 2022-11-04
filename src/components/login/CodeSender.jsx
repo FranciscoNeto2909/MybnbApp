@@ -2,7 +2,7 @@ import React from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export default function Registration({ email, setEmail, setCode, handleNextStep }) {
+export default function CodeSender({ userData, setUserData, setCode, handleNextStep }) {
 
     const navigate = useNavigate()
 
@@ -35,7 +35,7 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
 
     async function handleValidateEmail(e) {
         e.preventDefault()
-        if (email === undefined || !emailRegex.test(email)) {
+        if (userData.email === undefined || !emailRegex.test(userData.email)) {
             setWrong(true)
             setTimeout(() => {
                 setWrong(false)
@@ -54,7 +54,7 @@ export default function Registration({ email, setEmail, setCode, handleNextStep 
             <h3 className="mt-5">Bem-vindo ao Mybnb</h3>
             <form className="d-flex flex-column justify-content-center align-items-center mt-4">
                 <div className="email input-group-lg col-11 position-relative">
-                    <input id="email" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error" : "inpt border border-secondary rounded ps-3"} placeholder=" " autoComplete="none" required onChange={e => setEmail(e.target.value)} value={email} />
+                    <input id="email" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error" : "inpt border border-secondary rounded ps-3"} placeholder=" " autoComplete="none" required onChange={e => setUserData({...userData, email: e.target.value})} value={userData.email} />
                     <label className={wrong ? "lbl lbl-error" : "lbl"} htmlFor="phone">Email</label>
                     {wrong && <p className="font-smaller mt-1 mb-0 text-danger">Digite um email válido!</p>}
                 </div>

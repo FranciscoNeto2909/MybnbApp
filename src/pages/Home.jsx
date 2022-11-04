@@ -6,22 +6,30 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideNav, showNav } from "../assets/appSlice";
 import { useEffect } from "react";
+
 export default function Home() {
+    const user = useSelector(data => data.user)
+
     const [showDestiny, setShowDestiny] = useState(false)
     const [showFilter, setShowFilter] = useState(false)
     const dispatch = useDispatch()
+
     function handleOpenDestiny() {
         setShowDestiny(!showDestiny)
     }
+
     function handleOpenFilter() {
         setShowFilter(!showFilter)
         dispatch(hideNav())
     }
+
     useEffect(() =>{
         dispatch(showNav())
     },[])
+
     return (
         <div>
+            {user.isLogged && console.log(user)}
             <header className="border-bottom">
                 <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter}/>
                 <AcomodationTypes/>

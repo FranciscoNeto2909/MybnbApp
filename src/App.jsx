@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react"
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom"
+import React, { useEffect } from "react"
+import { Routes, Route, useNavigate} from "react-router-dom"
 import { useSelector } from "react-redux"
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
@@ -19,11 +19,12 @@ import AcomodationHost from "./pages/AcomodationHost"
 
 export default function App() {
   const isNavVisible = useSelector(data => data.app.navVisibility)
- const navigate = useNavigate()
-  
+  const navigate = useNavigate()
+
   useEffect(() => {
     navigate("/")
   }, [])
+
   return (
     <div className="App">
       {isNavVisible && <Nav />}

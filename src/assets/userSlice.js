@@ -2,37 +2,53 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
 
 export const createUser = createAsyncThunk("createUser", async user => {
-    try {
-        await axios.post("http://localhost:3000/users/", user)
-        .then(data => data.status)
-      } catch (err) {
-        console.log(err)
-      }
-})
+  try {
+    await axios.post("http://localhost:3001/users/", user)
+      .then(data => data.status)
+  } catch (err) {
+    console.log(err)
+  }
+}) 
+
 export const login = createAsyncThunk("login", async user => {
-    try {
-        await axios.post("http://localhost:3000/users/login", user)
-        .then(data => data.status)
-      } catch (err) {
-        console.log(err) 
-      }
+  try {
+   const res =  await axios.post("http://localhost:3001/users/login", user)
+    .then(data => data.data)
+    return res
+  } catch (err) {
+    console.log(err)
+  }
 })
+
+
 const userSlice = createSlice({
-    name: "user",
-    initialState: {
-        name: "Francisco",
-        email: "",
-        isLogged: false
+  name: "user",
+  initialState: {
+    user: {
+      name: "",
+      email: "",
+      phone: "",
+      birthDate: ""
     },
-    reducers: {
-      logout(state) {
-        return{...state, isLogged:false }
-      },
-      userLogin(state) {
-        return{...state, isLogged:true }
-      }
+    isLogged: false
+  },
+  reducers: {
+    logout(state) {
+      return { ...state, isLogged: false }
     },
-    extraReducers: {}
+    userLogin(state) {
+      return { ...state, isLogged: true }
+    },
+    setUser(state,{ payload}) {
+      return { ...state, user:payload }
+    }
+  },
+  extraReducers:(build) => {
+    build
+        .addCase(login.fulfilled, (state, action) => {
+          return {...state, user:action.payload.user}
+        })
+  }
 })
-export const {logout, userLogin } = userSlice.actions
+export const { logout, userLogin } = userSlice.actions
 export default userSlice.reducer

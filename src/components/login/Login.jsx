@@ -1,23 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { CaretLeft } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { userLogin } from "../../assets/userSlice"
-import { useState } from "react";
+import { login, userLogin } from "../../assets/userSlice"
+
 export default function Login() {
 
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const passwordRegex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")
+
     const [errors, setErrors] = useState({
         emailError: false,
         passwordError: false
     })
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+
 
     const [user, setUser] = useState({
         email: "",
-        passowrd: ""
+        password: ""
     })
 
     function handleLogin(e) {
@@ -28,13 +31,14 @@ export default function Login() {
             setTimeout(() => {
                 setErrors({ ...errors, emailError: false })
             }, 2500);
-        } else if (user.passowrd === "" || !passwordRegex.test(user.passowrd)) {
+        } else if (user.password === "" || !passwordRegex.test(user.password)) {
             setErrors({ ...errors, passwordError: true })
             setTimeout(() => {
                 setErrors({ ...errors, passwordError: false })
             }, 2500);
         }
         else {
+            dispatch(login(user))
             dispatch(userLogin())
             navigate("/")
         }
@@ -71,18 +75,18 @@ export default function Login() {
                         <input type="password"
                             className={errors.passwordError ?
                                 "inpt rounded ps-3 inpt-error" :
-                                "inpt border border-secondary rounded ps-3"} placeholder=" " required value={user.passowrd}
-                            onChange={e => setUser({ ...user, passowrd: e.target.value })}
+                                "inpt border border-secondary rounded ps-3"} placeholder=" " required value={user.password}
+                            onChange={e => setUser({ ...user, password: e.target.value })}
                         />
                         <label htmlFor="" className={errors.passwordError ? "lbl-error lbl" : "lbl"}>Senha</label>
 
-                        {errors.passwordError && user.passowrd == "" &&
+                        {errors.passwordError && user.password == "" &&
                             <p className="lbl-error mt-1">Este campo não pode ser vazio!</p>
                         }
-                        {errors.passwordError && user.passowrd != "" && user.passowrd.length < 6 &&
+                        {errors.passwordError && user.password != "" && user.password.length < 6 &&
                             <p className="lbl-error mt-1">Sua senha deve ter no minimo 6 digitos!</p>
                         }
-                        {errors.passwordError && user.passowrd != "" && user.passowrd.length >= 6 &&
+                        {errors.passwordError && user.password != "" && user.password.length >= 6 &&
                             <p className="lbl-error mt-1">Sua senha deve ter apenas numeros, letras maiúsculas e minúsculas!</p>
                         }
                         <p className="font-smaller mt-2">Sua senha deve ter numeros, letras maiusculas e minusculas e nenhum caractere especial</p>
