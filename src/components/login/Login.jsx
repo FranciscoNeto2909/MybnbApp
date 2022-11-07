@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CaretLeft } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login, userLogin } from "../../assets/userSlice"
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../assets/userSlice"
 
 export default function Login() {
+    const isLogged = useSelector(data => data.user.isLogged)
 
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
     const navigate = useNavigate()
@@ -14,9 +15,10 @@ export default function Login() {
 
     const [errors, setErrors] = useState({
         emailError: false,
-        passwordError: false
+        passwordError: false,
+        loginError: false
     })
-
+    const [errorMsg, setErrorMsg] = useState("")
 
     const [user, setUser] = useState({
         email: "",
@@ -39,8 +41,19 @@ export default function Login() {
         }
         else {
             dispatch(login(user))
-            dispatch(userLogin())
-            navigate("/")
+                .then(e => {
+                    if (e.payload.error == false) {
+                        navigate("/")
+                    } else {
+                        setErrors({ ...errors, loginError: true })
+                        setErrorMsg(e.payload.response.data.msg)
+
+                        setTimeout(() => {
+                            setErrors({ ...errors, loginError: false })
+                            setErrorMsg("")
+                        }, 2500);
+                    }
+                })
         }
     }
 
@@ -56,7 +69,7 @@ export default function Login() {
                     <div className="login-email input-group-lg col-11 position-relative my-3">
                         <input type="email"
                             className={errors.emailError ?
-                                "inpt rounded ps-3 inpt-error" :
+                                "inpt rounded ps-3 inpt-error lbl-error" :
                                 "inpt border border-secondary rounded ps-3"
                             }
                             placeholder=" " required value={user.email} onChange={e => setUser({ ...user, email: e.target.value })}
@@ -88,6 +101,9 @@ export default function Login() {
                         }
                         {errors.passwordError && user.password != "" && user.password.length >= 6 &&
                             <p className="lbl-error mt-1">Sua senha deve ter apenas numeros, letras maiúsculas e minúsculas!</p>
+                        }
+                        {errors.loginError && <p className="lbl-error mt-1">{errorMsg}</p>
+
                         }
                         <p className="font-smaller mt-2">Sua senha deve ter numeros, letras maiusculas e minusculas e nenhum caractere especial</p>
                     </div>

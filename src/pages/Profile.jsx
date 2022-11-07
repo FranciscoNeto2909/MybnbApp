@@ -12,6 +12,7 @@ export default function Profile() {
     function handleLogout() {
         dispatch(logout())
         navigate("/")
+        localStorage.clear()
     }
     function handleOpenPersonalInfos() {
         dispatch(hideNav())

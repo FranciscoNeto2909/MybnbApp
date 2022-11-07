@@ -1,25 +1,37 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import axios from "axios"
+import { api } from "./api"
 
 export const createUser = createAsyncThunk("createUser", async user => {
   try {
-    await axios.post("http://localhost:3001/users/", user)
+    await api.post("users/", user)
       .then(data => data.status)
   } catch (err) {
     console.log(err)
   }
-}) 
+})
 
 export const login = createAsyncThunk("login", async user => {
   try {
-   const res =  await axios.post("http://localhost:3001/users/login", user)
-    .then(data => data.data)
+    const res = await api.post("users/login", user)
+      .then(data => data.data)
+      .catch(err => err)
     return res
   } catch (err) {
     console.log(err)
   }
 })
 
+export const emailAuth = createAsyncThunk("emailAuth", async email => {
+
+  try {
+    const res = await api.post("emailAuth", email)
+      .then(data => data)
+      .catch(err => err)
+    return res
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 const userSlice = createSlice({
   name: "user",
@@ -39,15 +51,20 @@ const userSlice = createSlice({
     userLogin(state) {
       return { ...state, isLogged: true }
     },
-    setUser(state,{ payload}) {
-      return { ...state, user:payload }
+    setUser(state, { payload }) {
+      return { ...state, user: payload }
     }
   },
-  extraReducers:(build) => {
+  extraReducers: (build) => {
     build
-        .addCase(login.fulfilled, (state, action) => {
-          return {...state, user:action.payload.user}
-        })
+      .addCase(login.fulfilled, (state, action) => {
+        if (action.payload.token != undefined && action.payload.token != null) {  
+          localStorage.setItem('token', action.payload.token)
+          return { ...state, user: action.payload.user, isLogged: true }
+        }else{
+          return { ...state, isLogged: false }
+        }
+      })
   }
 })
 export const { logout, userLogin } = userSlice.actions

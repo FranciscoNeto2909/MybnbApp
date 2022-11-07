@@ -1,9 +1,9 @@
-import React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-
+import { emailAuth } from "../../assets/userSlice"
 export default function CodeSender({ userData, setUserData, setCode, handleNextStep }) {
-
+    const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
@@ -41,8 +41,12 @@ export default function CodeSender({ userData, setUserData, setCode, handleNextS
                 setWrong(false)
             }, 2000);
         } else {
-            handleGenerateAuthCode()
-            handleNextStep()
+            const code = await handleGenerateAuthCode()
+
+            dispatch(emailAuth({
+                email:userData.email,
+                code:code
+            })).then(() => handleNextStep())
         }
     }
 
@@ -54,7 +58,7 @@ export default function CodeSender({ userData, setUserData, setCode, handleNextS
             <h3 className="mt-5">Bem-vindo ao Mybnb</h3>
             <form className="d-flex flex-column justify-content-center align-items-center mt-4">
                 <div className="email input-group-lg col-11 position-relative">
-                    <input id="email" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error" : "inpt border border-secondary rounded ps-3"} placeholder=" " autoComplete="none" required onChange={e => setUserData({...userData, email: e.target.value})} value={userData.email} />
+                    <input id="email" type="Email" className={wrong ? " inpt rounded ps-3 inpt-error lbl-error" : "inpt border border-secondary rounded ps-3"} placeholder=" " autoComplete="none" required onChange={e => setUserData({...userData, email: e.target.value})} value={userData.email} />
                     <label className={wrong ? "lbl lbl-error" : "lbl"} htmlFor="phone">Email</label>
                     {wrong && <p className="font-smaller mt-1 mb-0 text-danger">Digite um email válido!</p>}
                 </div>

@@ -29,7 +29,6 @@ export default function Home() {
 
     return (
         <div>
-            {user.isLogged && console.log(user)}
             <header className="border-bottom">
                 <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter}/>
                 <AcomodationTypes/>
