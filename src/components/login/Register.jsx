@@ -70,7 +70,7 @@ export default function Register({ userData, setUserData }) {
                 email: userData.email,
                 password:hashedPassword,
                 birthDate: userData.birthDate
-            }))
+            })).then(() => navigate("/login"))
         }
     }
 
