@@ -33,6 +33,13 @@ export const emailAuth = createAsyncThunk("emailAuth", async email => {
   }
 })
 
+export const getUser = createAsyncThunk("getUser", async userId => {
+  const res = api.get(`users/${userId}`)
+    .then(data => data.data)
+    .catch(err => err)
+  return res
+})
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -58,12 +65,15 @@ const userSlice = createSlice({
   extraReducers: (build) => {
     build
       .addCase(login.fulfilled, (state, action) => {
-        if (action.payload.token != undefined && action.payload.token != null) {  
+        if (action.payload.token != undefined && action.payload.token != null) {
           localStorage.setItem('token', action.payload.token)
-          return { ...state, user: action.payload.user, isLogged: true }
-        }else{
+          return { ...state, isLogged: true }
+        } else {
           return { ...state, isLogged: false }
         }
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        return { ...state, user: action.payload, isLogged:true }
       })
   }
 })

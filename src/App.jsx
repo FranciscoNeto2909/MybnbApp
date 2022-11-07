@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { Routes, Route, useNavigate} from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import Home from "./pages/Home"
 import Favorites from "./pages/Favorites"
 import NotFound from "./pages/NotFound"
@@ -16,13 +16,20 @@ import Notification from "./components/account/Notification"
 import GlobalPrefer from "./components/account/GlobalPrefer"
 import PrivAndShare from "./components/account/PrivAndShare"
 import AcomodationHost from "./pages/AcomodationHost"
+import { getUser } from "./assets/userSlice"
 
 export default function App() {
   const isNavVisible = useSelector(data => data.app.navVisibility)
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
+  const token = localStorage.getItem('token')
+  const id = localStorage.getItem('userId')
+  
   useEffect(() => {
     navigate("/")
+    if (token !== null && id !== null) {
+      dispatch(getUser(id))
+    }
   }, [])
 
   return (

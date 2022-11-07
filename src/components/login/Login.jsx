@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CaretLeft } from "phosphor-react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../assets/userSlice"
+import { getUser, login } from "../../assets/userSlice"
 
 export default function Login() {
     const isLogged = useSelector(data => data.user.isLogged)
@@ -43,6 +43,9 @@ export default function Login() {
             dispatch(login(user))
                 .then(e => {
                     if (e.payload.error == false) {
+                        const userId = e.payload.userId
+                        localStorage.setItem("userId", userId.toString())
+                        dispatch(getUser(userId.toString()))
                         navigate("/")
                     } else {
                         setErrors({ ...errors, loginError: true })
@@ -53,7 +56,8 @@ export default function Login() {
                             setErrorMsg("")
                         }, 2500);
                     }
-                })
+                });
+
         }
     }
 
