@@ -3,9 +3,10 @@
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
-.navbar-navigator-selected{
+.navbar-navigator-selected {
   color: #f00;
 }
+
 .rede {
   cursor: pointer;
   font-size: 00.9rem;
@@ -38,28 +39,31 @@
   transition: 0.5s;
   opacity: 0.6;
 }
-.lbl-error{
+
+.lbl-error {
   color: #f00;
   transition: none;
   opacity: 1;
 }
+
 .input-group,
 .input-group-lg {
   position: relative;
 }
 
-.inpt-error{
+.inpt-error {
   border: 2px solid #f00;
 }
+
 .inpt {
   width: 100%;
   height: 60px;
   font-size: 1.2rem;
 }
 
-.inpt:focus ~ .lbl,
-.inpt:valid ~ .lbl,
-.inpt:not(:placeholder-shown).inpt:not(:focus) ~ .lbl {
+.inpt:focus~.lbl,
+.inpt:valid~.lbl,
+.inpt:not(:placeholder-shown).inpt:not(:focus)~.lbl {
   font-size: .9rem;
   transform: translateY(-13px);
 }
@@ -238,6 +242,7 @@
 .comodos-carroussel::-webkit-scrollbar {
   width: 0;
 }
+
 .comodos-btn {
   background-color: transparent;
   padding: 5px;
@@ -362,60 +367,78 @@ details[open] summary::after {
 .font-smaller {
   font-size: .9rem;
 }
-.receipt-elem{
-  background-color:rgba(0, 0, 0, 0.050);
+
+.receipt-elem {
+  background-color: rgba(0, 0, 0, 0.050);
 }
-.receipt-value{
+
+.receipt-value {
   font-size: 18px;
   padding: 0;
   margin: 0;
 }
-.anfitriao-resume-container{
+
+.anfitriao-resume-container {
   overflow-x: scroll;
 }
-.spaceDesc-container{
+
+.spaceDesc-container {
   background-color: rgba(0, 0, 0, 0.500);
   z-index: 1;
 }
-.scroll-lock{
+
+.scroll-lock {
   position: fixed;
 }
-.space-type-button-container{
+
+.space-type-button-container {
   background-color: rgba(0, 0, 0, 0.150);
 
 }
-.addAcomodation{
-  background: linear-gradient(to right, rgb(108, 0, 196), rgb(168, 0, 173), rgb(224, 0, 86),  rgb(255, 0, 55));
+
+.addAcomodation {
+  background: linear-gradient(to right, rgb(108, 0, 196), rgb(168, 0, 173), rgb(224, 0, 86), rgb(255, 0, 55));
 }
-.close-addAcmd-btn{
+
+.close-addAcmd-btn {
   background-color: rgba(255, 255, 255, 0.336);
 }
-.addAcomodation-main{
+
+.addAcomodation-main {
   min-height: 100%;
   background-color: #fff;
 }
-.space-types{
+
+.space-types {
   border: 1px solid darkgray;
   text-align: start;
 }
-.emphasis{
+
+.emphasis {
   border: 1px solid darkgray;
   padding: 10px;
   background-color: transparent;
   border-radius: 20px;
 }
-.emphasis:focus{
+
+.emphasis:focus {
   border: 1px solid #000;
 }
-.space-types:focus{
+
+.space-types:focus {
   border: 1px solid #000;
 }
-.map{
+
+.map {
   height: 200px;
   width: 100%;
   margin-top: 50px;
 }
-.conv-items, .pref-items, .sec-items,.selected{
+
+.conv-items,
+.pref-items,
+.sec-items,
+.selected {
   width: 120px;
   height: 100px;
   background-color: transparent;
@@ -423,49 +446,79 @@ details[open] summary::after {
   font-weight: 500;
   border-radius: 12px;
 }
-.selected{
+
+.selected {
   border: 1px solid #000;
   color: #000;
 }
-.img-container{
+
+.img-container {
   border: 1px dotted #008080;
   width: 70%;
   margin: 0 auto;
 }
-.anuncio-title{
+
+.anuncio-title {
   margin: 0 auto;
 }
-a.comodation-desc{
+
+a.comodation-desc {
   resize: none;
 }
-.form-check-input{
+
+.form-check-input {
   padding: 10px;
 }
-.desc-option-radio{
+
+.desc-option-radio {
   padding: 20px;
 }
-.input-img-container{
+
+.input-img-container {
   margin-bottom: 60px;
 }
-.preview-container{
+
+.preview-container {
   background-color: rgba(0, 0, 0, 0.192);
   border-radius: 10px;
 }
-.caret{
+
+.caret {
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.350);
 }
+
+.dialog {
+  border-radius: 25px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 1em rgba(0, 0, 0, .5);
+}
+
+.dialog::backdrop {
+  background-color: rgb(0, 0, 0, .5);
+}
+
+.close-dialog {
+  position: absolute;
+  bottom: 10px;
+  left: 47%;
+}
+
 @media (max-width: 700px) {
   .search-desc-container {
     white-space: nowrap;
     width: 60%;
   }
+
   .search-desc-item {
     font-size: .7rem;
   }
+
   .desc-item-divisor {
     transform: translateY(-11px);
   }
+
   .search-lbl {
     display: block;
   }
@@ -473,5 +526,5 @@ a.comodation-desc{
   .destiny-maps::-webkit-scrollbar {
     height: 0;
   }
-  
+
 }

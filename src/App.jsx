@@ -24,9 +24,10 @@ export default function App() {
   const dispatch = useDispatch()
   const token = localStorage.getItem('token')
   const id = localStorage.getItem('userId')
-  
+
   useEffect(() => {
     navigate("/")
+
     if (token !== null && id !== null) {
       dispatch(getUser(id))
     }

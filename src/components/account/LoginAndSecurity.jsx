@@ -1,16 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { CaretLeft } from "phosphor-react"
 import { useState } from "react";
+import { DeleteUser, logout } from "../../assets/userSlice";
+import { useDispatch } from "react-redux";
 export default function LoginAndSecurity() {
     const [loginVisib, setLoginVisib] = useState(false)
+    const [delUserVisib, setDeluserVisib] = useState(false)
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    function handleDeleteUser() {
+        const userId = localStorage.getItem("userId")
+        dispatch(DeleteUser(userId))
+        dispatch(logout())
+        navigate("/")
+        localStorage.clear()
+    }
 
     return (
         <>
             <header className="account-header py-3 position-sticky top-0 bg-light mb-5">
                 <CaretLeft size={25} onClick={() => navigate(-1)} />
             </header>
-            <main className="p-3">
+            <main className="p-3 position-relative">
                 <h1 className="fs-3 fw-bold mb-5">Login e segurança</h1>
                 <section className="py-2 mb-5">
                     <h2 className="fs-3 fw-bold mb-5">Login</h2>
@@ -62,9 +75,16 @@ export default function LoginAndSecurity() {
                     <h1 className="fs-3 fw-bold">Conta</h1>
                     <div className="del-account position-relative">
                         <p>Desativar sua conta</p>
-                        <button className="border-0 bg-transparent text-danger position-absolute top-0 end-0">Desativar</button>
+                        <button className="border-0 bg-transparent text-danger position-absolute top-0 end-0" onClick={() => setDeluserVisib("open")}>Desativar</button>
                     </div>
                 </section>
+                <dialog className="dialog py-5 position-absolute top-50" open={delUserVisib} >
+                    <p>Desejo excluir todos os meus dados</p>
+                    <div className="buttons-container d-flex justify-content-evenly">
+                        <button className="btn btn-primary" onClick={() => setDeluserVisib("")}>Cancelar</button>
+                        <button className="btn btn-danger" onClick={handleDeleteUser}>Excluir</button>
+                    </div>
+                </dialog>
             </main>
         </>
     )

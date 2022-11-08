@@ -40,9 +40,17 @@ export const getUser = createAsyncThunk("getUser", async userId => {
   return res
 })
 
+export const DeleteUser = createAsyncThunk("deleteUser", async userId => {
+  const res = api.delete(`users/${userId}`)
+    .then(data => data.data)
+    .catch(err => err)
+  return res
+
+})
+
 export const updateUser = createAsyncThunk("updateUser", async user => {
   const userId = localStorage.getItem("userId")
-  
+
   const res = api.put(`users/${userId}`, user)
     .then(data => data.data)
     .catch(err => err)

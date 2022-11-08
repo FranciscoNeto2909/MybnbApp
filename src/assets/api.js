@@ -4,19 +4,21 @@ export const api = axios.create({
     baseURL: "http://localhost:3001/"
 })
 
-const token = localStorage.getItem('token')
+
 
 api.interceptors.request.use(async (config) => {
     try {
-        if (token != null || token != undefined) {
+        const token = await localStorage.getItem('token')
+
+        if (token != null && token != undefined) {
             config.headers.Authorization = `Bearer ${token}`
         }
         return config
         
     } catch (error) {
-        console.log(error)
+        console.log("erro dentro do request")
     }
-}, error => console.log(error))
+}, error => console.log("erro fora do request"))
 
 axios.interceptors.response.use(config => {
     try {
@@ -26,6 +28,6 @@ axios.interceptors.response.use(config => {
         return config
 
     } catch (error) {
-        console.log(error)
+        console.log("erro dentro do response")
     }
-}, error => console.log(error))
+}, error => console.log("erro fora do response"))

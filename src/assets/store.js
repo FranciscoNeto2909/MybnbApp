@@ -8,5 +8,9 @@ export const store = configureStore({
         user:userSlice,
         acomodation:acomodationSlice,
         app:appSlice
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 })
