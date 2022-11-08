@@ -8,6 +8,7 @@ import { hash } from "bcryptjs"
 export default function Register({ userData, setUserData }) {
     const data = new Date()
     const year = data.getFullYear()
+    
     const [errors, setErrors] = useState({
         nameError: false,
         lastNameError: false,

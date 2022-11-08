@@ -40,6 +40,15 @@ export const getUser = createAsyncThunk("getUser", async userId => {
   return res
 })
 
+export const updateUser = createAsyncThunk("updateUser", async user => {
+  const userId = localStorage.getItem("userId")
+  
+  const res = api.put(`users/${userId}`, user)
+    .then(data => data.data)
+    .catch(err => err)
+  return res
+})
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -47,7 +56,9 @@ const userSlice = createSlice({
       name: "",
       email: "",
       phone: "",
-      birthDate: ""
+      birthDate: "",
+      sex: "",
+      address: ""
     },
     isLogged: false
   },
@@ -73,7 +84,7 @@ const userSlice = createSlice({
         }
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        return { ...state, user: action.payload, isLogged:true }
+        return { ...state, user: action.payload, isLogged: true }
       })
   }
 })
