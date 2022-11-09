@@ -1,14 +1,72 @@
 import { useNavigate } from "react-router-dom";
 import { CaretLeft } from "phosphor-react"
 import { useState } from "react";
-import { DeleteUser, logout } from "../../assets/userSlice";
+import { DeleteUser, logout, updateUser } from "../../assets/userSlice";
 import { useDispatch } from "react-redux";
+import { hash } from "bcryptjs";
+
 export default function LoginAndSecurity() {
     const [loginVisib, setLoginVisib] = useState(false)
     const [delUserVisib, setDeluserVisib] = useState(false)
+    const [newPassVisib, setNewPassVisib] = useState(false)
+    const [oldPassword, setOldPassword] = useState("")
+    const [newPassword, setNewPassowrd] = useState("")
+    const [confirmNewPassword, setConfirmNewPassowrd] = useState("")
+    const [errorMsg, setErrorMsg] = useState("")
+    const [errors, setErrors] = useState({
+        passwordError: false,
+        newPasswordError: false
+    })
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    async function handleVerifyPassword() {
+        dispatch(updateUser({
+            name: " ",
+            email: "",
+            phone: "",
+            birthDate: "",
+            sex: "",
+            address: "",
+            oldPassword,
+            newPassword
+        })).then(e => {
+            console.log(e)
+            if (e.payload.response?.data.error == true) {
+                setErrorMsg(e.payload.response.data.msg)
+                setErrors({ ...errors, passwordError: true })
+                setTimeout(() => {
+                    setErrors({ ...errors, passwordError: false })
+                    setErrorMsg("")
+                }, 2000);
+            }
+            else {
+                setNewPassVisib(true)
+            }
+        })
+    }
+
+    async function handleUpdatePassoword() {
+        if (confirmNewPassword != newPassword) {
+            setErrors({ ...errors, newPasswordError: true })
+            setTimeout(() => {
+                setErrors({ ...errors, newPasswordError: false })
+            }, 2000);
+        }else{
+            const hashedPassword = await hash(newPassword,8)
+            dispatch(updateUser({
+                name: " ",
+                email: "",
+                phone: "",
+                birthDate: "",
+                sex: "",
+                address: "",
+                oldPassword,
+                newPassword:hashedPassword
+            })).then(e => console.log(e))
+        }
+    }
 
     function handleDeleteUser() {
         const userId = localStorage.getItem("userId")
@@ -36,20 +94,28 @@ export default function LoginAndSecurity() {
                             <div className="personalInfo-name position-relative">
                                 <div className="input-group-lg col-11 my-2">
                                     <label className="form-label" htmlFor="name">Senha atual</label>
-                                    <input id="name" type="text" className="form-control border-secondary rounded ps-3" autoComplete="none" required />
+                                    <input id="name" type="password" value={oldPassword} className={errors.passwordError ? "form-control inpt-error lbl-error rounded ps-3" : "form-control border-secondary rounded ps-3"} onChange={e => setOldPassword(e.target.value)} autoComplete="none" required />
+                                    {errors.passwordError && <p className="lbl-error mt-1 font-smaller">{errorMsg}</p>}
+                                    <button className="btn login-btn text-light my-3 py-2 fw-bold" onClick={handleVerifyPassword}>Verificar</button>
                                 </div>
-                                <div className="input-group-lg col-11 position-relative">
-                                    <label className="form-label" htmlFor="sobrenome">Nova Senha</label>
-                                    <input id="sobrenome" type="text" className="form-control border-secondary rounded ps-3 border" autoComplete="none" required />
-                                </div>
-                                <div className="input-group-lg col-11 position-relative">
-                                    <label className="form-label" htmlFor="sobrenome">Confirmar nova senha</label>
-                                    <input id="sobrenome" type="text" className="form-control border-secondary rounded ps-3 border" autoComplete="none" required />
-                                </div>
-                                <button className="btn login-btn text-light my-3 py-2 fw-bold">Atualizar senha</button>
+                                {newPassVisib &&
+                                    <>
+                                        <div className="input-group-lg col-11 position-relative">
+                                            <label className="form-label" htmlFor="sobrenome">Nova Senha</label>
+                                            <input id="newPassword" type="password" className="form-control border-secondary rounded ps-3 border" autoComplete="none" required value={newPassword} onChange={e => setNewPassowrd(e.target.value)} />
+                                        </div>
+                                        <div className="input-group-lg col-11 position-relative">
+                                            <label className="form-label" htmlFor="sobrenome">Confirmar nova senha</label>
+                                            <input id="confirmPassword" type="password" className={errors.newPasswordError ? "form-control inpt-error lbl-error rounded ps-3" : "form-control border-secondary rounded ps-3"} autoComplete="none" required value={confirmNewPassword} onChange={e => setConfirmNewPassowrd(e.target.value)} />
+                                            {errors.newPasswordError && 
+                                            <p className="lbl-error font-smaller mt-1">As senhas não coincidem!</p>}
+                                        </div>
+                                        <button className="btn login-btn text-light my-3 py-2 fw-bold" onClick={handleUpdatePassoword}>Atualizar senha</button>
+                                    </>
+                                }
                             </div>
                         }
-                        <button className="position-absolute top-0 end-0 border-0 bg-transparent text-info fw-bolder" onClick={e => setLoginVisib(!loginVisib)}>{loginVisib ? "Cancelar" : "Atualizar"}</button>
+                        <button className="position-absolute top-0 end-0 border-0 bg-transparent text-info fw-bolder" onClick={e => { setLoginVisib(!loginVisib); setNewPassVisib(false) }}>{loginVisib ? "Cancelar" : "Atualizar"}</button>
                     </div>
                 </section>
                 <section className="socialAccount-container my-5">

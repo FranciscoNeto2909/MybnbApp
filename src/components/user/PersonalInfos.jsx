@@ -90,14 +90,16 @@ export default function name() {
         setEmailVisb(false)
         setPhoneVisb(false)
         setSexoVisb(false)
-        
+
         dispatch(updateUser({
             name: `${userData.name} ${userData.lastName}`,
             email: userData.email,
             phone: userData.phone,
             birthDate: userData.birthDate,
             sex: userData.sex,
-            address: userData.address
+            address: userData.address,
+            oldPassword:"",
+            newPassword:""
         }))
     }
 
