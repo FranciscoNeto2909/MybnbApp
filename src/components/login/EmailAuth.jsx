@@ -1,7 +1,7 @@
-import { useState } from "react"
+import React,{ useState } from "react"
+import { mask } from "remask"
 
-export default function NumberAuth({ email, handleBackStep, handleNextStep, code }) {
-    const pattern = "[a-zA-Z0-9{8}]"
+export default function NumberAuth({ handleBackStep, handleNextStep, code }) {
     const [writedCode, setWritedCode] = useState("")
     const [wrong, setWrong] = useState(false)
 
@@ -17,6 +17,11 @@ export default function NumberAuth({ email, handleBackStep, handleNextStep, code
             handleNextStep()
         }
     }
+
+    function handleMaskCode(elem) {
+        setWritedCode(mask(`${elem}`, ['999999']))
+    }
+
     return (
         <div className="numAuth-container">
             <header className="numAuth-header container-fluid mt-2 position-relative d-flex align-items-center justify-content-center">
@@ -28,7 +33,7 @@ export default function NumberAuth({ email, handleBackStep, handleNextStep, code
                 <input type="text" aria-label="Código inserido: "
                     className={wrong ? "code-input col-6 py-2 inpt-error lbl-error rounded-3 mx-auto text-center fs-2" :
                         "code-input col-6 py-2 border-2 border-dark rounded-3 mx-auto text-center fs-2"
-                    } maxLength={6} placeholder="- - - - - -" value={writedCode} onChange={e => setWritedCode(e.target.value)} />
+                    } maxLength={6} placeholder="- - - - - -" value={writedCode} onChange={e => handleMaskCode(e.target.value)} />
                 {wrong && <p className="font-smaller lbl-error text-center">Codigo incorreto</p>}
                 <p className="mt-4 mx-auto">Não recebeu o código? <span><a href="" className="text-dark">Mais opções</a></span></p>
                 <button className="btn btn-dark my-4 col-10 mx-auto" onClick={handleConfirmCode}>Continuar</button>

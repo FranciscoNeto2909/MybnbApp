@@ -36,7 +36,10 @@ export const emailAuth = createAsyncThunk("emailAuth", async email => {
 export const getUser = createAsyncThunk("getUser", async userId => {
   const res = api.get(`users/${userId}`)
     .then(data => data.data)
-    .catch(err => err)
+    .catch(err => {
+      localStorage.clear()
+      return err
+    })
   return res
 })
 
@@ -48,10 +51,23 @@ export const DeleteUser = createAsyncThunk("deleteUser", async userId => {
 
 })
 
+export const setUserImage = createAsyncThunk("setUserImage",async userImage => {
+  const userId = localStorage.getItem("userId")
+  const formData = new FormData()
+  formData.append('image', userImage)
+
+  const headers = {
+    "headers" : {
+      'Content-Type': 'application/json'
+    }
+  } 
+  await api.put(`users/image/${userId}`, formData, headers ).then(e => console.log(e))
+})
+
 export const updateUser = createAsyncThunk("updateUser", async user => {
   const userId = localStorage.getItem("userId")
 
-  const res = api.put(`users/${userId}`, user)
+  const res = await api.put(`users/${userId}`, user)
     .then(data => data.data)
     .catch(err => err)
   return res

@@ -32,6 +32,7 @@ export default function name() {
     const [userData, setUserData] = useState({
         name: "",
         email: "",
+        image:"",
         lastName: "",
         sex: "",
         phone: "",
@@ -93,6 +94,7 @@ export default function name() {
 
         dispatch(updateUser({
             name: `${userData.name} ${userData.lastName}`,
+            image:"",
             email: userData.email,
             phone: userData.phone,
             birthDate: userData.birthDate,
