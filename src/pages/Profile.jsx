@@ -32,7 +32,7 @@ export default function Profile() {
     }
 
     async function handleGetUserImage() {
-        setImage(`http://localhost:3001/profile/${user.user.image}`)
+        setImage(`https://mybnb-api.onrender.com/profile/${user.user.image}`)
     }
 
     async function handleChangeUserImage(e) {
