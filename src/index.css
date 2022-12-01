@@ -505,6 +505,19 @@ a.comodation-desc {
   left: 47%;
 }
 
+.card {
+  width: 250px;
+  height: 350px;
+}
+
+.card-img-container {
+  overflow-x: hidden;
+}
+
+.card-img {
+  min-width: 100%;
+}
+
 @media (max-width: 700px) {
   .search-desc-container {
     white-space: nowrap;
@@ -525,6 +538,11 @@ a.comodation-desc {
 
   .destiny-maps::-webkit-scrollbar {
     height: 0;
+  }
+
+  .card {
+    width: 350px;
+    height: 450px;
   }
 
 }

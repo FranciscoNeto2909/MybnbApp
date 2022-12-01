@@ -1,10 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: "https://mybnb-api.onrender.com/"
+    baseURL: "http://localhost:3001/"
 })
-
-
 
 api.interceptors.request.use(async (config) => {
     try {

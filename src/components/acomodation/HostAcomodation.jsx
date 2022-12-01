@@ -3,17 +3,25 @@ import { X, MinusCircle, PlusCircle, Image, Bed } from "phosphor-react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
 import SimpleCheckButon from "../buttons/SimpleCheckButton"
+import { useDispatch, useSelector } from "react-redux";
+import { postAcomodation, postAcomodationImage } from "../../assets/acomodationSlice";
 
 export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [step, setStep] = useState(1)
     const [char, setChar] = useState(0)
+    const user = useSelector(data => data.user.user)
+
     const [filed, setFiled] = useState(false)
     const [progress, setProgress] = useState(7.5)
+    const dispatch = useDispatch()
     const [cordenates, setCordenates] = useState({
         lat: -4.179914,
         lng: -38.129617
     })
+    const [images, setImages] = useState([])
+
     const [acomodation, setAcomodation] = useState({
+        hostName: user.name,
         hostSpace: "",
         hostSpaceDesc: "",
         hostPlace: "",
@@ -25,13 +33,13 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         confort: [],
         preferences: [],
         securityItems: [],
-        images: [],
         title: "",
         hostEmphasis: "",
         hostDesc: "",
         price: 53,
         hostOptions: []
     })
+
     const confort = ["piscina", "Churrasqueira", "jacuzzi", "patio", "fogueira", "Área de lazer"]
     const preferences = ["Wi-Fi", "Tv", "Cozinha", "maquina de lavar", "chuveiro eletrico", "Ar-condicionado"]
     const securityItems = ["Alarme", "extintor de incendio", "Detector de fumaças", "kit de primeiros socorros"]
@@ -136,14 +144,20 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             setProgress(progress + 7.5)
         }
         if (step === 6) {
+            const confortStr = acomodation.confort.toString();
+            setAcomodation({ ...acomodation, confort: confortStr })
+
             setStep(step + 1)
             setFiled(false)
             setProgress(progress + 7.5)
         }
-        if (step === 7 && acomodation.images == []) {
+        if (step === 7 && images == []) {
             alert("Selecione um campo antes de ir para o proximo passo!")
             setFiled(false)
-        } else if (step === 7 && acomodation.images.length > 4) {
+        } else if (step === 7 && images.length > 4) {
+            const prefStr = acomodation.preferences.toString();
+            setAcomodation({ ...acomodation, preferences: prefStr })
+
             setStep(step + 1)
             setFiled(false)
             setProgress(progress + 7.5)
@@ -152,6 +166,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             alert("Selecione um campo antes de ir para o proximo passo!")
             setFiled(false)
         } else if (step === 8 && acomodation.title !== "") {
+            const secItemStr = acomodation.securityItems.toString();
+            setAcomodation({ ...acomodation, securityItems: secItemStr });
+
             setStep(step + 1)
             setFiled(false)
             setProgress(progress + 7.5)
@@ -160,6 +177,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             alert("Selecione um campo antes de ir para o proximo passo!")
             setFiled(false)
         } else if (step === 9 && acomodation.hostEmphasis != []) {
+            const hostEmphasisStr = acomodation.hostEmphasis.toString()
+            setAcomodation({ ...acomodation, hostEmphasis: hostEmphasisStr })
+
             setStep(step + 1)
             setFiled(false)
             setProgress(progress + 7.5)
@@ -178,41 +198,53 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             setProgress(progress + 7.5)
         }
         if (step === 12) {
+            const hostOptionStr = acomodation.hostOptions.toString();
+            setAcomodation({ ...acomodation, hostOptions: hostOptionStr })
             setStep(step + 1)
             setFiled(true)
             setProgress(progress + 7.5)
         }
     }
+
     function handleBackStep() {
         if (step > 1) {
             setStep(step - 1)
             setProgress(progress - 7.5)
         }
     }
+
     function handleIncreaseHostsQuant() {
         acomodation.hostsQuant < 16 && setAcomodation({ ...acomodation, hostsQuant: acomodation.hostsQuant + 1 })
     }
+
     function handleDecreaseHostsQuant() {
         acomodation.hostsQuant > 1 && setAcomodation({ ...acomodation, hostsQuant: acomodation.hostsQuant - 1 })
     }
+
     function handleIncreaseBedsQuant() {
         acomodation.bedsQuant < 12 && setAcomodation({ ...acomodation, bedsQuant: acomodation.bedsQuant + 1 })
     }
+
     function handleDecreaseBedsQuant() {
         acomodation.bedsQuant > 1 && setAcomodation({ ...acomodation, bedsQuant: acomodation.bedsQuant - 1 })
     }
+
     function handleIncreaseBedroomsQuant() {
         acomodation.bedroomsQuant < 8 && setAcomodation({ ...acomodation, bedroomsQuant: acomodation.bedroomsQuant + 1 })
     }
+
     function handleDecreaseBedromsQuant() {
         acomodation.bedroomsQuant > 1 && setAcomodation({ ...acomodation, bedroomsQuant: acomodation.bedroomsQuant - 1 })
     }
+
     function handleIncreaseBethroomsQuant() {
         acomodation.bethroomsQuant < 8 && setAcomodation({ ...acomodation, bethroomsQuant: acomodation.bethroomsQuant + 1 })
     }
+
     function handleDecreaseBethromsQuant() {
         acomodation.bethroomsQuant > 1 && setAcomodation({ ...acomodation, bethroomsQuant: acomodation.bethroomsQuant - 1 })
     }
+
     function handleSetConfortItems(e) {
         const conf = e.target.value
         e.target.classList.toggle("selected")
@@ -223,6 +255,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             acomodation.confort.push(conf)
         }
     }
+
     function handleSetPreferenceItems(e) {
         e.target.classList.toggle("selected")
         const pref = e.target.value
@@ -233,6 +266,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             acomodation.preferences.push(pref)
         }
     }
+
     function handleSetSecurityItems(e) {
         e.target.classList.toggle("selected")
         const secItem = e.target.value
@@ -243,6 +277,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             acomodation.securityItems.push(secItem)
         }
     }
+
     function handleChangeAcomodationDesc(e) {
         setAcomodation({ ...acomodation, hostDesc: e.target.value })
         setFiled(true)
@@ -253,6 +288,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             setChar(char - 1)
         }
     }
+
     function handleChangePriceValue(operation) {
         if (operation === "addition" && acomodation.price < 5003) {
             setAcomodation({ ...acomodation, price: acomodation.price + 10 })
@@ -260,21 +296,24 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             setAcomodation({ ...acomodation, price: acomodation.price - 10 })
         }
     }
+
     async function handleUploadImages(e) {
         const file = await e.target.files[0]
-        const isSameName = acomodation.images.every((elem) => file.name !== elem.name)
-        const isSameSize = acomodation.images.every((elem) => file.size !== elem.size)
+        const isSameName = images.every((elem) => file.name !== elem.name)
+        const isSameSize = images.every((elem) => file.size !== elem.size)
         setFiled(true)
         if (file !== undefined && isSameName && isSameSize) {
-            setAcomodation({ ...acomodation, images: [...acomodation.images, file] })
-        }else{
+            setImages([...images, file])
+        } else {
             alert("a imagem ja foi adicionada")
         }
     }
+
     function handlePreviewImage(elem) {
         const previewImg = URL.createObjectURL(elem)
         return previewImg
     }
+
     function setAcomodationOption(elem) {
         if (acomodation.hostOptions.includes(elem)) {
             setAcomodation({ ...acomodation, hostOptions: acomodation.hostOptions.filter(op => op !== elem) })
@@ -283,6 +322,17 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             acomodation.hostOptions.push(elem)
         }
     }
+
+    function handlePostAcomodation() {
+        dispatch(postAcomodation(acomodation)).then(() => {  
+            dispatch(postAcomodationImage({
+                images,
+                acomodationName: acomodation.title
+            }))
+            handleToggleAcmdVisib()
+        })
+    }
+
     return (
         <div className="addAcomodation">
             <header className="addAcomodation-header py-5" style={{ height: "160px" }}>
@@ -292,7 +342,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                     <progress className="position-absolute top-0" value={progress} max={100} style={{ width: "100%", height: "6px" }}></progress>
                     <button className="bg-transparent border-0 text-decoration-underline fw-bold" onClick={handleBackStep}>Voltar</button>
                     {step === 13 ?
-                        <button className="btn btn-danger">Salve seu anucio
+                        <button className="btn btn-danger" onClick={handlePostAcomodation}>Salve seu anucio
                         </button> :
                         <button className={filed ? "btn btn-dark" : "btn btn-secondary"} onClick={handleNextStep}>{step === 12 ? "Revise seu anúncio" : "Avançar"}
                         </button>}
@@ -416,8 +466,8 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 7 &&
                     <div className="images-container d-flex flex-column align-items-center">
                         <h2 className="fs-4">Agora vamos adicionar algumas fotos</h2>
-                        {acomodation.images.map((img, i) => (
-                            acomodation.images[0] == img ?
+                        {images.map((img, i) => (
+                            images[0] == img ?
                                 <div key={i} className="preview-container container d-flex justify-content-center position-relative">
                                     <span className="position-absolute font-smaller ms-1 mt-1 bg-light rounded p-1 fw-bold">Foto de capa</span>
                                     <img src={handlePreviewImage(img)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
@@ -430,7 +480,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                         <div className="input-img-container container">
                             <label htmlFor="img" className="font-smaller img-container py-5 rounded-2 text-center mt-5 d-flex flex-column align-items-center">
                                 <Image size={40} />
-                                {acomodation.images.length < 5 ? `Escolha pelo menos ${5 - acomodation.images.length} imagens` : "Escolha no maximo 8 imagens"}
+                                {images.length < 5 ? `Escolha pelo menos ${5 - images.length} imagens` : "Escolha no maximo 8 imagens"}
                                 <input type="file" accept="image/*" className="imgs-input d-none" id="img" onChange={handleUploadImages} />
                             </label>
                         </div>
@@ -494,7 +544,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 13 &&
                     <div className="host-resume-container">
                         <div className="host-resume-header d-flex flex-column">
-                            <img src={handlePreviewImage(acomodation.images[0])} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
+                            <img src={handlePreviewImage(images[0])} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
                             <h1 className="fw-bold mb-4">{acomodation.title}</h1>
                         </div>
                         <div className="mb-4 pb-3 border-bottom">

@@ -27,7 +27,6 @@ export default function App() {
 
   useEffect(() => {
     navigate("/")
-
     if (token !== null && id !== null) {
       dispatch(getUser(id))
     }

@@ -6,9 +6,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { hideNav, showNav } from "../assets/appSlice";
 import { useEffect } from "react";
+import Card from "../components/aplication/cards/Card";
+import { getAcomodations } from "../assets/acomodationSlice"
 
 export default function Home() {
-    const user = useSelector(data => data.user)
+    const acomodation = useSelector(data => data.acomodation.acomodation)
 
     const [showDestiny, setShowDestiny] = useState(false)
     const [showFilter, setShowFilter] = useState(false)
@@ -23,18 +25,26 @@ export default function Home() {
         dispatch(hideNav())
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(showNav())
-    },[])
+        dispatch(getAcomodations())
+    }, [])
 
     return (
         <div>
-            <header className="border-bottom">
-                <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter}/>
-                <AcomodationTypes/>
+            <header className="home-header border-bottom">
+                <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter} />
+                <AcomodationTypes />
             </header>
-            {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny}/>}
-            {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter}/>}
+            {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
+            {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
+            <main className="container-fluid">
+                <div className="cards-container ms-1">
+                    {acomodation.map((host, i) => (
+                        <Card host={host} key={i} />
+                    ))}
+                </div>
+            </main>
         </div>
     )
 }
