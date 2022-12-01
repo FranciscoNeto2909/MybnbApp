@@ -17,7 +17,7 @@ export default function Card({ host }) {
     <div className="card m-1">
       <div className="card-img-carrossel d-flex position-relative">
       <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
-        <div className="card-img-container d-flex" ref={carroussel} style={{ height: "300px" }}>
+        <div className="card-img-container d-flex" ref={carroussel}>
           {acomodationImages.map((img,i) =>(
             <img className="card-img" src={`https://mybnb-api.onrender.com/acomodationImages/${img}`} key={i} alt="acomodation" />
           ))}

@@ -512,6 +512,7 @@ a.comodation-desc {
 
 .card-img-container {
   overflow-x: hidden;
+  height: 300px;
 }
 
 .card-img {
@@ -541,8 +542,8 @@ a.comodation-desc {
   }
 
   .card {
-    width: 350px;
-    height: 450px;
+    width: 300px;
+    height: 400px;
   }
 
 }
