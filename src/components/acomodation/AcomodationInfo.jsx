@@ -72,7 +72,7 @@ export default function AcomodationInfo({ acomodation }) {
                 <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
                 <div className="card-img-container d-flex" ref={carroussel}>
                     {acomodationImages.map((img, i) => (
-                        <img className="card-img rounded" src={`http://localhost:3001/acomodationImages/${img}`} key={i} alt="acomodation" />
+                        <img className="card-img rounded" src={`https://mybnb-api.onrender.com/acomodationImages/${img}`} key={i} alt="acomodation" />
                     ))}
                 </div>
                 <CaretRight size={32} onClick={handleNextImage} className="text-light position-absolute top-50 end-0" />
