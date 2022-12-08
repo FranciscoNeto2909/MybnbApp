@@ -8,6 +8,7 @@ export default function AcomodationInfo({ acomodation }) {
 
     const carroussel = useRef(null)
     const acomodationImages = acomodation.images.split(",")
+    console.log(acomodationImages)
     const [updatedAcomodation, setUpdatedAcomodation] = useState(acomodation)
 
     function handleNextImage() {
