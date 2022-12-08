@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { logout, setUserImage } from "../assets/userSlice"
-import { UserCircle, Gear, Camera, AlignLeft, Gift, SquaresFour, CaretRight, ToggleRight, ToggleLeft } from "phosphor-react"
+import { UserCircle, Gear, Camera, AlignLeft, Gift, SquaresFour, CaretRight, ToggleRight, ToggleLeft, HouseLine } from "phosphor-react"
 import { useNavigate } from "react-router-dom"
 import { hideNav } from "../assets/appSlice"
 
 export default function Profile() {
     const user = useSelector(data => data.user)
+    const userAcomodations = useSelector(data => data.acomodation.acomodation.filter(acmd => acmd.hostName == user.user.name))
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [image, setImage] = useState("")
@@ -31,8 +32,13 @@ export default function Profile() {
         navigate("/profile/acomodation-host")
     }
 
+    function handleOpenUserAcomodations() {
+        dispatch(hideNav())
+        navigate("/profile/my-acomodations")
+    }
+
     async function handleGetUserImage() {
-        setImage(`https://mybnb-api.onrender.com/profile/${user.user.image}`)
+        setImage(`http://localhost:3001/profile/${user.user.image}`)
     }
 
     async function handleChangeUserImage(e) {
@@ -89,8 +95,15 @@ export default function Profile() {
                     Hospede uma acomodação
                     <CaretRight size={30} className="position-absolute end-0" />
                 </button>
+                { userAcomodations.length > 0 && <button className="btn position-relative d-flex p-2 my-2 text-start align-items-center" onClick={handleOpenUserAcomodations}>
+                    <div className="houses-container d-flex me-3">
+                        <HouseLine size={32} className="" />
+                    </div>
+                    Minhas acomodações
+                    <CaretRight size={30} className="position-absolute end-0" />
+                </button>}
                 <button className="btn position-relative  p-2 my-2 text-start">
-                    <AlignLeft size={32} className="me-4" />
+                    <AlignLeft size={32} className="me-3" />
                     Hospede uma experiência
                     <CaretRight size={30} className="position-absolute end-0" />
                 </button>

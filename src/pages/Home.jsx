@@ -40,7 +40,7 @@ export default function Home() {
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
             <main className="container-fluid">
                 <div className="cards-container d-flex justify-content-center">
-                    {acomodation.map((host, i) => (
+                    {acomodation.length > 0 && acomodation.map((host, i) => (
                         <Card host={host} key={i} />
                     ))}
                 </div>

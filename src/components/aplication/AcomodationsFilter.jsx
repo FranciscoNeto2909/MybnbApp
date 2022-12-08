@@ -81,7 +81,7 @@ export default function AcomodationsFilter({handleOpenFilter}) {
                             <div className="comodos-carroussel d-flex">
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} id={i} className= {bdRoomsId == i ?"bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBdRooms}>{option}</button>
+                                        <button key={i} id={i} className= {bdRoomsId == i ? "bdRooms comodos-btn conv-selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBdRooms}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -91,7 +91,7 @@ export default function AcomodationsFilter({handleOpenFilter}) {
                             <div className="comodos-carroussel d-flex">
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} id={i} className={bedsId == i ? "bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBeds}>{option}</button>
+                                        <button key={i} id={i} className={bedsId == i ? "bdRooms comodos-btn conv-selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBeds}>{option}</button>
                                     ))
                                 }
                             </div>
@@ -101,7 +101,7 @@ export default function AcomodationsFilter({handleOpenFilter}) {
                             <div className="comodos-carroussel d-flex">
                                 {
                                     quantity.map((option, i) => (
-                                        <button key={i} id={i} className={bthRoomsId == i ? "bdRooms comodos-btn conv_selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBthRooms}>{option}</button>
+                                        <button key={i} id={i} className={bthRoomsId == i ? "bdRooms comodos-btn conv-selected rounded-5 mx-2 px-4 border" : "bdRooms comodos-btn rounded-5 mx-2 px-4 border"} onClick={handleSelectBthRooms}>{option}</button>
                                     ))
                                 }
                             </div>

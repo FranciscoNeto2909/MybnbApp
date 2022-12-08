@@ -6,7 +6,7 @@ import { getUser, login } from "../../assets/userSlice"
 
 export default function Login() {
     const isLogged = useSelector(data => data.user.isLogged)
-
+    const [inLoading, setInLoading] = useState(false)
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -39,13 +39,15 @@ export default function Login() {
                 setErrors({ ...errors, passwordError: false })
             }, 2500);
         }
-        else {
+        else if(inLoading == false) {
+            setInLoading(true)
             dispatch(login(user))
                 .then(e => {
                     if (e.payload.error == false) {
                         const userId = e.payload.userId
                         localStorage.setItem("userId", userId.toString())
                         dispatch(getUser(userId.toString()))
+                        setInLoading(false)
                         navigate("/")
                     } else {
                         setErrors({ ...errors, loginError: true })
@@ -111,7 +113,7 @@ export default function Login() {
                         }
                         <p className="font-smaller mt-2">Sua senha deve ter numeros, letras maiusculas e minusculas e nenhum caractere especial</p>
                     </div>
-                    <button className="btn btn-primary my-3 col-11" onClick={e => handleLogin(e)}>Login</button>
+                    <button className="btn btn-primary my-3 col-11" onClick={e => handleLogin(e)}>{inLoading ? "Aguarde ..." : "Login"}</button>
                 </form>
                 <p className="ps-4">Insira um endereço de email válido, que ja tenha sido usado no myBnb antes.</p>
                 <span className="ps-4 mt-5"> Está aplicação foi desenvolvida no intuito de praticar programação e não tem nenhum fim comercial ou finançeiro</span>

@@ -84,7 +84,7 @@ export default function Register({ userData, setUserData }) {
             <main className="container-fluid mb-5 p-4 d-flex flex-column">
                 <section className="name-container container mb-3">
                     <div className="input-group-lg position-relative">
-                        <input id="name" type="text" placeholder=" " className={errors.nameError ? "inpt inpt-error rounded-top ps-3 text-capitalize" : "inpt border border-secondary rounded-top ps-3 text-capitalize"} autoComplete="none" required autoCapitalize="on" value={userData.name} onChange={e => setUserData({ ...userData, name: e.target.value })} />
+                        <input id="name" type="email" placeholder=" " className={errors.nameError ? "inpt inpt-error rounded-top ps-3 text-capitalize" : "inpt border border-secondary rounded-top ps-3 text-capitalize"} required autoCapitalize="on" value={userData.name} onChange={e => setUserData({ ...userData, name: e.target.value })} />
                         <label className={errors.nameError ? "lbl lbl-error" : "lbl"} htmlFor="name">Name</label>
                     </div>
                     <div className="input-group-lg  position-relative">

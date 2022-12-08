@@ -16,6 +16,7 @@ import Notification from "./components/account/Notification"
 import GlobalPrefer from "./components/account/GlobalPrefer"
 import PrivAndShare from "./components/account/PrivAndShare"
 import AcomodationHost from "./pages/AcomodationHost"
+import UserAcomodations from "./components/acomodation/UserAcomodations"
 import { getUser } from "./assets/userSlice"
 
 export default function App() {
@@ -49,6 +50,7 @@ export default function App() {
         <Route path="/profile/account/privacity-and-share" element={<PrivAndShare />} />
         <Route path="/profile/account/global-prefer" element={<GlobalPrefer />} />
         <Route path="/profile/acomodation-host" element={<AcomodationHost />} />
+        <Route path="/profile/my-acomodations" element={<UserAcomodations />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

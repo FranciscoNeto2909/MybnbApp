@@ -5,6 +5,7 @@ import { emailAuth } from "../../assets/userSlice"
 export default function CodeSender({ userData, setUserData, setCode, handleNextStep }) {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [inLoading, setInLoading] = useState(false)
 
     const emailRegex = new RegExp("^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+).(\.[a-z]{2,3})$")
     const social = [
@@ -40,13 +41,17 @@ export default function CodeSender({ userData, setUserData, setCode, handleNextS
             setTimeout(() => {
                 setWrong(false)
             }, 2000);
-        } else {
+        } else if(inLoading == false) {
             const code = await handleGenerateAuthCode()
+            setInLoading(true)
 
             dispatch(emailAuth({
                 email:userData.email,
                 code:code
-            })).then(() => handleNextStep())
+            })).then(() => {
+                setInLoading(false)
+                handleNextStep()
+            })
         }
     }
 
@@ -63,9 +68,9 @@ export default function CodeSender({ userData, setUserData, setCode, handleNextS
                     {wrong && <p className="font-smaller mt-1 mb-0 text-danger">Digite um email válido!</p>}
                 </div>
                 <div className="numConfirm mt-2">
-                    <p className="text-center">Enviaremos um codigo de confirmação para seu endereço de email.</p>
+                    <p className="text-center">Certifique-se de inserir um endereço de email válido para receber o código de acesso.</p>
                 </div>
-                <button className="btn btn-primary p-2 col-11 my-1 mx-auto" onClick={e => handleValidateEmail(e)}>Continue</button>
+                <button className="btn btn-primary p-2 col-11 my-1 mx-auto" onClick={e => handleValidateEmail(e)}>{inLoading ?"Enviando..." :"Enviar"}</button>
             </form>
             <p className="text-center my-4"> <span className="line"></span> ou <span className="line"></span></p>
             <div className="social container-fluid">

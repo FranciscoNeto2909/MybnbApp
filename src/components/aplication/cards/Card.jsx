@@ -2,7 +2,6 @@ import { CaretLeft, CaretRight } from "phosphor-react"
 import { useState, useRef } from "react"
 
 export default function Card({ host }) {
-  const [margin, setMargin] = useState(0)
   const carroussel = useRef(null)
   const acomodationImages = host.images.split(",")
   function handleNextImage() {
@@ -19,7 +18,7 @@ export default function Card({ host }) {
       <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
         <div className="card-img-container d-flex" ref={carroussel}>
           {acomodationImages.map((img,i) =>(
-            <img className="card-img" src={`https://mybnb-api.onrender.com/acomodationImages/${img}`} key={i} alt="acomodation" />
+            <img className="card-img" src={`http://localhost:3001/acomodationImages/${img}`} key={i} alt="acomodation" />
           ))}
         </div>
         <CaretRight size={32} onClick={handleNextImage} className="text-light position-absolute top-50 end-0" />

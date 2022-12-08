@@ -248,7 +248,7 @@
   padding: 5px;
 }
 
-.conv_selected {
+.conv-selected {
   background-color: #000;
   color: #fff;
 }
@@ -447,7 +447,7 @@ details[open] summary::after {
   border-radius: 12px;
 }
 
-.selected {
+.btn-selected {
   border: 1px solid #000;
   color: #000;
 }
@@ -518,7 +518,13 @@ a.comodation-desc {
 .card-img {
   min-width: 100%;
 }
+.space-container{
+  overflow-x: scroll;   
+}
 
+.space-container::-webkit-scrollbar {
+  width: 0;
+}
 @media (max-width: 700px) {
   .search-desc-container {
     white-space: nowrap;
@@ -543,7 +549,7 @@ a.comodation-desc {
 
   .card {
     width: 300px;
-    height: 400px;
+    height: 430px;
   }
 
 }
