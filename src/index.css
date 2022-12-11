@@ -421,14 +421,6 @@ details[open] summary::after {
   border-radius: 20px;
 }
 
-.emphasis:focus {
-  border: 1px solid #000;
-}
-
-.space-types:focus {
-  border: 1px solid #000;
-}
-
 .map {
   height: 200px;
   width: 100%;

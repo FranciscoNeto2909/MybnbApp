@@ -10,6 +10,10 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [step, setStep] = useState(1)
     const [char, setChar] = useState(0)
     const user = useSelector(data => data.user.user)
+    const [spaceTypeId, setSpaceTypeId] = useState(-1)
+    const [hostSpaceId, setHostSpaceId] = useState(-1)
+    const [hostPlaceId, setHostPlaceid] = useState(-1)
+    const [hostEmphasisId, setHostEmphasisid] = useState(-1)
 
     const [filed, setFiled] = useState(false)
     const [progress, setProgress] = useState(7.5)
@@ -301,7 +305,8 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         const file = await e.target.files[0]
         const isSameName = images.every((elem) => file.name !== elem.name)
         const isSameSize = images.every((elem) => file.size !== elem.size)
-        setFiled(true)
+        images.length > 3 && setFiled(true)
+
         if (file !== undefined && isSameName && isSameSize) {
             setImages([...images, file])
         } else {
@@ -353,9 +358,10 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 1 &&
                     <div className="space-types-container d-flex flex-column">
                         {spaceType.map((type, i) =>
-                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent"
+                            <button key={i} className={ spaceTypeId == i ? "border-dark space-types p-2 m-3 rounded-3 bg-transparent" : "space-types p-2 m-3 rounded-3 bg-transparent"}
                                 onClick={e => {
                                     setAcomodation({ ...acomodation, hostSpace: e.target.value })
+                                    setSpaceTypeId(i)
                                     setFiled(true)
                                 }}
                                 value={type}>
@@ -366,9 +372,10 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step == 2 &&
                     <div className="space-types-desc-container mb-5">
                         {spaceTypesDesc.map((space, i) =>
-                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent"
+                            <button key={i} className={hostSpaceId == i ? "space-types border-dark p-2 m-3 rounded-3 bg-transparent" : "space-types p-2 m-3 rounded-3 bg-transparent"}
                                 onClick={e => {
                                     setAcomodation({ ...acomodation, hostSpaceDesc: space.desc })
+                                    setHostSpaceId(i)
                                     setFiled(true)
                                 }}
                                 value={space.desc}>
@@ -381,8 +388,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 3 &&
                     <div className="space-types-container d-flex flex-column">
                         {placeType.map((place, i) =>
-                            <button key={i} className="space-types p-2 m-3 rounded-3 bg-transparent" onClick={e => {
+                            <button key={i} className={hostPlaceId == i ? "space-types border-dark p-2 m-3 rounded-3 bg-transparent" : "space-types p-2 m-3 rounded-3 bg-transparent"} onClick={e => {
                                 setAcomodation({ ...acomodation, hostPlace: e.target.value })
+                                setHostPlaceid(i)
                                 setFiled(true)
                             }}
                                 value={place}>
@@ -500,8 +508,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                         <h2 className="fs-4 fw-bold mt-4 mb-3">Escolha o destaque de sua acomodação</h2>
                         {
                             hostEmphasis.map((host, i) => (
-                                <button className="emphasis bg-transparent rounded-5 p-2 m-2" key={i} onClick={() => {
+                                <button className={hostEmphasisId == i ? "emphasis border-dark bg-transparent rounded-5 p-2 m-2" : "emphasis bg-transparent rounded-5 p-2 m-2"} key={i} onClick={() => {
                                     setAcomodation({ ...acomodation, hostEmphasis: host.name })
+                                    setHostEmphasisid(i)
                                     setFiled(true)
                                 }}>
                                     <img src={host.image} alt="emphasis" className="types-item-img" />

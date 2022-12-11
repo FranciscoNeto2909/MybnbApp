@@ -8,7 +8,6 @@ export default function AcomodationInfo({ acomodation }) {
 
     const carroussel = useRef(null)
     const acomodationImages = acomodation.images.split(",")
-    console.log(acomodationImages)
     const [updatedAcomodation, setUpdatedAcomodation] = useState(acomodation)
 
     function handleNextImage() {
@@ -114,9 +113,10 @@ export default function AcomodationInfo({ acomodation }) {
                 <p className="">
                     {acomodation.hostsQuant}
                     {acomodation.hostsQuant > 1 ? " hóspedes " : " hóspede "}
+                    - {acomodation.bedsQuant}
+                    {acomodation.bedsQuant > 1 ? " camas " : " cama "} 
                     - {acomodation.bedroomsQuant}
-                    {acomodation.bedroomsQuant > 1 ? " quartos " : " quarto "} - {acomodation.bedsQuant}
-                    {acomodation.bedsQuant > 1 ? " camas " : " cama "} - {acomodation.bethroomsQuant}
+                    {acomodation.bedroomsQuant > 1 ? " quartos " : " quarto "}  - {acomodation.bethroomsQuant}
                     {acomodation.bethroomsQuant > 1 ? " banheiros" : " banheiroo"}</p>
                     <div className="hosts">
                         <div className="d-flex justify-content-between p-2 my-2 border rounded-3">
