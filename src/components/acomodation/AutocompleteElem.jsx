@@ -14,7 +14,9 @@ export default function AutocompleteElem({setFiled, setCordenates, acomodation, 
         setAddress(value)
         setCordenates(latLang)
         setAcomodation({...acomodation, hostLocalization: results[0].formatted_address})
-        setFiled(true) 
+        if (setFiled) {
+          setFiled(true) 
+        }
     }
     return(
         <PlacesAutocomplete
@@ -27,7 +29,7 @@ export default function AutocompleteElem({setFiled, setCordenates, acomodation, 
             <input 
               {...getInputProps({
                 placeholder: 'Search Places ...',
-                className: 'location-search-input mb-4',
+                className: 'location-search-input form-control border-secondary mb-4',
               })}
             />
             <div className="autocomplete-dropdown-container">

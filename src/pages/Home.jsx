@@ -26,6 +26,7 @@ export default function Home() {
     }
 
     useEffect(() => {
+        localStorage.setItem("routeId", 1)
         dispatch(showNav())
         dispatch(getAcomodations())
     }, [])
@@ -38,7 +39,7 @@ export default function Home() {
             </header>
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
-            <main className="container-fluid">
+            <main className="container-fluid mt-5">
                 <div className="cards-container d-flex justify-content-center">
                     {acomodation.length > 0 && acomodation.map((host, i) => (
                         <Card host={host} key={i} />

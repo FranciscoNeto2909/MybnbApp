@@ -14,8 +14,11 @@ export default function Profile() {
 
     function handleLogout() {
         dispatch(logout())
+        localStorage.removeItem("userId")
+        localStorage.removeItem("token")
+        localStorage.setItem("routeId", 1)
         navigate("/")
-        localStorage.clear()
+
     }
     function handleOpenPersonalInfos() {
         dispatch(hideNav())

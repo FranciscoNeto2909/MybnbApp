@@ -69,8 +69,8 @@
 }
 
 .navbar {
-  box-shadow: 0 -1px 12px rgba(0, 0, 0, 0.644);
-  height: 55px;
+  height: 60px;
+  border-top:1px solid #a9a9a9 ;
   z-index: 1;
 }
 
@@ -139,6 +139,7 @@
 
 .types-container {
   height: 61px;
+  box-shadow: 0 5px 8px 5px #a9a9a977;
 }
 
 .types-carrousel {

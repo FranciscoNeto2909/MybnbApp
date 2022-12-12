@@ -39,7 +39,7 @@ export default function Login() {
                 setErrors({ ...errors, passwordError: false })
             }, 2500);
         }
-        else if(inLoading == false) {
+        else if (inLoading == false) {
             setInLoading(true)
             dispatch(login(user))
                 .then(e => {
@@ -48,6 +48,7 @@ export default function Login() {
                         localStorage.setItem("userId", userId.toString())
                         dispatch(getUser(userId.toString()))
                         setInLoading(false)
+                        localStorage.setItem("routeId", 1)
                         navigate("/")
                     } else {
                         setErrors({ ...errors, loginError: true })
