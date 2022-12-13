@@ -1,19 +1,41 @@
 import React, { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import { CaretLeft, CaretRight, MinusCircle, Pencil, PlusCircle } from "phosphor-react";
-import { confort, preferences, securityItems, spaceType, placeType, hostEmphasis } from "./acomodationItems"
+import { confort, preferences, securityItems, spaceType, placeType } from "./acomodationItems"
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
 
 export default function AcomodationInfo({ acomodation }) {
 
     const carroussel = useRef(null)
+    const user = useSelector(data => data.user.user)
+
+    const [updatedAcomodation, setUpdatedAcomodation] = useState({
+        hostName: user.name,
+        hostSpace: acomodation.hostSpace,
+        hostSpaceDesc: "",
+        hostPlace: acomodation.hostPlace,
+        hostLocalization: "",
+        hostsQuant: acomodation.hostsQuant,
+        bedsQuant: acomodation.bedsQuant,
+        bedroomsQuant: acomodation.bedroomsQuant,
+        bethroomsQuant: acomodation.bethroomsQuant,
+        confort: acomodation.confort.split(","),
+        preferences: acomodation.preferences.split(","),
+        securityItems: acomodation.securityItems.split(","),
+        title: acomodation.title,
+        hostEmphasis: "",
+        hostDesc: "",
+        price: acomodation.price,
+        hostOptions: acomodation.hostOptions.split(",")
+    })
     const acomodationImages = acomodation.images.split(",")
-    const [updatedAcomodation, setUpdatedAcomodation] = useState(acomodation)
+
     const [cordenates, setCordenates] = useState({
         lat: -4.179914,
         lng: -38.129617
     })
-    
+
     function handleNextImage() {
         carroussel.current.scrollLeft += carroussel.current.offsetWidth
     }
@@ -68,6 +90,46 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleDecreaseBethromsQuant() {
         updatedAcomodation.bethroomsQuant > 1 && setUpdatedAcomodation({ ...updatedAcomodation, bethroomsQuant: updatedAcomodation.bethroomsQuant - 1 })
+    }
+
+    function handleSetConfortItems(e) {
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-black")
+
+        const conf = e.target.value
+
+        if (updatedAcomodation.confort.includes(conf)) {
+            setUpdatedAcomodation({ ...updatedAcomodation, confort: updatedAcomodation.confort.filter(elem => elem !== conf) })
+        }
+        else if (!updatedAcomodation.confort.includes(conf)) {
+            updatedAcomodation.confort.push(conf)
+        }
+    }
+
+    function handleSetPreferenceItems(e) {
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-black")
+        const pref = e.target.value
+
+        if (updatedAcomodation.preferences.includes(pref)) {
+            setUpdatedAcomodation({ ...updatedAcomodation, preferences: updatedAcomodation.preferences.filter(elem => elem !== pref) })
+        }
+        else if (!updatedAcomodation.preferences.includes(pref)) {
+            updatedAcomodation.preferences.push(pref)
+        }
+    }
+
+    function handleSetSecurityItems(e) {
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-black")
+        const secItem = e.target.value
+
+        if (updatedAcomodation.securityItems.includes(secItem)) {
+            setUpdatedAcomodation({ ...updatedAcomodation, securityItems: updatedAcomodation.securityItems.filter(elem => elem !== secItem) })
+        }
+        else if (!updatedAcomodation.securityItems.includes(secItem)) {
+            updatedAcomodation.securityItems.push(secItem)
+        }
     }
 
     return (
@@ -160,30 +222,27 @@ export default function AcomodationInfo({ acomodation }) {
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">
                 <h3 className="fw-bold">Confortos externos</h3>
-                <p>{acomodation.confort}</p>
-                <div className="confort-container d-flex flex-wrap justify-content-center">
+                <div className="confort-container d-flex flex-wrap justify-content-center pt-3">
                     {confort.map((conf, i) =>
-                        <button key={i} className={updatedAcomodation.confort.split(",").filter(e => e == conf) == conf ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={conf}>{conf}</button>)
+                        <button key={i} className={acomodation.confort.split(",").filter(e => e == conf) == conf ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={conf} onClick={e => handleSetConfortItems(e)}>{conf}</button>)
                     }
                 </div>
                 <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">
                 <h3 className="fw-bold">Confortos internos</h3>
-                <p>{acomodation.preferences}</p>
-                <div className="preferences-container d-flex flex-wrap justify-content-center">
+                <div className="preferences-container d-flex flex-wrap justify-content-center pt-3">
                     {preferences.map((pref, i) =>
-                        <button key={i} className={updatedAcomodation.preferences.split(",").filter(e => e == pref) == pref ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={pref}>{pref}</button>)
+                        <button key={i} className={acomodation.preferences.split(",").filter(e => e == pref) == pref ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={pref} onClick={e => handleSetPreferenceItems(e)}>{pref}</button>)
                     }
                 </div>
                 <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">
                 <h3 className="fw-bold">Items de segurança</h3>
-                <p>{acomodation.securityItems}</p>
-                <div className="preferences-container d-flex flex-wrap justify-content-center">
+                <div className="preferences-container d-flex flex-wrap justify-content-center pt-3">
                     {securityItems.map((secItem, i) =>
-                        <button key={i} className={updatedAcomodation.securityItems.split(",").filter(e => e == secItem) == secItem ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={secItem}>{secItem}</button>)
+                        <button key={i} className={acomodation.securityItems.split(",").filter(e => e == secItem) == secItem ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={secItem} onClick={e => handleSetSecurityItems(e)} >{secItem}</button>)
                     }
                 </div>
                 <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
@@ -199,7 +258,7 @@ export default function AcomodationInfo({ acomodation }) {
             <section className="mb-2 pb-3 border-bottom position-relative">
                 <h3 className="fw-bold">Localização</h3>
                 <p className="my-3">{acomodation.hostLocalization}</p>
-                <div className="map-container" style={{ minHeight: '300px' }}>
+                <div className="map-container m-2" style={{ minHeight: '300px' }}>
                     <AutocompleteElem setCordenates={setCordenates}
                         setAcomodation={setUpdatedAcomodation} acomodation={updatedAcomodation} />
                     <GoogleMap
@@ -216,8 +275,11 @@ export default function AcomodationInfo({ acomodation }) {
                     </GoogleMap>
                 </div>
                 <Pencil size={25} className="ms-2 position-absolute top-0 end-0" />
-            </section>
-            <button className="mb-5 btn btn-primary" onClick={() => console.log(updatedAcomodation)}>Salvar alterações</button>
+            </section> 
+            <div className="buttons-container my-5 d-flex justify-content-between">
+                <button className="btn btn-primary" onClick={() => console.log(updatedAcomodation)}>Salvar alterações</button>
+                <button className="btn btn-danger">Excluir</button>
+            </div>
         </div>
     )
 }

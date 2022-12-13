@@ -51,17 +51,16 @@ export const DeleteUser = createAsyncThunk("deleteUser", async userId => {
 
 })
 
-export const setUserImage = createAsyncThunk("setUserImage",async userImage => {
+export const setUserImage = createAsyncThunk("setUserImage", async userImage => {
   const userId = localStorage.getItem("userId")
   const formData = new FormData()
   formData.append('image', userImage)
 
   const headers = {
-    "headers" : {
-      'Content-Type': 'application/json'
-    }
-  } 
-  await api.put(`users/image/${userId}`, formData, headers ).then(e => console.log(e))
+    'Content-Type': 'application/json'
+  }
+
+  await api.put(`users/image/${userId}`, formData, headers).then(e => console.log(e))
 })
 
 export const updateUser = createAsyncThunk("updateUser", async user => {
