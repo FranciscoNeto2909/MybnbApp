@@ -24,6 +24,18 @@ export const postAcomodation = createAsyncThunk("postAcomodation", async acomoda
     }
 })
 
+export const updateAcomodation = createAsyncThunk("updateAcomodation", async acomodation => {
+
+    try {
+        const res = await api.put(`acomodations/${acomodation.id}`, acomodation)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+        return res
+    } catch (error) {
+        return console.log(error)
+    }
+})
+
 export const postAcomodationImage = createAsyncThunk("postAcomodationImage", async acomodationData => {
 
     try {
@@ -40,6 +52,15 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
             .catch(err => console.log(err))
 
         return res
+    } catch (error) {
+        return console.log(error)
+    }
+})
+
+export const deleteAcomodation = createAsyncThunk("deleteAcomodation", async id => {
+    try {
+        await api.delete(`acomodations/${id}`)
+        .then(data => data.data)
     } catch (error) {
         return console.log(error)
     }

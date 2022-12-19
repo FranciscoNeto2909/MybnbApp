@@ -63,3 +63,5 @@ export const hostEmphasis = [
     }
 ]
 export const placeType = ["Lugar inteiro", "Um quarto inteiro", "Um quarto compartilhado"]
+
+export const hostOptions = ["Câmera(s) de segurança", "Armas", "Animais perigosos"]

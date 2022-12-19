@@ -39,7 +39,7 @@ export default function Home() {
             </header>
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
-            <main className="container-fluid mt-5">
+            <main className="container-fluid mt-3">
                 <div className="cards-container d-flex justify-content-center">
                     {acomodation.length > 0 && acomodation.map((host, i) => (
                         <Card host={host} key={i} />

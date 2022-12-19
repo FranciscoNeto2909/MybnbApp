@@ -1,21 +1,24 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { CaretLeft, CaretRight, MinusCircle, Pencil, PlusCircle } from "phosphor-react";
-import { confort, preferences, securityItems, spaceType, placeType } from "./acomodationItems"
+import { confort, preferences, securityItems, spaceType, placeType, hostOptions } from "./acomodationItems"
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
+import { deleteAcomodation, updateAcomodation } from "../../assets/acomodationSlice";
 
 export default function AcomodationInfo({ acomodation }) {
+    const dispatch = useDispatch()
 
     const carroussel = useRef(null)
     const user = useSelector(data => data.user.user)
 
     const [updatedAcomodation, setUpdatedAcomodation] = useState({
+        id: acomodation.id,
         hostName: user.name,
         hostSpace: acomodation.hostSpace,
-        hostSpaceDesc: "",
+        hostSpaceDesc: acomodation.hostSpaceDesc,
         hostPlace: acomodation.hostPlace,
-        hostLocalization: "",
+        hostLocalization: acomodation.hostLocalization,
         hostsQuant: acomodation.hostsQuant,
         bedsQuant: acomodation.bedsQuant,
         bedroomsQuant: acomodation.bedroomsQuant,
@@ -24,10 +27,11 @@ export default function AcomodationInfo({ acomodation }) {
         preferences: acomodation.preferences.split(","),
         securityItems: acomodation.securityItems.split(","),
         title: acomodation.title,
-        hostEmphasis: "",
-        hostDesc: "",
+        images: acomodation.images,
+        hostEmphasis: acomodation.hostEmphasis,
+        hostDesc: acomodation.hostDesc,
         price: acomodation.price,
-        hostOptions: acomodation.hostOptions.split(",")
+        hostOptions: acomodation.hostOptions.split(","),
     })
     const acomodationImages = acomodation.images.split(",")
 
@@ -94,7 +98,7 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleSetConfortItems(e) {
         e.target.classList.toggle("bg-black")
-        e.target.classList.toggle("text-black")
+        e.target.classList.toggle("text-light")
 
         const conf = e.target.value
 
@@ -108,7 +112,7 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleSetPreferenceItems(e) {
         e.target.classList.toggle("bg-black")
-        e.target.classList.toggle("text-black")
+        e.target.classList.toggle("text-light")
         const pref = e.target.value
 
         if (updatedAcomodation.preferences.includes(pref)) {
@@ -121,7 +125,7 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleSetSecurityItems(e) {
         e.target.classList.toggle("bg-black")
-        e.target.classList.toggle("text-black")
+        e.target.classList.toggle("text-light")
         const secItem = e.target.value
 
         if (updatedAcomodation.securityItems.includes(secItem)) {
@@ -132,6 +136,30 @@ export default function AcomodationInfo({ acomodation }) {
         }
     }
 
+    function handleSetHostOptions(e) {
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-light")
+        const option = e.target.value
+
+        if (updatedAcomodation.hostOptions.includes(option)) {
+            setUpdatedAcomodation({ ...updatedAcomodation, hostOptions: updatedAcomodation.hostOptions.filter(elem => elem !== option) })
+        }
+        else if (!updatedAcomodation.hostOptions.includes(option)) {
+            updatedAcomodation.hostOptions.push(option)
+        }
+    }
+
+    function handleSetAcomodationDesc(e) {
+        setUpdatedAcomodation({ ...updatedAcomodation, hostDesc: e.target.value })
+    }
+
+    function handleUpdateAcomodation() {
+        dispatch(updateAcomodation(updatedAcomodation))
+    }
+
+    function handleDeleteAcomodation() {
+        dispatch(deleteAcomodation(acomodation.id))
+    }
     return (
         <div className="host-resume-container mx-2 mt-2">
             <section className="card-img-carrossel d-flex position-relative">
@@ -248,13 +276,24 @@ export default function AcomodationInfo({ acomodation }) {
                 <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
             </section>
             <section className="mb-4 pb-3 border-bottom position-relative">
-                <h3 className="fw-bold">Descrição da acomodação</h3>
-                <p>{acomodation.hostDesc}</p>
-                <div className="description-container d-flex flex-column">
-                    <textarea id="" cols="30" rows="10" className="border-secondary mx-3 rounded p-1"></textarea>
+                <h3 className="fw-bold">outros itens de segurança</h3>
+                <div className="hostOptions-container d-flex flex-wrap justify-content-center pt-3">
+                    {
+                        hostOptions.map((op, i) => (
+                            <button key={i} className={acomodation.hostOptions.split(",").filter(e => e == op) == op ? "conv-items bg-black text-light m-1" : "conv-items py-3 m-2"} value={op} onClick={e => handleSetHostOptions(e)} >{op}</button>
+                        ))
+                    }
                 </div>
                 <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
             </section>
+            <section className="mb-4 pb-3 border-bottom position-relative">
+                <h3 className="fw-bold">Descrição da acomodação</h3>
+                <p>{acomodation.hostDesc}</p>
+                <div className="description-container d-flex flex-column">
+                    <textarea id="" cols="30" rows="10" className="border-secondary mx-3 rounded p-1" onChange={e => handleSetAcomodationDesc(e)}></textarea>
+                </div>
+                <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
+            </section >
             <section className="mb-2 pb-3 border-bottom position-relative">
                 <h3 className="fw-bold">Localização</h3>
                 <p className="my-3">{acomodation.hostLocalization}</p>
@@ -275,10 +314,10 @@ export default function AcomodationInfo({ acomodation }) {
                     </GoogleMap>
                 </div>
                 <Pencil size={25} className="ms-2 position-absolute top-0 end-0" />
-            </section> 
+            </section>
             <div className="buttons-container my-5 d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={() => console.log(updatedAcomodation)}>Salvar alterações</button>
-                <button className="btn btn-danger">Excluir</button>
+                <button className="btn btn-primary" onClick={ handleUpdateAcomodation}>Salvar alterações</button>
+                <button className="btn btn-danger" onClick={handleDeleteAcomodation}>Excluir</button>
             </div>
         </div>
     )
