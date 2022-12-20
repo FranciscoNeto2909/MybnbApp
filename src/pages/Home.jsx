@@ -33,14 +33,14 @@ export default function Home() {
 
     return (
         <div>
-            <header className="home-header border-bottom">
+            <header className="home-header border-bottom position-fixed top-0">
                 <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter} />
                 <AcomodationTypes />
             </header>
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
-            <main className="container-fluid mt-3">
-                <div className="cards-container d-flex justify-content-center">
+            <main style={{ marginTop:"130px"}}>
+                <div className="cards-container d-flex flex-column justify-content-center align-items-center">
                     {acomodation.length > 0 && acomodation.map((host, i) => (
                         <Card host={host} key={i} />
                     ))}

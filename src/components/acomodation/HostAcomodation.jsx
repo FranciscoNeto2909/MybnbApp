@@ -5,7 +5,7 @@ import AutocompleteElem from "./AutocompleteElem";
 import SimpleCheckButon from "../buttons/SimpleCheckButton"
 import { useDispatch, useSelector } from "react-redux";
 import { postAcomodation, postAcomodationImage } from "../../assets/acomodationSlice";
-import {confort, preferences, securityItems, spaceType, spaceTypesDesc, placeType, hostEmphasis} from "./acomodationItems"
+import { confort, preferences, securityItems, spaceType, spaceTypesDesc, placeType, hostEmphasis } from "./acomodationItems"
 
 export default function AddAcomodation({ handleToggleAcmdVisib }) {
     const [step, setStep] = useState(1)
@@ -269,8 +269,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             dispatch(postAcomodationImage({
                 images,
                 acomodationName: acomodation.title
-            }))
-            handleToggleAcmdVisib()
+            })).then(() => {
+                handleToggleAcmdVisib()
+            })
         })
     }
 

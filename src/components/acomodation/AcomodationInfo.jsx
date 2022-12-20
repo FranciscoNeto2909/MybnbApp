@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { CaretLeft, CaretRight, MinusCircle, Pencil, PlusCircle } from "phosphor-react";
 import { confort, preferences, securityItems, spaceType, placeType, hostOptions } from "./acomodationItems"
 import { GoogleMap, Marker } from "@react-google-maps/api";
@@ -8,9 +9,10 @@ import { deleteAcomodation, updateAcomodation } from "../../assets/acomodationSl
 
 export default function AcomodationInfo({ acomodation }) {
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const carroussel = useRef(null)
     const user = useSelector(data => data.user.user)
+    const acomodationImages = acomodation.images?.split(",")
 
     const [updatedAcomodation, setUpdatedAcomodation] = useState({
         id: acomodation.id,
@@ -33,7 +35,6 @@ export default function AcomodationInfo({ acomodation }) {
         price: acomodation.price,
         hostOptions: acomodation.hostOptions.split(","),
     })
-    const acomodationImages = acomodation.images.split(",")
 
     const [cordenates, setCordenates] = useState({
         lat: -4.179914,
@@ -158,14 +159,16 @@ export default function AcomodationInfo({ acomodation }) {
     }
 
     function handleDeleteAcomodation() {
-        dispatch(deleteAcomodation(acomodation.id))
+        dispatch(deleteAcomodation(acomodation.id)).then(() => {
+            navigate("/") 
+        })
     }
     return (
         <div className="host-resume-container mx-2 mt-2">
             <section className="card-img-carrossel d-flex position-relative">
                 <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
                 <div className="card-img-container d-flex" ref={carroussel}>
-                    {acomodationImages.map((img, i) => (
+                    {acomodationImages && acomodationImages.map((img, i) => (
                         <img className="card-img rounded" src={`https://mybnb-api.onrender.com/acomodationImages/${img}`} key={i} alt="acomodation" />
                     ))}
                 </div>
