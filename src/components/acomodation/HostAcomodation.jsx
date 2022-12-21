@@ -187,7 +187,9 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
 
     function handleSetConfortItems(e) {
         const conf = e.target.value
-        e.target.classList.toggle("selected")
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-light")
+
         if (acomodation.confort.includes(conf)) {
             setAcomodation({ ...acomodation, confort: acomodation.confort.filter(elem => elem !== conf) })
         }
@@ -197,7 +199,8 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     }
 
     function handleSetPreferenceItems(e) {
-        e.target.classList.toggle("selected")
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-light")
         const pref = e.target.value
         if (acomodation.preferences.includes(pref)) {
             setAcomodation({ ...acomodation, preferences: acomodation.preferences.filter(elem => elem !== pref) })
@@ -208,7 +211,8 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     }
 
     function handleSetSecurityItems(e) {
-        e.target.classList.toggle("selected")
+        e.target.classList.toggle("bg-black")
+        e.target.classList.toggle("text-light")
         const secItem = e.target.value
         if (acomodation.securityItems.includes(secItem)) {
             setAcomodation({ ...acomodation, securityItems: acomodation.securityItems.filter(elem => elem !== secItem) })
