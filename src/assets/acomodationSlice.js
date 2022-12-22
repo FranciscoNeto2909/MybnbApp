@@ -47,7 +47,11 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
             formData.append('images', file)
         }
 
-        const res = await api.post(`acomodations/images/${acomodationName}`, formData)
+        const headers = {
+            'Content-Type': 'application/json'
+          }
+
+        const res = await api.post(`acomodations/images/${acomodationName}`, formData, headers)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
 
