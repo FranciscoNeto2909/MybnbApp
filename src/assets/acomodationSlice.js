@@ -42,10 +42,9 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
         const { images, acomodationName } = acomodationData
         const formData = new FormData()
 
-        for (let index = 0; index < images.length; index++) {
-            const file = images[index];
-            formData.append('images', file)
-        }
+        images.map(img => {
+            formData.append('images', img)
+        })
 
         const headers = {
             'Content-Type': 'application/json'

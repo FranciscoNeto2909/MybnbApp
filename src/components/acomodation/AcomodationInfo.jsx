@@ -6,6 +6,7 @@ import { confort, preferences, securityItems, spaceType, placeType, hostOptions 
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
 import { deleteAcomodation, getAcomodations, updateAcomodation } from "../../assets/acomodationSlice";
+import { showNav } from "../../assets/appSlice";
 
 export default function AcomodationInfo({ acomodation }) {
     const dispatch = useDispatch()
@@ -162,6 +163,7 @@ export default function AcomodationInfo({ acomodation }) {
     function handleDeleteAcomodation() {
         dispatch(deleteAcomodation(acomodation.id)).then(() => {
             dispatch(getAcomodations())
+            dispatch(showNav())
             navigate("/profile") 
         })
     }
