@@ -5,7 +5,7 @@ import { CaretLeft, CaretRight, MinusCircle, Pencil, PlusCircle } from "phosphor
 import { confort, preferences, securityItems, spaceType, placeType, hostOptions } from "./acomodationItems"
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
-import { deleteAcomodation, updateAcomodation } from "../../assets/acomodationSlice";
+import { deleteAcomodation, getAcomodations, updateAcomodation } from "../../assets/acomodationSlice";
 
 export default function AcomodationInfo({ acomodation }) {
     const dispatch = useDispatch()
@@ -156,11 +156,13 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleUpdateAcomodation() {
         dispatch(updateAcomodation(updatedAcomodation))
+        dispatch(getAcomodations())
     }
 
     function handleDeleteAcomodation() {
         dispatch(deleteAcomodation(acomodation.id)).then(() => {
-            navigate("/") 
+            dispatch(getAcomodations())
+            navigate("/profile") 
         })
     }
     return (
@@ -318,7 +320,7 @@ export default function AcomodationInfo({ acomodation }) {
                 </div>
                 <Pencil size={25} className="ms-2 position-absolute top-0 end-0" />
             </section>
-            <div className="buttons-container my-5 d-flex justify-content-between">
+            <div className="buttons-container mt-5 mb-2 d-flex justify-content-between">
                 <button className="btn btn-primary" onClick={ handleUpdateAcomodation}>Salvar alterações</button>
                 <button className="btn btn-danger" onClick={handleDeleteAcomodation}>Excluir</button>
             </div>
