@@ -37,24 +37,21 @@ export const updateAcomodation = createAsyncThunk("updateAcomodation", async aco
 })
 
 export const postAcomodationImage = createAsyncThunk("postAcomodationImage", async acomodationData => {
-
     try {
         const { images, acomodationName } = acomodationData
         const formData = new FormData()
+        const headers = {
+            'Content-Type': 'application/json'
+        }
 
-        images.map(img => {
+        await images.map(img => {
             formData.append('images', img)
         })
 
-        const headers = {
-            'Content-Type': 'application/json'
-          }
-
-        const res = await api.put(`acomodations/images/${acomodationName}`, formData, headers)
+        await api.put(`acomodations/images/${acomodationName}`, formData, headers)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
 
-        return res
     } catch (error) {
         return console.log(error)
     }
@@ -63,7 +60,7 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
 export const deleteAcomodation = createAsyncThunk("deleteAcomodation", async id => {
     try {
         await api.delete(`acomodations/${id}`)
-        .then(data => data.data)
+            .then(data => data.data)
     } catch (error) {
         return console.log(error)
     }
