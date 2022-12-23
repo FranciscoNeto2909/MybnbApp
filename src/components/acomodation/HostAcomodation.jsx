@@ -269,14 +269,13 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
 
     function handlePostAcomodation() {
         setPosting(true)
-        dispatch(postAcomodation(acomodation)).then(() => {
-            dispatch(postAcomodationImage({
-                images,
-                acomodationName: acomodation.title
-            })).then(() => {
-                setPosting(false)
-                handleToggleAcmdVisib()
-            })
+        dispatch(postAcomodation(acomodation))
+        dispatch(postAcomodationImage({
+            images,
+            acomodationName: acomodation.title
+        })).then(() => {
+            setPosting(false)
+            handleToggleAcmdVisib()
         })
     }
 
@@ -289,7 +288,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                     <progress className="position-absolute top-0" value={progress} max={100} style={{ width: "100%", height: "6px" }}></progress>
                     <button className="bg-transparent border-0 text-decoration-underline fw-bold" onClick={handleBackStep}>Voltar</button>
                     {step === 13 ?
-                        <button className="btn btn-danger" onClick={posting == false ? handlePostAcomodation : ()=>{}}>{posting ? "Criando acomodação...":"Salve seu anucio"}
+                        <button className="btn btn-danger" onClick={posting == false ? handlePostAcomodation : () => { }}>{posting ? "Criando acomodação..." : "Salve seu anucio"}
                         </button> :
                         <button className={filed ? "btn btn-dark" : "btn btn-secondary"} onClick={handleNextStep}>{step === 12 ? "Revise seu anúncio" : "Avançar"}
                         </button>}
