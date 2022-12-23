@@ -62,7 +62,7 @@ export default function Profile() {
                         <label htmlFor="image">
                             <Camera size={18} className="position-absolute top-50 ms-3 mt-2 text-light" />
                             <img src={image} className="profile-img rounded-4" alt="" />
-                            <input type="file" id="image" className="d-none" accept="image/*" onChange={e => handleChangeUserImage(e)} />
+                            <input type="file" id="image" className="d-none" accept="image/*" alt="user profile" onChange={e => handleChangeUserImage(e)} />
                         </label>
                     </div>
                     :

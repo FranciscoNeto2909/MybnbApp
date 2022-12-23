@@ -50,7 +50,7 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
             'Content-Type': 'application/json'
           }
 
-        const res = await api.post(`acomodations/images/${acomodationName}`, formData, headers)
+        const res = await api.put(`acomodations/images/${acomodationName}`, formData, headers)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
 
