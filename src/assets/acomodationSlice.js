@@ -38,15 +38,13 @@ export const updateAcomodation = createAsyncThunk("updateAcomodation", async aco
 
 export const postAcomodationImage = createAsyncThunk("postAcomodationImage", async acomodationData => {
     try {
-        const { images, acomodationName } = acomodationData
+        const { image, acomodationName } = acomodationData
         const formData = new FormData()
+        formData.append('image', image)
+        
         const headers = {
             'Content-Type': 'application/json'
         }
-
-        await images.map(img => {
-            formData.append('images', img)
-        })
 
         await api.put(`acomodations/images/${acomodationName}`, formData, headers)
             .then(res => console.log(res.data))

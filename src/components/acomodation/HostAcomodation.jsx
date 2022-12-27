@@ -23,7 +23,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         lat: -4.179914,
         lng: -38.129617
     })
-    const [images, setImages] = useState([])
+    const [image, setImage] = useState("")
     const [acomodation, setAcomodation] = useState({
         hostName: user.name,
         hostSpace: "",
@@ -90,13 +90,12 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
             setFiled(false)
             setProgress(progress + 7.5)
         }
-        if (step === 7 && images == []) {
+        if (step === 7 && image == "") {
             alert("Selecione um campo antes de ir para o proximo passo!")
             setFiled(false)
-        } else if (step === 7 && images.length > 4) {
+        } else if (step === 7 && image) {
             const prefStr = acomodation.preferences.toString();
             setAcomodation({ ...acomodation, preferences: prefStr })
-
             setStep(step + 1)
             setFiled(false)
             setProgress(progress + 7.5)
@@ -242,15 +241,8 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
 
     async function handleUploadImages(e) {
         const file = await e.target.files[0]
-        const isSameName = images.every((elem) => file.name !== elem.name)
-        const isSameSize = images.every((elem) => file.size !== elem.size)
-        images.length > 3 && setFiled(true)
-
-        if (file !== undefined && isSameName && isSameSize) {
-            setImages([...images, file])
-        } else {
-            alert("a imagem ja foi adicionada")
-        }
+        setImage(file)
+        setFiled(true)
     }
 
     function handlePreviewImage(elem) {
@@ -272,7 +264,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         dispatch(postAcomodation(acomodation)).then(() => {
 
             dispatch(postAcomodationImage({
-                images,
+                image,
                 acomodationName: acomodation.title
             })).then(() => {
                 setPosting(false)
@@ -416,22 +408,18 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 }
                 {step === 7 &&
                     <div className="images-container d-flex flex-column align-items-center">
-                        <h2 className="fs-4">Agora vamos adicionar algumas fotos</h2>
-                        {images.map((img, i) => (
-                            images[0] == img ?
-                                <div key={i} className="preview-container container d-flex justify-content-center position-relative">
+                        <h2 className="fs-4">Agora vamos adicionar a foto de capa</h2>
+                        {
+                            image &&
+                                <div className="preview-container container d-flex justify-content-center position-relative">
                                     <span className="position-absolute font-smaller ms-1 mt-1 bg-light rounded p-1 fw-bold">Foto de capa</span>
-                                    <img src={handlePreviewImage(img)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
-                                </div> :
-                                <div key={i} className="preview-container container d-flex justify-content-center my-2">
-                                    <img src={handlePreviewImage(img)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
+                                    <img src={URL.createObjectURL(image)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
                                 </div>
-                        ))
                         }
                         <div className="input-img-container container">
                             <label htmlFor="img" className="font-smaller img-container py-5 rounded-2 text-center mt-5 d-flex flex-column align-items-center">
                                 <Image size={40} />
-                                {images.length < 5 ? `Escolha pelo menos ${5 - images.length} imagens` : "Escolha no maximo 8 imagens"}
+                                Escolha a imagem de capa
                                 <input type="file" accept="image/*" className="imgs-input d-none" id="img" onChange={handleUploadImages} />
                             </label>
                         </div>
@@ -496,7 +484,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 13 &&
                     <div className="host-resume-container">
                         <div className="host-resume-header d-flex flex-column">
-                            <img src={handlePreviewImage(images[0])} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
+                            <img src={handlePreviewImage(image)} style={{ height: "300px", width: "300px" }} className="rounded-3 mx-auto my-3" alt="capa" />
                             <h1 className="fw-bold mb-4">{acomodation.title}</h1>
                         </div>
                         <div className="mb-4 pb-3 border-bottom">

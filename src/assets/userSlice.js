@@ -60,7 +60,9 @@ export const setUserImage = createAsyncThunk("setUserImage", async userImage => 
     'Content-Type': 'application/json'
   }
 
-  await api.put(`users/image/${userId}`, formData, headers).then(e => console.log(e))
+  await api.put(`users/image/${userId}`, formData, headers)
+    .then(res => console.log(res.data))
+    .catch(err => console.log(err))
 })
 
 export const updateUser = createAsyncThunk("updateUser", async user => {

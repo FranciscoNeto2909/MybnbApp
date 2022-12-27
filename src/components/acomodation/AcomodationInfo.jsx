@@ -13,7 +13,6 @@ export default function AcomodationInfo({ acomodation }) {
     const navigate = useNavigate()
     const carroussel = useRef(null)
     const user = useSelector(data => data.user.user)
-    const acomodationImages = acomodation.images?.split(",")
 
     const [updatedAcomodation, setUpdatedAcomodation] = useState({
         id: acomodation.id,
@@ -164,19 +163,15 @@ export default function AcomodationInfo({ acomodation }) {
         dispatch(deleteAcomodation(acomodation.id)).then(() => {
             dispatch(getAcomodations())
             dispatch(showNav())
-            navigate("/profile") 
+            navigate("/profile")
         })
     }
     return (
         <div className="host-resume-container mx-2 mt-2">
             <section className="card-img-carrossel d-flex position-relative">
-                <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
-                <div className="card-img-container d-flex" ref={carroussel}>
-                    {acomodationImages && acomodationImages.map((img, i) => (
-                        <img className="card-img rounded" src={`https://mybnb-api.onrender.com/acomodationImages/${img}`} key={i} alt="acomodation" />
-                    ))}
-                </div>
-                <CaretRight size={32} onClick={handleNextImage} className="text-light position-absolute top-50 end-0" />
+                    {acomodation.image &&
+                        <img className="card-img rounded" src={`https://mybnb-api.onrender.com/acomodationImages/${acomodation.image}`} alt="acomodation" />
+                    }
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">
                 <h3 className="fw-bold">Titulo</h3>
@@ -323,7 +318,7 @@ export default function AcomodationInfo({ acomodation }) {
                 <Pencil size={25} className="ms-2 position-absolute top-0 end-0" />
             </section>
             <div className="buttons-container mt-5 mb-2 d-flex justify-content-between">
-                <button className="btn btn-primary" onClick={ handleUpdateAcomodation}>Salvar alterações</button>
+                <button className="btn btn-primary" onClick={handleUpdateAcomodation}>Salvar alterações</button>
                 <button className="btn btn-danger" onClick={handleDeleteAcomodation}>Excluir</button>
             </div>
         </div>
