@@ -93,7 +93,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         if (step === 7 && images == []) {
             alert("Selecione um campo antes de ir para o proximo passo!")
             setFiled(false)
-        } else if (step === 7 && images.length > 0 ) {
+        } else if (step === 7 && images.length > 4) {
             const prefStr = acomodation.preferences.toString();
             setAcomodation({ ...acomodation, preferences: prefStr })
 
@@ -244,7 +244,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         const file = await e.target.files[0]
         const isSameName = images.every((elem) => file.name !== elem.name)
         const isSameSize = images.every((elem) => file.size !== elem.size)
-        setFiled(true)
+        images.length > 3 && setFiled(true)
 
         if (file !== undefined && isSameName && isSameSize) {
             setImages([...images, file])
@@ -269,13 +269,15 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
 
     function handlePostAcomodation() {
         setPosting(true)
-        dispatch(postAcomodation(acomodation))
-        dispatch(postAcomodationImage({
-            images,
-            acomodationName: acomodation.title
-        })).then(() => {
-            setPosting(false)
-            handleToggleAcmdVisib()
+        dispatch(postAcomodation(acomodation)).then(() => {
+
+            dispatch(postAcomodationImage({
+                images,
+                acomodationName: acomodation.title
+            })).then(() => {
+                setPosting(false)
+                handleToggleAcmdVisib()
+            })
         })
     }
 
