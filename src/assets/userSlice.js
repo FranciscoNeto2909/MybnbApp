@@ -57,7 +57,7 @@ export const setUserImage = createAsyncThunk("setUserImage", async userImage => 
   formData.append('image', userImage)
 
   const headers = {
-    'Content-Type': 'application/json'
+    'headers': { 'Content-Type': 'application/json' }
   }
 
   await api.put(`users/image/${userId}`, formData, headers)

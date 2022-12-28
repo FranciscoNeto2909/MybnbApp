@@ -12,14 +12,12 @@ export default function Card({ host }) {
   }
 
   return (
-    <div className="card border-0 m-1">
-      <div className="card-img-carrossel d-flex position-relative">
+    <div className="card border-0 m-1 mt-4">
         {host.image &&
-          <img className="card-img"
-            src={`https://mybnb-api.onrender.com/acomodationImages/${host.image}`}
+          <img className="card-img" style={{height:"340px"}}
+            src={`https://mybnb-api.onrender.com/acomodationImage/${host.image}`}
             alt="acomodation" />
         }
-      </div>
       <div className="card-body">
         <h5 className="card-title">{host.title}</h5>
         <p className="card-text font-smaller">{host.hostLocalization}</p>

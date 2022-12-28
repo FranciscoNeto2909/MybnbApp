@@ -259,18 +259,19 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         }
     }
 
-    function handlePostAcomodation() {
+    async function handlePostAcomodation() {
         setPosting(true)
-        dispatch(postAcomodation(acomodation)).then(() => {
-
-            dispatch(postAcomodationImage({
-                image,
-                acomodationName: acomodation.title
-            })).then(() => {
-                setPosting(false)
-                handleToggleAcmdVisib()
+        await dispatch(postAcomodation(acomodation))
+            .then(() => {
+                dispatch(postAcomodationImage({
+                    image,
+                    title: acomodation.title
+                }))
+                    .then(() => {
+                        setPosting(false)
+                        handleToggleAcmdVisib()
+                    })
             })
-        })
     }
 
     return (
@@ -411,10 +412,10 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                         <h2 className="fs-4">Agora vamos adicionar a foto de capa</h2>
                         {
                             image &&
-                                <div className="preview-container container d-flex justify-content-center position-relative">
-                                    <span className="position-absolute font-smaller ms-1 mt-1 bg-light rounded p-1 fw-bold">Foto de capa</span>
-                                    <img src={URL.createObjectURL(image)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
-                                </div>
+                            <div className="preview-container container d-flex justify-content-center position-relative">
+                                <span className="position-absolute font-smaller ms-1 mt-1 bg-light rounded p-1 fw-bold">Foto de capa</span>
+                                <img src={URL.createObjectURL(image)} alt="" style={{ height: "200px", width: "200px" }} className="rounded-4" />
+                            </div>
                         }
                         <div className="input-img-container container">
                             <label htmlFor="img" className="font-smaller img-container py-5 rounded-2 text-center mt-5 d-flex flex-column align-items-center">

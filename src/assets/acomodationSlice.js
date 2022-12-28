@@ -38,20 +38,19 @@ export const updateAcomodation = createAsyncThunk("updateAcomodation", async aco
 
 export const postAcomodationImage = createAsyncThunk("postAcomodationImage", async acomodationData => {
     try {
-        const { image, acomodationName } = acomodationData
         const formData = new FormData()
-        formData.append('image', image)
+        formData.append('acomodationImage', acomodationData.image)
         
         const headers = {
-            'Content-Type': 'application/json'
-        }
+            'headers': { 'Content-Type': 'application/json' }
+          }
 
-        await api.put(`acomodations/images/${acomodationName}`, formData, headers)
+        await api.put(`acomodations/image/${acomodationData.title}`, formData, headers)
             .then(res => console.log(res.data))
             .catch(err => console.log(err))
 
     } catch (error) {
-        return console.log(error)
+        return console.log(error.response.data)
     }
 })
 
