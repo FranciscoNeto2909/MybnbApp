@@ -13,6 +13,7 @@ export default function AcomodationInfo({ acomodation }) {
     const navigate = useNavigate()
     const carroussel = useRef(null)
     const user = useSelector(data => data.user.user)
+    const acomodationImages = acomodation.images?.split(",")
 
     const [updatedAcomodation, setUpdatedAcomodation] = useState({
         id: acomodation.id,
@@ -166,12 +167,19 @@ export default function AcomodationInfo({ acomodation }) {
             navigate("/profile")
         })
     }
+
     return (
         <div className="host-resume-container mx-2 mt-2">
             <section className="card-img-carrossel d-flex position-relative">
-                    {acomodation.image &&
-                        <img className="card-img rounded" height={"450px"} src={`https://mybnb-api.onrender.com/acomodationImage/${acomodation.image}`} alt="acomodation" />
-                    }
+                    <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
+                    <div className="card-img-container d-flex" ref={carroussel}>
+                        {acomodationImages && acomodationImages.map((img, i) => (
+                            <img className="card-img"
+                                src={`https://mybnb-api.onrender.com/acomodationImages/${img}`}
+                                key={i} alt="acomodation" />
+                        ))}
+                    </div>
+                    <CaretRight size={32} onClick={handleNextImage} className="text-light position-absolute top-50 end-0" />
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">
                 <h3 className="fw-bold">Titulo</h3>

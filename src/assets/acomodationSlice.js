@@ -39,7 +39,10 @@ export const updateAcomodation = createAsyncThunk("updateAcomodation", async aco
 export const postAcomodationImage = createAsyncThunk("postAcomodationImage", async acomodation => {
     try {
         const formData = new FormData()
-        formData.append('acomodationImage', acomodation.image)
+
+        await acomodation.images.map(img => {
+            formData.append('acomodationImage', img)
+        })
         
         const headers = {
             'headers': { 'Content-Type': 'application/json' }
