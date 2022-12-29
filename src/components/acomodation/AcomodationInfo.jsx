@@ -170,7 +170,7 @@ export default function AcomodationInfo({ acomodation }) {
         <div className="host-resume-container mx-2 mt-2">
             <section className="card-img-carrossel d-flex position-relative">
                     {acomodation.image &&
-                        <img className="card-img rounded" src={`https://mybnb-api.onrender.com/acomodationImage/${acomodation.image}`} alt="acomodation" />
+                        <img className="card-img rounded" height={"450px"} src={`https://mybnb-api.onrender.com/acomodationImage/${acomodation.image}`} alt="acomodation" />
                     }
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">

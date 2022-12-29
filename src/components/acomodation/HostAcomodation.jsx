@@ -262,15 +262,17 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
     async function handlePostAcomodation() {
         setPosting(true)
         await dispatch(postAcomodation(acomodation))
-            .then(() => {
-                dispatch(postAcomodationImage({
-                    image,
-                    title: acomodation.title
-                }))
-                    .then(() => {
-                        setPosting(false)
-                        handleToggleAcmdVisib()
-                    })
+            .then(e => {
+                if (e.payload.id) {
+                    dispatch(postAcomodationImage({
+                        image,
+                        id: e.payload.id
+                    }))
+                        .then(() => {
+                            setPosting(false)
+                            handleToggleAcmdVisib()
+                        })
+                }
             })
     }
 
