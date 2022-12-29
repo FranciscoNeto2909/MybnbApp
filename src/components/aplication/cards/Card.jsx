@@ -14,7 +14,7 @@ export default function Card({ host }) {
   }
 
   return (
-    <div className="card border-0 m-1 mt-4">
+    <div className="card border-0 m-1">
       <div className="card-img-carrossel d-flex position-relative">
         <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
         <div className="card-img-container d-flex" ref={carroussel}>
