@@ -20,7 +20,7 @@ export default function Card({ host }) {
         <div className="card-img-container d-flex" ref={carroussel}>
           {acomodationImages && acomodationImages.map((img, i) => (
             <img className="card-img"
-              src={`https://mybnb-api.onrender.com/acomodationImages/${img}`}
+              src={`http://localhost:3001/acomodationImages/${img}`}
               key={i} alt="acomodation" />
           ))}
         </div>

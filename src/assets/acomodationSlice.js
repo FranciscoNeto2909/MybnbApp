@@ -43,10 +43,10 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
         await acomodation.images.map(img => {
             formData.append('acomodationImage', img)
         })
-        
+
         const headers = {
             'headers': { 'Content-Type': 'application/json' }
-          }
+        }
 
         await api.post(`acomodations/${acomodation.id}`, formData, headers)
             .then(res => console.log(res.data))
@@ -54,6 +54,25 @@ export const postAcomodationImage = createAsyncThunk("postAcomodationImage", asy
 
     } catch (error) {
         return console.log(error.response.data)
+    }
+})
+
+export const updateAcomodationImages = createAsyncThunk("updateAcomodationImage", async acomodation => {
+    try {
+        const formData = new FormData()
+        const headers = {
+            'headers': { 'Content-Type': 'multipart/form-data' }
+        }
+
+        formData.append("oldImage", acomodation.oldImage)
+        formData.append('acomodationImage', acomodation.newImage)
+
+        await api.post(`acomodations/${acomodation.id}`, formData, headers)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err))
+
+    } catch (error) {
+        return console.log(error)
     }
 })
 

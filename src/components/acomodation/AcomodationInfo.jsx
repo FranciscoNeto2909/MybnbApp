@@ -5,7 +5,7 @@ import { CaretLeft, CaretRight, MinusCircle, Pencil, PlusCircle } from "phosphor
 import { confort, preferences, securityItems, spaceType, placeType, hostOptions } from "./acomodationItems"
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
-import { deleteAcomodation, getAcomodations, updateAcomodation } from "../../assets/acomodationSlice";
+import { deleteAcomodation, getAcomodations, updateAcomodation, updateAcomodationImages } from "../../assets/acomodationSlice";
 import { showNav } from "../../assets/appSlice";
 
 export default function AcomodationInfo({ acomodation }) {
@@ -157,7 +157,7 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleUpdateAcomodation() {
         dispatch(updateAcomodation(updatedAcomodation))
-        dispatch(getAcomodations())
+        .then(dispatch(getAcomodations()))
     }
 
     function handleDeleteAcomodation() {
@@ -167,19 +167,32 @@ export default function AcomodationInfo({ acomodation }) {
             navigate("/profile")
         })
     }
+    
+    async function handleChangeAcomodationImage(e) {
+        const id = acomodation.id
+        const oldImage = e.target.id
+        const newImage = e.target.files[0]
+        if(newImage){
+            dispatch(updateAcomodationImages({id, oldImage, newImage}))
+            .then(dispatch(getAcomodations()))
+        }
+    }
 
     return (
         <div className="host-resume-container mx-2 mt-2">
             <section className="card-img-carrossel d-flex position-relative">
-                    <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
-                    <div className="card-img-container d-flex" ref={carroussel}>
-                        {acomodationImages && acomodationImages.map((img, i) => (
-                            <img className="card-img"
-                                src={`https://mybnb-api.onrender.com/acomodationImages/${img}`}
-                                key={i} alt="acomodation" />
-                        ))}
-                    </div>
-                    <CaretRight size={32} onClick={handleNextImage} className="text-light position-absolute top-50 end-0" />
+                <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
+                <div className="card-img-container d-flex" ref={carroussel} style={{ height: "400px" }} >
+                    {acomodationImages && acomodationImages.map((img, i) => (
+                        <label htmlFor={img} className="card-img" key={i} >
+                            <input type="file" id={img} className="d-none" onChange={handleChangeAcomodationImage} />
+                            <img className="card-img" style={{ height: "100%" }}
+                                src={`http://localhost:3001/acomodationImages/${img}`}
+                                alt="acomodation" />
+                        </label>
+                    ))}
+                </div>
+                <CaretRight size={32} onClick={handleNextImage} className="text-light position-absolute top-50 end-0" />
             </section>
             <section className="mb-4 pb-3 border-bottom mt-3 position-relative">
                 <h3 className="fw-bold">Titulo</h3>
