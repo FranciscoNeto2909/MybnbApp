@@ -14,7 +14,7 @@ export default function Card({ host }) {
   }
 
   return (
-    <div className="card border-0 m-1">
+    <div className="card border-0 my-3">
       <div className="card-img-carrossel d-flex position-relative">
         <CaretLeft size={32} onClick={handlePrevImage} className="text-light position-absolute top-50" />
         <div className="card-img-container d-flex" ref={carroussel}>
@@ -29,7 +29,7 @@ export default function Card({ host }) {
       <div className="card-body">
         <h5 className="card-title">{host.title}</h5>
         <p className="card-text font-smaller">{host.hostLocalization}</p>
-        <p className="card-text"><span className="fw-bold">R${host.price}</span> noite</p>
+        <p className="card-text"><span className="fw-bold">R${host.price}</span>/noite</p>
       </div>
     </div>
   )

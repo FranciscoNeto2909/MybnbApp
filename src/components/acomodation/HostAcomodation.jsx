@@ -151,6 +151,11 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
         }
     }
 
+    function handleSetResult(results) {
+        setAcomodation({ ...acomodation, hostLocalization: results[0].formatted_address })
+        setFiled(true)
+    }
+
     function handleIncreaseHostsQuant() {
         acomodation.hostsQuant < 16 && setAcomodation({ ...acomodation, hostsQuant: acomodation.hostsQuant + 1 })
     }
@@ -345,7 +350,7 @@ export default function AddAcomodation({ handleToggleAcmdVisib }) {
                 {step === 4 &&
                     <div className="map-container" style={{ minHeight: '300px' }}>
                         <AutocompleteElem setCordenates={setCordenates}
-                            setAcomodation={setAcomodation} acomodation={acomodation} setFiled={setFiled} />
+                            handleSetResult={handleSetResult} />
                         <GoogleMap
                             mapContainerClassName="map"
                             center={{

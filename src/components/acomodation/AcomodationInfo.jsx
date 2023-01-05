@@ -186,7 +186,7 @@ export default function AcomodationInfo({ acomodation }) {
                     {acomodationImages && acomodationImages.map((img, i) => (
                         <label htmlFor={img} className="card-img" key={i} >
                             <input type="file" id={img} className="d-none" onChange={handleChangeAcomodationImage} />
-                            <img className="card-img" style={{ height: "100%" }}
+                            <img className="card-img" accept="image/*" style={{ height: "100%" }}
                                 src={`https://mybnb-api.onrender.com/acomodationImages/${img}`}
                                 alt="acomodation" />
                         </label>

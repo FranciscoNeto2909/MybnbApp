@@ -32,7 +32,7 @@ export default function Destiny({ handleOpenDestiny }) {
         setToggleClass(!toggleClass)
     }
     return (
-        <div className="destiny-container container-fluid d-flex position-absolute top-0 pt-3 justify-content-center bg-light">
+        <div className="destiny-container container-fluid d-flex position-fixed top-0 pt-3 justify-content-center bg-light">
             <div className="destiny container-fluid px-2 rounded-4 bg-light position-relative">
                 <header className="container-fluid pt-1 position-sticky top-0 
                     bg-light">

@@ -37,7 +37,7 @@ export default function AcomodationsFilter({handleOpenFilter}) {
         dispatch(showNav())
     }
     return (
-        <div className="acmd-filter-container container-fluid d-flex position-absolute top-0 pt-3 justify-content-center">
+        <div className="acmd-filter-container container-fluid d-flex position-fixed top-0 pt-3 justify-content-center">
             <div className="acmd-filter px-2 rounded-4 bg-light position-relative">
                 <header className="acmd-header pt-3 position-sticky top-0 container-fluid bg-light">
                     <button className="close-btn position-absolute border-0 fw-bold m-0 p-0 top-0 bg-transparent" onClick={handleCloseFilter}>x</button>
