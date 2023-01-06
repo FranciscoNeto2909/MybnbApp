@@ -3,9 +3,10 @@
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
-.home-header{
+.home-header {
   z-index: 1;
-  background:#fff;
+  max-width: 100vw;
+  background: #fff;
 }
 
 .navbar-navigator-selected {
@@ -75,7 +76,7 @@
 
 .navbar {
   height: 60px;
-  border-top:1px solid #a9a9a9 ;
+  border-top: 1px solid #a9a9a9;
   z-index: 1;
 }
 
@@ -147,15 +148,13 @@
   box-shadow: 0 5px 4px rgba(169, 169, 169, 0.185);
 }
 
-.types-carrousel {
-  min-width: 100vw;
-  overflow-x: auto;
+.types-carroussel {
+  overflow-x: scroll;
+  white-space: nowrap;
 }
-
-.types-carrousel::-webkit-scrollbar {
+.types-carroussel::-webkit-scrollbar {
   width: 0;
 }
-
 .types-item-img {
   height: 30px;
   width: 30px;
@@ -163,7 +162,7 @@
 
 .types-item {
   font-size: .8rem;
-  width: 100px;
+  min-width: 100px;
   border: 0;
   background-color: transparent;
   white-space: nowrap;
@@ -257,7 +256,7 @@
   color: #fff;
 }
 
-.teste{
+.teste {
   background-color: #000;
 }
 
@@ -518,13 +517,15 @@ details[open] summary::after {
 .card-img {
   min-width: 100%;
 }
-.space-container{
-  overflow-x: scroll;   
+
+.space-container {
+  overflow-x: scroll;
 }
 
 .space-container::-webkit-scrollbar {
   width: 0;
 }
+
 @media (max-width: 700px) {
   .search-desc-container {
     white-space: nowrap;

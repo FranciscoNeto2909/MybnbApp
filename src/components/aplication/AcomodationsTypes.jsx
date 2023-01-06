@@ -38,7 +38,7 @@ export default function AcomodationTypes() {
     }
     return (
         <div className="types-container position-relative overflow-hidden">
-            <div className="types-carrousel d-flex justify-content-between px-1 ">
+            <div className="types-carroussel d-flex justify-content-between">
                 {
                     types.map((type, i) => <button key={i} id={i} className={selected == i ? "types-item d-flex flex-column align-items-center border-bottom border-dark" : "types-item d-flex flex-column align-items-center"} onClick={e => handleFilterAcomodations(e)}>
                         <img src={type.img} alt="" className="types-item-img" id={i} />
