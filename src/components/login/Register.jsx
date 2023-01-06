@@ -8,7 +8,7 @@ import { hash } from "bcryptjs"
 export default function Register({ userData, setUserData }) {
     const data = new Date()
     const year = data.getFullYear()
-    
+    const passwordRegex = new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$")
     const [errors, setErrors] = useState({
         nameError: false,
         lastNameError: false,
@@ -36,11 +36,11 @@ export default function Register({ userData, setUserData }) {
             setTimeout(() => {
                 setErrors({ ...errors, lastNameError: false })
             }, 2000);
-        } else if (userData.password === "" || userData.password.length < 6) {
+        } else if (userData.password === "" || userData.password.length < 6 || !passwordRegex.test(userData.password)) {
             setErrors({ ...errors, passwordError: true })
             setTimeout(() => {
                 setErrors({ ...errors, passwordError: false })
-            }, 2000);
+            }, 2500);
         } else if (userData.confirmPass === "") {
             setErrors({ ...errors, confirmPassError: true })
             setTimeout(() => {
@@ -63,13 +63,13 @@ export default function Register({ userData, setUserData }) {
             }, 2000);
         }
         else {
-            const hashedPassword = await hash(userData.password,8)
-            
+            const hashedPassword = await hash(userData.password, 8)
+
             dispatch(createUser({
-                name:`${userData.name} ${userData.lastName}`,
+                name: `${userData.name} ${userData.lastName}`,
                 phone: userData.phone,
                 email: userData.email,
-                password:hashedPassword,
+                password: hashedPassword,
                 birthDate: userData.birthDate
             })).then(() => navigate("/login"))
         }
@@ -105,6 +105,7 @@ export default function Register({ userData, setUserData }) {
                     </div>
                     {errors.passwordError && userData.password === "" && <p className="lbl-error">Este campo não pode ser vazio!</p>}
                     {errors.passwordError && userData.password.length > 1 && userData.password.length < 6 && <p className="lbl-error">Este campo deve conter no minimo 6 digitos</p>}
+                    {errors.passwordError && userData.password.length > 1 && userData.password.length >= 6 && <p className="lbl-error">Sua senha deve ter letras maiusculas minusculas e numeros</p>}
                     <span className="d-inline-block my-1">Confirme sua senha</span>
                     <div className="password input-group">
                         <input type="password" id="pass-confirm" placeholder=" "
