@@ -16,7 +16,6 @@ export default function Home() {
     const [showFilter, setShowFilter] = useState(false)
     const dispatch = useDispatch()
     const filteredAcomodations = acomodation.filter(acmd => acmd.hostEmphasis.includes(filtered))
-    // .toLowerCase().includes(lowerSearch))
 
     function handleOpenDestiny() {
         setShowDestiny(!showDestiny)
@@ -34,13 +33,13 @@ export default function Home() {
     }, [filtered])
     return (
         <div>
-            <header className="home-header border-bottom position-fixed top-0">
+            <header className="home-header container-fluid position-fixed top-0">
                 <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter} />
                 <AcomodationTypes filtered={filtered} SetFiltered={SetFiltered} />
             </header>
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
-            <main style={{ marginTop:"140px", marginBottom:"50px"}}>
+            <main style={{ marginTop:"140px", marginBottom:"65px"}}>
                 <div className="cards-container d-flex flex-column justify-content-center align-items-center">
                     {filteredAcomodations && filteredAcomodations.map((host, i) => (
                         <Card host={host} key={i} />

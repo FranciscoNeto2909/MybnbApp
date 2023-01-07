@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { CaretLeft, CaretRight, MinusCircle, Pencil, PlusCircle } from "phosphor-react";
-import { confort, preferences, securityItems, spaceType, placeType, hostOptions } from "./acomodationItems"
+import { confort, preferences, securityItems, spaceType, placeType, hostOptions, hostEmphasis } from "./acomodationItems"
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
 import { deleteAcomodation, getAcomodations, updateAcomodation, updateAcomodationImages } from "../../assets/acomodationSlice";
@@ -64,6 +64,10 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleselectHostSpace(e) {
         setUpdatedAcomodation({ ...updatedAcomodation, hostSpace: e.target.value })
+    }
+
+    function handleChangeEmphasis(e) {
+        setUpdatedAcomodation({ ...updatedAcomodation, hostEmphasis: e.target.value })
     }
 
     function handleIncreaseHostsQuant() {
@@ -157,7 +161,7 @@ export default function AcomodationInfo({ acomodation }) {
 
     function handleUpdateAcomodation() {
         dispatch(updateAcomodation(updatedAcomodation))
-        .then(dispatch(getAcomodations()))
+            .then(dispatch(getAcomodations()))
     }
 
     function handleDeleteAcomodation() {
@@ -167,14 +171,14 @@ export default function AcomodationInfo({ acomodation }) {
             navigate("/profile")
         })
     }
-    
+
     async function handleChangeAcomodationImage(e) {
         const id = acomodation.id
         const oldImage = e.target.id
         const newImage = e.target.files[0]
-        if(newImage){
-            dispatch(updateAcomodationImages({id, oldImage, newImage}))
-            .then(dispatch(getAcomodations()))
+        if (newImage) {
+            dispatch(updateAcomodationImages({ id, oldImage, newImage }))
+                .then(dispatch(getAcomodations()))
         }
     }
 
@@ -224,6 +228,21 @@ export default function AcomodationInfo({ acomodation }) {
                     ))}
                 </div>
                 <Pencil size={25} className="position-absolute top-0 end-0 ms-2" />
+            </section>
+            <section className="pb-3 border-bottom position-relative">
+                <h3 className="fw-bold">Destaque da acomodação</h3>
+                <div className="types-carroussel d-flex justify-content-between mt-4">
+                    {hostEmphasis.map((emphasis, i) => (
+                        <label htmlFor={`btn${i}`} key={i} className={updatedAcomodation.hostEmphasis == emphasis.name ?
+                            "rounded-5 mx-1 d-flex flex-column align-items-center justify-content-center border border-2 border-dark" :
+                            "rounded-5 mx-1 d-flex flex-column align-items-center justify-content-center"
+                        } style={{ minWidth: "90px", maxHeight: "90px" }}>
+                            <input type="button" onClick={e => handleChangeEmphasis(e)} className="d-none" id={`btn${i}`} value={emphasis.name}/>
+                            <img src={emphasis.image} alt="emphasis" className="types-item-img" />
+                            <p className="text-wrap font-smaller text-center">{emphasis.name}</p>
+                        </label>
+                    ))}
+                </div>
             </section>
             <section className="mb-4 pb-3 border-bottom position-relative">
                 <h3 className="fw-bold">Hóspedes e comodos</h3>
