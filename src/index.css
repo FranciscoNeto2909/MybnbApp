@@ -144,7 +144,7 @@
 }
 
 .types-container {
-  height: 69px;
+  height: 66px;
   box-shadow: 0 5px 4px rgba(169, 169, 169, 0.185);
 }
 
@@ -172,9 +172,6 @@
   border-bottom: 1px solid darkgray;
 }
 
-.types-item:hover {
-  border-bottom: 1px solid darkgray;
-}
 
 .acmd-filter-container,
 .destiny-container {
@@ -532,6 +529,9 @@ details[open] summary::after {
     width: 60%;
   }
 
+  .types-item:hover {
+  border-bottom:none;
+}
   .search-desc-item {
     font-size: .7rem;
   }

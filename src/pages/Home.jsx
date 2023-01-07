@@ -11,10 +11,12 @@ import { getAcomodations } from "../assets/acomodationSlice"
 
 export default function Home() {
     const acomodation = useSelector(data => data.acomodation.acomodation)
-
+    const [filtered, SetFiltered] = useState("")
     const [showDestiny, setShowDestiny] = useState(false)
     const [showFilter, setShowFilter] = useState(false)
     const dispatch = useDispatch()
+    const filteredAcomodations = acomodation.filter(acmd => acmd.hostEmphasis.includes(filtered))
+    // .toLowerCase().includes(lowerSearch))
 
     function handleOpenDestiny() {
         setShowDestiny(!showDestiny)
@@ -29,19 +31,18 @@ export default function Home() {
         localStorage.setItem("routeId", 1)
         dispatch(showNav())
         dispatch(getAcomodations())
-    }, [])
-
+    }, [filtered])
     return (
         <div>
             <header className="home-header border-bottom position-fixed top-0">
                 <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter} />
-                <AcomodationTypes />
+                <AcomodationTypes filtered={filtered} SetFiltered={SetFiltered} />
             </header>
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
             <main style={{ marginTop:"140px", marginBottom:"50px"}}>
                 <div className="cards-container d-flex flex-column justify-content-center align-items-center">
-                    {acomodation.length > 0 && acomodation.map((host, i) => (
+                    {filteredAcomodations && filteredAcomodations.map((host, i) => (
                         <Card host={host} key={i} />
                     ))}
                 </div>

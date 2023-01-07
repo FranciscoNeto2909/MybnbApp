@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function AcomodationTypes() {
+export default function AcomodationTypes({ filtered, SetFiltered }) {
     const [selected, setSelected] = useState(null)
     const types = [
         {
@@ -32,18 +32,21 @@ export default function AcomodationTypes() {
     function handleFilterAcomodations(e) {
         if (selected == e.target.id) {
             setSelected(null)
+            SetFiltered("")
         } else {
             setSelected(e.target.id)
+            SetFiltered(e.target.value)
         }
     }
     return (
         <div className="types-container position-relative overflow-hidden">
             <div className="types-carroussel d-flex justify-content-between">
                 {
-                    types.map((type, i) => <button key={i} id={i} className={selected == i ? "types-item d-flex flex-column align-items-center border-bottom border-dark" : "types-item d-flex flex-column align-items-center"} onClick={e => handleFilterAcomodations(e)}>
-                        <img src={type.img} alt="" className="types-item-img" id={i} />
-                        <p id={i}>{type.name}</p>
-                    </button>)
+                    types.map((type, i) => <label htmlFor={`button${i}`} key={i} className={selected == `button${i}` ? "types-item d-flex flex-column align-items-center border-dark border-bottom" : "types-item d-flex flex-column align-items-center"}>
+                        <input id={`button${i}`} type="button" className="d-none" value={type.name} onClick={e => handleFilterAcomodations(e)} />
+                        <img src={type.img} alt="" className="types-item-img" />
+                        <p>{type.name}</p>
+                    </label>)
                 }
             </div>
         </div>
