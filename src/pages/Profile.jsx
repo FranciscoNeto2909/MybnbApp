@@ -4,6 +4,7 @@ import { logout, setUserImage } from "../assets/userSlice"
 import { UserCircle, Gear, Camera, AlignLeft, Gift, SquaresFour, CaretRight, ToggleRight, ToggleLeft, HouseLine } from "phosphor-react"
 import { useNavigate } from "react-router-dom"
 import { hideNav } from "../assets/appSlice"
+import { serverUrl } from "../assets/api"
 
 export default function Profile() {
     const user = useSelector(data => data.user)
@@ -41,7 +42,7 @@ export default function Profile() {
     }
 
     async function handleGetUserImage() {
-        setImage(`https://mybnb-api.onrender.com/profile/${user.user.image}`)
+        setImage(`${serverUrl}profile/${user.user.image}`)
     }
 
     async function handleChangeUserImage(e) {

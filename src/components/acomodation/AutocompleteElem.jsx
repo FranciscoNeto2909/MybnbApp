@@ -5,7 +5,7 @@ import PlacesAutocomplete, {
     getLatLng,
   }  from "react-places-autocomplete";
 
-export default function AutocompleteElem({ setCordenates, handleSetResult}) {
+export default function AutocompleteElem({ setCordenates, handleSetResult, setStep, step}) {
     const [address, setAddress] = useState("")
 
     async function handleSelect(value) {
@@ -16,6 +16,12 @@ export default function AutocompleteElem({ setCordenates, handleSetResult}) {
         if (handleSetResult) {
           handleSetResult(results)
         }
+    }
+    function handleNextStep() {
+      if (step == 0) {
+        setStep(step+1)
+        console.log("ok")
+      }
     }
     return(
         <PlacesAutocomplete
@@ -28,7 +34,8 @@ export default function AutocompleteElem({ setCordenates, handleSetResult}) {
             <input 
               {...getInputProps({
                 placeholder: 'Search Places ...',
-                className: 'location-search-input form-control border-secondary mb-4',
+                className: 'location-search-input form-control border-secondary',
+                onFocus:() => handleNextStep()
               })}
             />
             <div className="autocomplete-dropdown-container">

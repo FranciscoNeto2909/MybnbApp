@@ -40,7 +40,7 @@ export default function Home() {
             {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} />}
             {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
             <main style={{ marginTop:"140px", marginBottom:"65px"}}>
-                <div className="cards-container d-flex flex-column justify-content-center align-items-center">
+                <div className="cards-container">
                     {filteredAcomodations && filteredAcomodations.map((host, i) => (
                         <Card host={host} key={i} />
                     ))}

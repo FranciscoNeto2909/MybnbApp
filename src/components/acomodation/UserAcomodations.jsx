@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { showNav } from "../../assets/appSlice"
 import { useState } from "react"
 import AcomodationInfo from "./AcomodationInfo"
+import { serverUrl } from "../../assets/api"
 
 export default function UserAcomodations() {
     const navigate = useNavigate()
@@ -36,7 +37,7 @@ export default function UserAcomodations() {
                         {
                             userAcomodations.map((acomodation, i) => (
                                 <button key={i} className="py-4 border position-relative d-flex align-items-center justify-content-between bg-transparent border-0" onClick={() => handleOpenAcomodationResume(i)}>
-                                    <img src={`https://mybnb-api.onrender.com/acomodationImages/${acomodation.images && acomodation.images.split(",")[0]}`} className="rounded" style={{ height: "50px" }} alt="" />
+                                    <img src={`${serverUrl}acomodationImages/${acomodation.images && acomodation.images.split(",")[0]}`} className="rounded" style={{ height: "50px" }} alt="" />
                                     {acomodation.title}
                                     <CaretRight size={30} />
                                 </button>

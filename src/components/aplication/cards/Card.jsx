@@ -1,5 +1,6 @@
 import { CaretLeft, CaretRight } from "phosphor-react"
 import { useRef } from "react"
+import { serverUrl } from "../../../assets/api"
 
 export default function Card({ host }) {
   const carroussel = useRef(null)
@@ -20,7 +21,7 @@ export default function Card({ host }) {
         <div className="card-img-container d-flex" ref={carroussel}>
           {acomodationImages && acomodationImages.map((img, i) => (
             <img className="card-img"
-              src={`https://mybnb-api.onrender.com/acomodationImages/${img}`}
+              src={`${serverUrl}acomodationImages/${img}`}
               key={i} alt="acomodation" />
           ))}
         </div>
@@ -29,7 +30,7 @@ export default function Card({ host }) {
       <div className="card-body">
         <h5 className="card-title">{host.title}</h5>
         <p className="card-text font-smaller">{host.hostLocalization}</p>
-        <p className="card-text"><span className="fw-bold">R${host.price}</span>/noite</p>
+        <p className="card-text"><span className="fw-bold">R${host.price}</span> noite</p>
       </div>
     </div>
   )

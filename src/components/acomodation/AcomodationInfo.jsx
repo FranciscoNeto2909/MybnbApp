@@ -7,6 +7,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import AutocompleteElem from "./AutocompleteElem";
 import { deleteAcomodation, getAcomodations, updateAcomodation, updateAcomodationImages } from "../../assets/acomodationSlice";
 import { showNav } from "../../assets/appSlice";
+import { serverUrl } from "../../assets/api";
 
 export default function AcomodationInfo({ acomodation }) {
     const dispatch = useDispatch()
@@ -191,7 +192,7 @@ export default function AcomodationInfo({ acomodation }) {
                         <label htmlFor={img} className="card-img" key={i} >
                             <input type="file" id={img} className="d-none" onChange={handleChangeAcomodationImage} />
                             <img className="card-img" accept="image/*" style={{ height: "100%" }}
-                                src={`https://mybnb-api.onrender.com/acomodationImages/${img}`}
+                                src={`${serverUrl}acomodationImages/${img}`}
                                 alt="acomodation" />
                         </label>
                     ))}

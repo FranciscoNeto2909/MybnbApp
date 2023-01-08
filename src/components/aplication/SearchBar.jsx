@@ -3,7 +3,7 @@ import { Equalizer } from "phosphor-react"
 export default function SearchBar({ handleOpenDestiny, handleOpenFilter }) {
     const dispatch = useDispatch()
     return (
-        <div className="search-container position-relative p-2 mt-2 mx-3">
+        <div className="search-container position-relative p-2 mt-1 mx-3">
             <button type="button" title="btn" id="search-input" className="search-input form-control rounded-5 ps-5 py-4" onClick={() => handleOpenDestiny()} >
             </button>
             <div className="search-filter-container position-absolute px-3 p-2">

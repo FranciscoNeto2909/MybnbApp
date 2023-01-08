@@ -152,9 +152,11 @@
   overflow-x: scroll;
   white-space: nowrap;
 }
+
 .types-carroussel::-webkit-scrollbar {
   width: 0;
 }
+
 .types-item-img {
   height: 30px;
   width: 30px;
@@ -500,9 +502,15 @@ details[open] summary::after {
   left: 47%;
 }
 
+.cards-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .card {
-  width: 250px;
-  height: 350px;
+  width: 200px;
+  height: 200px;
 }
 
 .card-img-container {
@@ -512,6 +520,7 @@ details[open] summary::after {
 
 .card-img {
   min-width: 100%;
+  border-radius: 14px;
 }
 
 .space-container {
@@ -529,8 +538,9 @@ details[open] summary::after {
   }
 
   .types-item:hover {
-  border-bottom:none;
-}
+    border-bottom: none;
+  }
+
   .search-desc-item {
     font-size: .7rem;
   }
@@ -547,9 +557,38 @@ details[open] summary::after {
     height: 0;
   }
 
+  .cards-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   .card {
-    width: 300px;
+    width: 350px;
     height: 430px;
   }
 
+  .react-datepicker {
+    border: none;
+    background-color: transparent;
+  }
+
+  .react-datepicker__current-month {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+
+  .react-datepicker__header {
+    background-color: transparent;
+    border-bottom: 0;
+    font-size: 16px;
+  }
+
+  .react-datepicker__day {
+    padding: 15px;
+    padding-right: 30px;
+    text-align: center;
+  }
 }
