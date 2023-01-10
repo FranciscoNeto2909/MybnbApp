@@ -67,8 +67,8 @@ export default function Home() {
             <header className="home-header position-sticky top-0 bg-white">
                 <SearchBar handleOpenDestiny={handleOpenDestiny} handleOpenFilter={handleOpenFilter} />
                 {!hasDestiny && <AcomodationTypes filtered={filtered} SetFiltered={SetFiltered} />}
-            {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} setFilterDestiny={setFilterDestiny} />}
-            {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
+                {showDestiny && <Destiny handleOpenDestiny={handleOpenDestiny} setFilterDestiny={setFilterDestiny} />}
+                {showFilter && <AcomodationsFilter handleOpenFilter={handleOpenFilter} />}
             </header>
             <main className="home-main" onTouchMove={handleTouchMove} onTouchStart={handleTouchStart}>
                 {hasDestiny && filterDestiny.localization &&
@@ -87,15 +87,16 @@ export default function Home() {
                             }} />
                         </GoogleMap>
                     </div>}
-                <div className="cards-container">
-                    {hasDestiny ?
-                        filteredDestiny.map((host, i) => (
-                            <Card host={host} key={i} />
-                        )) :
-                        filteredAcomodations.map((host, i) => (
-                            <Card host={host} key={i} />
-                        ))}
-                </div>
+                {!showDestiny &&
+                    <div className="cards-container">
+                        {hasDestiny ?
+                            filteredDestiny.map((host, i) => (
+                                <Card host={host} key={i} />
+                            )) :
+                            filteredAcomodations.map((host, i) => (
+                                <Card host={host} key={i} />
+                            ))}
+                    </div>}
             </main>
         </div>
     )
