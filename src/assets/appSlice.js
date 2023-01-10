@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
     name: "app",
     initialState: {
-        navVisibility:true
+        navVisibility:true,
+        destiny:false
     },
     reducers: {
       showNav(state) {
@@ -11,9 +12,15 @@ const appSlice = createSlice({
       },
       hideNav(state) {
         return{...state, navVisibility:false }
+      },
+      setDestiny(state){
+        return{...state, destiny:true}
+      },
+      clearDestiny(state){
+        return{...state, destiny:false}
       }
     },
     extraReducers: {}
 })
-export const {showNav, hideNav } = appSlice.actions
+export const {showNav, hideNav,setDestiny, clearDestiny } = appSlice.actions
 export default appSlice.reducer

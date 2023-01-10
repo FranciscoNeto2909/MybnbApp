@@ -1,6 +1,6 @@
 * {
   list-style: none;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif
 }
 
 .home-header {
@@ -112,7 +112,7 @@
   left: 23px;
 }
 
-.search-input {
+.search-input, .shadows {
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.212);
 }
 
@@ -532,6 +532,22 @@ details[open] summary::after {
 }
 
 @media (max-width: 700px) {
+  .home {
+    display: grid;
+    grid-template-areas:
+      "home-header"
+      "home-main";
+      grid-template-rows: 0.2fr 5fr;
+  }
+
+  .home-header{
+    grid-area: "home-header";
+  }
+
+  .home-main{
+    grid-area: "home-main";
+  }
+  
   .search-desc-container {
     white-space: nowrap;
     width: 60%;
@@ -590,5 +606,9 @@ details[open] summary::after {
     padding: 15px;
     padding-right: 30px;
     text-align: center;
+  }
+
+  .destiny-map {
+    height: 300px;
   }
 }

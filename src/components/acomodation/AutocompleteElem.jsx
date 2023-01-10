@@ -20,7 +20,6 @@ export default function AutocompleteElem({ setCordenates, handleSetResult, setSt
     function handleNextStep() {
       if (step == 0) {
         setStep(step+1)
-        console.log("ok")
       }
     }
     return(

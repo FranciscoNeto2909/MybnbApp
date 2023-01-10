@@ -1,16 +1,25 @@
-import { ArrowLeft, MagnifyingGlass } from "phosphor-react"
+import { ArrowLeft, MagnifyingGlass, Minus, Plus } from "phosphor-react"
 import { useState } from "react"
 import AutocompleteElem from "../acomodation/AutocompleteElem"
 import Datepicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
+import { useDispatch } from "react-redux"
+import { setDestiny } from "../../assets/appSlice"
 
-export default function Destiny({ handleOpenDestiny }) {
-    const [toggleClass, setToggleClass] = useState(true)
+export default function Destiny({ handleOpenDestiny, setFilterDestiny }) {
+    const dispatch = useDispatch()
+    const [headerBtn, setHeaderBtn] = useState("headerB1")
     const [cordenates, setCordenates] = useState("")
     const [localization, setLocalization] = useState("")
     const [btnId, setBtnId] = useState("btn-1")
     const [date, setDate] = useState("")
-    const [hosts, setHosts] = useState("")
+    const [hosts, setHosts] = useState(
+        {
+            adults: 0,
+            kids: 0,
+            babies: 0,
+            animals: 0
+        })
     const [step, setStep] = useState(0)
 
     const destinations = [
@@ -40,10 +49,6 @@ export default function Destiny({ handleOpenDestiny }) {
         }
     ]
 
-    function handleToggleClass() {
-        setToggleClass(!toggleClass)
-    }
-
     function handleSetResult(results) {
         setLocalization(results[0].formatted_address)
         setStep(step + 1)
@@ -57,16 +62,55 @@ export default function Destiny({ handleOpenDestiny }) {
 
     function handleSetDate(e) {
         setDate(e)
-        setStep(step + 1)
     }
 
     function handleBackStep() {
         setStep(step - 1)
     }
+
+    function handleAddHosts(hostType) {
+        if (hostType == "adult") {
+            setHosts({ ...hosts, adults: hosts.adults + 1 })
+        } else if (hostType == "kid") {
+            setHosts({ ...hosts, kids: hosts.kids + 1 })
+        } else if (hostType == "babie") {
+            setHosts({ ...hosts, babies: hosts.babies + 1 })
+        } else if (hostType == "animal") {
+            setHosts({ ...hosts, animals: hosts.animals + 1 })
+        }
+    }
+
+    function handleremoveHosts(hostType) {
+        if (hostType == "adult" && hosts.adults > 0) {
+            setHosts({ ...hosts, adults: hosts.adults - 1 })
+        } else if (hostType == "kid" && hosts.kids > 0) {
+            setHosts({ ...hosts, kids: hosts.kids - 1 })
+        } else if (hostType == "babie" && hosts.babies > 0) {
+            setHosts({ ...hosts, babies: hosts.babies - 1 })
+        } else if (hostType == "animal" && hosts.animals > 0) {
+            setHosts({ ...hosts, animals: hosts.animals - 1 })
+        }
+    }
+
+    function handleFilter() {
+        const local = localization.split(",").slice(0, 2).toString()
+        const newDate = date.toString().split(" ").slice(1, 4).toString()
+        let sum = Object.values(hosts).reduce((acc, val) => acc + val, 0);
+        handleOpenDestiny()
+        if (local || newDate || sum) {
+            dispatch(setDestiny())
+            setFilterDestiny({
+                localization: local,
+                cordenates,
+                hosts: sum,
+                date: newDate
+            })
+        }
+    }
     return (
         <div className="destiny-container container-fluid d-flex position-fixed top-0 pt-3 justify-content-center bg-light">
             <div className="destiny container-fluid px-2 rounded-4 bg-light position-relative">
-                <header className="container-fluid pt-1 position-sticky top-0 
+                <header className="container-fluid position-sticky top-0 
                     bg-light">
                     {step == 0 ?
                         <button type="button" className="position-absolute      
@@ -74,42 +118,42 @@ export default function Destiny({ handleOpenDestiny }) {
                             onClick={handleOpenDestiny}>
                             x
                         </button> :
-                        <ArrowLeft size={20} onClick={handleBackStep} className="position-absolute pt-0 start-0 mt-1" />}
+                        <ArrowLeft size={20} onClick={handleBackStep} className="position-absolute pt-0 start-0 mt-2" />}
                     <div className="btns-container mx-auto d-flex justify-content-center">
-                        <button type="button" className={toggleClass ?
-                            "destiny-btn bg-transparent border-bt p-2" :
-                            "destiny-btn bg-transparent text-secondary p-2"}
-                            onClick={handleToggleClass}>
+                        <button type="button" id="headerB1" className={headerBtn == "headerB1" ?
+                            "destiny-btn bg-transparent border-bt" :
+                            "destiny-btn bg-transparent text-secondary"}
+                            onClick={e => setHeaderBtn(e.target.id)}>
                             Acomodações
                         </button>
-                        <button type="button" className={toggleClass ?
-                            "destiny-btn bg-transparent text-secondary p-2" : "destiny-btn bg-transparent border-bt p-2"}
-                            onClick={handleToggleClass}>
+                        <button type="button" id="headerB2" className={headerBtn == "headerB2" ?
+                            "destiny-btn bg-transparent border-bt" : "destiny-btn bg-transparent text-secondary"}
+                            onClick={e => setHeaderBtn(e.target.id)}>
                             Experiêcias
                         </button>
                     </div>
                 </header>
                 <main className="mt-5">
                     {step >= 2 && <>
-                        <div className="d-flex justify-content-between align-items-baseline mb-5">
-                            <p className="text-secondary font-smaller">Onde</p>
+                        <button className="shadows container d-flex justify-content-between align-items-baseline bg-white py-3 px-2 mb-3 rounded-4 border-0" onClick={() => setStep(1)}>
+                            <span className="text-secondary font-smaller">Onde</span>
                             {localization ?
-                                <p className="font-smaller">{localization}</p> :
-                                <button className="bg-transparent border-0 font-smaller" onClick={() => setStep(1)}>Busca flexível</button>}
-                        </div>
+                                <span className="font-smaller">{localization.split(",").slice(0, 2).toString()}</span> :
+                                <span className="font-smaller">Busca flexível</span>}
+                        </button>
                         {step > 2 &&
-                            <div className="d-flex justify-content-between align-items-baseline mb-5">
-                                <p className="text-secondary font-smaller">Quando</p>
+                            <button className="shadows d-flex container border-0 justify-content-between align-items-baseline bg-white py-3 px-2 mb-3 rounded-4" onClick={() => setStep(2)}>
+                                <span className="text-secondary font-smaller">Quando</span>
                                 {date ?
-                                    <p className="font-smaller">{date.toString().split(" ").slice(1, 4).toString()}</p> :
-                                    <button className="bg-transparent border-0 font-smaller" onClick={() => setStep(2)}>Adicionar datas</button>}
-                            </div>}
+                                    <span className="font-smaller">{date.toString().split(" ").slice(1, 4).toString()}</span> :
+                                    <span className="bg-transparent border-0 font-smaller">Adicionar datas</span>}
+                            </button>}
                     </>
                     }
                     {step < 2 &&
                         <>
                             <section className="container mt-3 p-2 rounded-4 bg-transparent">
-                                <h1 className="fs-4 fw-bold mb-3">Para onde?</h1>
+                                <h1 className="fs-5 fw-bold mb-3">Para onde?</h1>
                                 <AutocompleteElem setCordenates={setCordenates} handleSetResult={handleSetResult} setStep={setStep} step={step} />
                             </section>
                             {step == 0 && <>
@@ -154,18 +198,87 @@ export default function Destiny({ handleOpenDestiny }) {
                                 </div>
                             </div>
                         </>}
+                    {
+                        step == 3 &&
+                        <div className="hosts shadows p-4 bg-white rounded-4">
+                            <h4 className="fw-bold">Quem está vindo?</h4>
+                            <div className="hosts-container">
+                                <div className="hosts-button d-flex justify-content-between mb-3 bottom-border">
+                                    <div className="hosts-type">
+                                        <p className="mb-0">Adultos</p>
+                                        <p className="font-smaller text-secondary">16 anos ou mais</p>
+                                    </div>
+                                    <div className="hosts-buttons d-flex">
+                                        <button onClick={() => handleremoveHosts("adult")} className={hosts.adults > 0 ? "p-0 rounded-5 border border-dark text-dark bg-transparent" : "p-0 rounded-5 border border-secondary text-secondary bg-transparent"} style={{ height: "29px", width: "29px" }}>
+                                            <Minus size={16} />
+                                        </button>
+                                        <p className="fs-5 mx-3">{hosts.adults}</p>
+                                        <button onClick={() => handleAddHosts("adult")} className="p-0 rounded-5 border border-dark bg-transparent" style={{ height: "29px", width: "29px" }}>
+                                            <Plus size={16} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="hosts-button d-flex justify-content-between mb-3 bottom-border">
+                                    <div className="hosts-type">
+                                        <p className="mb-0">Crianças</p>
+                                        <p className="font-smaller text-secondary">Idade entre 2 e 15</p>
+                                    </div>
+                                    <div className="hosts-buttons d-flex">
+                                        <button onClick={() => handleremoveHosts("kid")} className={hosts.kids > 0 ? "p-0 rounded-5 border border-dark text-dark bg-transparent" : "p-0 rounded-5 border border-secondary text-secondary bg-transparent"} style={{ height: "29px", width: "29px" }}>
+                                            <Minus size={16} />
+                                        </button>
+                                        <p className="fs-5 mx-3">{hosts.kids}</p>
+                                        <button onClick={() => handleAddHosts("kid")} className="p-0 rounded-5 border border-dark bg-transparent" style={{ height: "29px", width: "29px" }}>
+                                            <Plus size={16} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="hosts-button d-flex justify-content-between mb-3 bottom-border">
+                                    <div className="hosts-type">
+                                        <p className="mb-0">Bebês</p>
+                                        <p className="font-smaller text-secondary">Menor de 2</p>
+                                    </div>
+                                    <div className="hosts-buttons d-flex">
+                                        <button onClick={() => handleremoveHosts("babie")} className={hosts.babies > 0 ? "p-0 rounded-5 border border-dark text-dark bg-transparent" : "p-0 rounded-5 border border-secondary text-secondary bg-transparent"} style={{ height: "29px", width: "29px" }}>
+                                            <Minus size={16} />
+                                        </button>
+                                        <p className="fs-5 mx-3">{hosts.babies}</p>
+                                        <button onClick={() => handleAddHosts("babie")} className="p-0 rounded-5 border border-dark bg-transparent" style={{ height: "29px", width: "29px" }}>
+                                            <Plus size={16} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className="hosts-button d-flex justify-content-between">
+                                    <div className="hosts-type">
+                                        <p className="mb-0">Animais de estimação</p>
+                                        <p className="font-smaller text-secondary"></p>
+                                    </div>
+                                    <div className="hosts-buttons d-flex">
+                                        <button onClick={() => handleremoveHosts("animal")} className={hosts.animals > 0 ? "p-0 rounded-5 border border-dark text-dark bg-transparent" : "p-0 rounded-5 border border-secondary text-secondary bg-transparent"} style={{ height: "29px", width: "29px" }}>
+                                            <Minus size={16} />
+                                        </button>
+                                        <p className="fs-5 mx-3">{hosts.animals}</p>
+                                        <button onClick={() => handleAddHosts("animal")} className="p-0 rounded-5 border border-dark bg-transparent" style={{ height: "29px", width: "29px" }}>
+                                            <Plus size={16} />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </main>
             </div>
-            <div className="container-fluid position-absolute bottom-0 mb-2 d-flex justify-content-between border-top">
-                <button className="border-0 fw-bold mt-3 text-decoration-underline bg-transparent" onClick={handleClearAll}>Limpar tudo</button>
-                {hosts ?
-                    <button className="btn btn-danger py-2 px-3 mt-3">
-                        <span className="me-1">
-                            <MagnifyingGlass size={22} className="mb-1" />
-                        </span>
-                        Buscar
-                    </button> : <button className="btn bg-black text-light py-2 px-3 mt-3">Avançar</button>}
-            </div>
+            {step != 1 &&
+                <div className="container-fluid position-absolute bottom-0 mb-2 d-flex justify-content-between border-top">
+                    <button className="border-0 fw-bold mt-3 text-decoration-underline bg-transparent" onClick={handleClearAll}>Limpar tudo</button>
+                    {step == 0 || step == 3 ?
+                        <button className="btn btn-danger py-2 px-3 mt-3" onClick={handleFilter}>
+                            <span className="me-1">
+                                <MagnifyingGlass size={22} className="mb-1" />
+                            </span>
+                            Buscar
+                        </button> : <button className="btn bg-black text-light py-2 px-3 mt-3" onClick={() => setStep(3)}>Avançar</button>}
+                </div>}
         </div>
     )
 }
