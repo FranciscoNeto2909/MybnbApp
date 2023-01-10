@@ -26,7 +26,7 @@ export default function Home() {
     const filteredAcomodations = acomodation.filter(acmd => acmd.hostEmphasis.includes(filtered))
 
     const filteredDestiny = acomodation.filter(acmd =>
-        acmd.hostLocalization.includes(filterDestiny.localization) && acmd.hostsQuant > filterDestiny.hosts
+        acmd.hostLocalization.includes(filterDestiny.localization) && acmd.hostsQuant >= filterDestiny.hosts
     )
 
     function handleOpenDestiny() {
@@ -41,7 +41,7 @@ export default function Home() {
     const handleTouchMove = (event) => {
         const touch = event.touches[0]
         const deltaY = touch.clientY - previousTouchRef.current.y
-        if (deltaY < 0) {
+        if (deltaY < -50) {
             dispatch(hideNav())
         }
         if (deltaY > 0) {

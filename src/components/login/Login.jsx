@@ -53,14 +53,13 @@ export default function Login() {
                     } else {
                         setErrors({ ...errors, loginError: true })
                         setErrorMsg(e.payload.response.data.msg)
-
+                        setInLoading(false)
                         setTimeout(() => {
                             setErrors({ ...errors, loginError: false })
                             setErrorMsg("")
                         }, 2500);
                     }
                 });
-
         }
     }
 

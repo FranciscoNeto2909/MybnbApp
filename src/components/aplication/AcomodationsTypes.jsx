@@ -45,7 +45,7 @@ export default function AcomodationTypes({ filtered, SetFiltered }) {
                     types.map((type, i) => <label htmlFor={`button${i}`} key={i} className={selected == `button${i}` ? "types-item d-flex flex-column align-items-center border-dark border-bottom mx-3 px-2" : "types-item d-flex flex-column align-items-center mx-3 px-2"}>
                         <input id={`button${i}`} type="button" className="d-none" value={type.name} onClick={e => handleFilterAcomodations(e)} />
                         <img src={type.img} alt="" className="types-item-img" />
-                        <p>{type.name}</p>
+                        <p className="mb-1">{type.name}</p>
                     </label>)
                 }
             </div>

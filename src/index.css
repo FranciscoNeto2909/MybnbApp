@@ -145,7 +145,7 @@
 }
 
 .types-container {
-  height: 66px;
+  height: 54px;
 }
 
 .types-carroussel {
@@ -537,7 +537,7 @@ details[open] summary::after {
     grid-template-areas:
       "home-header"
       "home-main";
-      grid-template-rows: 0.2fr 5fr;
+      grid-template-rows: 0.05fr 1fr;
   }
 
   .home-header{
@@ -582,7 +582,7 @@ details[open] summary::after {
   }
 
   .card {
-    width: 350px;
+    width: 340px;
     height: 430px;
   }
 
